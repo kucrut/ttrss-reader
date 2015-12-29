@@ -31,18 +31,5 @@
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.0"
   },
-  "scripts": {
-    "start": "webpack --progress --colors --watch",
-    "build": "webpack -p"
-  },
-  "author": "Dzikri Aziz",
-  "browserify": {
-    "transform": [
-      "reactify",
-      "envify"
-    ]
-  },
-  "jest": {
-    "rootDir": "./js"
-  }
+  "author": "Dzikri Aziz"
 }
