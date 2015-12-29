@@ -1,8 +1,9 @@
 {
-  "name": "ttrss-readr",
-  "version": "0.0.1",
-  "description": "TT-RSS Reader.",
-  "repository": "https://github.com/kucrut/ttrss-readr",
+  "name": "ttrss-reader",
+  "version": "0.1.0",
+  "description": "Tiny Tiny RSS Reader",
+  "author": "Dzikri Aziz",
+  "repository": "https://github.com/kucrut/ttrss-reader",
   "main": "js/bundle.js",
   "license": "GPL-2.0",
   "devDependencies": {
@@ -30,6 +31,5 @@
     "redux-thunk": "^0.1.0",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.0"
-  },
-  "author": "Dzikri Aziz"
+  }
 }
