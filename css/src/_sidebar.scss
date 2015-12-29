@@ -1,0 +1,163 @@
+.sidebar {
+	position: absolute;
+	z-index: 2;
+	top: $bar-height;
+	bottom: 0;
+	width: 100%;
+	max-width: $sidebar-max-width;
+	padding-top: 3em;
+	overflow: hidden;
+	transform: translate3d( -100%, 0, 0 );
+	transition: all .5s;
+
+	.inside,
+	.actions {
+		background: $white;
+	}
+
+	.inside {
+		position: relative;
+		height: 100%;
+		overflow-y: scroll;
+
+		@include scrollbars( 3px, #d2d2d2, none );
+	}
+
+	&.is-visible {
+		transform: translate3d( 0, 0, 0 );
+		box-shadow: 1px 2px 5px $shadow-color;
+	}
+
+	.actions {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 0 1.25em;
+		z-index: 3;
+		height: 3em;
+		line-height: 3em;
+		text-align: right;
+
+		a {
+			display: inline-block;
+			margin-left: .75em;
+
+			&:before {
+				font-size: 1.4em;
+			}
+		}
+
+		.refresh {
+			float: left;
+			margin-left: 0;
+		}
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+	}
+
+	i {
+		margin-right: .25em;
+
+		&::before {
+			width: 1.5em;
+		}
+	}
+
+	.placeholder {
+		font-style: italic;
+	}
+}
+
+.category-list {
+	min-height: 100%;
+	padding: 0 0 1em;
+
+	i {
+		color: #bbb;
+		vertical-align: middle;
+	}
+
+	a,
+	.placeholder {
+		display: block;
+		padding: .4em 1.25em;
+	}
+
+	.name {
+		max-width: 80%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	a {
+		position: relative;
+
+		&:active,
+		&:hover,
+		&:focus {
+			background: rgba(0, 0, 0, .03);
+			color: #444;
+			outline: none;
+			box-shadow: inset 0 0 1px rgba(0, 0, 0, .06);
+			text-shadow: 0 -1px 0 #fff;
+
+			i {
+				color: inherit;
+			}
+		}
+
+		&.current {
+			.name {
+				font-weight: bold;
+			}
+
+			i {
+				color: $orange;
+			}
+		}
+
+		.count {
+			font-size: .8em;
+			color: #aaa;
+			position: absolute;
+			top: .8em;
+			right: 1.25em;
+		}
+	}
+}
+
+.feed-list {
+	padding: 0;
+	display: none;
+
+	.is-open & {
+		display: block;
+	}
+
+	a,
+	.placeholder {
+		padding-left: 2.85em;
+	}
+}
+
+@media (min-width: 1020px) {
+	.sidebar {
+		width: $sidebar-max-width;
+		transform: none;
+
+		.inside,
+		.actions {
+			background: #fafafa;
+			border-right: 1px solid $border-color;
+		}
+
+		&.is-visible {
+			box-shadow: none;
+		}
+	}
+}
+

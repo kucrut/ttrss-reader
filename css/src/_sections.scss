@@ -1,0 +1,11 @@
+header, article, section, main, div, form, nav, ul, input {
+	box-sizing: border-box;
+}
+
+.whole-wrap {
+	position: relative;
+	height: 100vh;
+	max-height: 100vh;
+	padding-top: $bar-height;
+	overflow: hidden;
+}
