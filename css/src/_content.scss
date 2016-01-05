@@ -6,11 +6,24 @@
 	border: 1px solid $border-color;
 	border-radius: 3px;
 	background: #fdfdfd;
+	position: relative;
+
+	.close {
+		position: absolute;
+		right: .5em;
+		top: .25em;
+	}
 
 	h1 {
 		text-align: center;
 		margin: 0 0 .5em;
 		font-size: 1.4em;
+	}
+
+	.message {
+		font-size: .875em;
+		font-style: italic;
+		text-align: center;
 	}
 
 	.form-row  {
@@ -28,6 +41,7 @@
 		padding-top: .3em;
 	}
 
+	select,
 	input[type="text"],
 	input[type="password"],
 	input[type="number"],
@@ -39,6 +53,11 @@
 		float: right;
 		width: 73%;
 		padding: .25em .4em;
+	}
+
+	select {
+		padding: 0;
+		margin: .25em 0;
 	}
 
 	label.iwrap {

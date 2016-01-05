@@ -1,6 +1,11 @@
 import _ from 'lodash'
 import { REQUESTED_LOGOUT } from '../actions/session'
-import { REQUESTED_CATEGORIES, RECEIEVED_CATEGORIES } from '../actions/categories'
+import {
+	REQUESTED_CATEGORIES,
+	RECEIEVED_CATEGORIES,
+	REQUESTED_ALL_CATEGORIES,
+	RECEIEVED_ALL_CATEGORIES
+} from '../actions/categories'
 
 const initialState = {
 	isFetching: true,
@@ -14,7 +19,7 @@ function normalizeCategory( category ) {
 	})
 }
 
-export default function categories( state = initialState, action ) {
+export function categories( state = initialState, action ) {
 	switch ( action.type ) {
 		case REQUESTED_CATEGORIES:
 			return Object.assign( {}, state, {
@@ -36,6 +41,31 @@ export default function categories( state = initialState, action ) {
 
 		case REQUESTED_LOGOUT:
 			return Object.assign( {}, initialState )
+
+		default:
+			return state
+	}
+}
+
+const _allCategories = {
+	isFetching: false,
+	items: []
+}
+
+export function allCategories( state = _allCategories, action ) {
+	switch ( action.type ) {
+		case REQUESTED_ALL_CATEGORIES:
+			return Object.assign( {}, state, {
+				isFetching: action.isFetching
+			})
+
+		case RECEIEVED_ALL_CATEGORIES:
+			return Object.assign( {}, state, {
+				isFetching: false,
+				items: _.filter( action.categories.map( normalizeCategory ), function( item ) {
+					return -1 < item.id
+				})
+			})
 
 		default:
 			return state

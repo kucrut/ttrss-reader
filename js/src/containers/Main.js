@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
 import _                    from 'lodash'
-import classNames           from 'classnames'
 import { showSidebar }      from '../actions/ui'
 import { selectArticle }    from '../actions/articles'
 import ArticleList          from './ArticleList'

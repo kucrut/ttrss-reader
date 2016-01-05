@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
-import classNames           from 'classnames'
-import { getCategories }    from '../actions/categories'
-import { editSettings }     from '../actions/settings'
-import { requestLogout }    from '../actions/session'
-import CategoryList         from './CategoryList'
+import React, { PropTypes }     from 'react'
+import { connect }              from 'react-redux'
+import classNames               from 'classnames'
+import { getCategories }        from '../actions/categories'
+import { editSettings }         from '../actions/settings'
+import { openSubscriptionForm } from '../actions/subscription'
+import { requestLogout }        from '../actions/session'
+import CategoryList             from './CategoryList'
 
 class Sidebar extends React.Component {
 	handleClickRefresh() {
@@ -17,6 +18,10 @@ class Sidebar extends React.Component {
 
 	handleClickSettings() {
 		this.props.dispatch( editSettings() )
+	}
+
+	handleClickSubscribe() {
+		this.props.dispatch( openSubscriptionForm() )
 	}
 
 	render() {
@@ -36,6 +41,7 @@ class Sidebar extends React.Component {
 			<div className={ sidebarClass }>
 				<div className="actions">
 					<a onClick={ this.handleClickRefresh.bind( this ) } className="refresh"><i className={ refreshClass } />Refresh</a>
+					<a onClick={ this.handleClickSubscribe.bind( this ) } className="fa-eye" title="Subscribe to feed" />
 					<a onClick={ this.handleClickSettings.bind( this ) } className="fa-cog" title="Settings" />
 					<a onClick={ this.handleClickLogout.bind( this ) } className="fa-logout" title="Logout" />
 				</div>

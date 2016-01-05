@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
 import { checkLastSession } from '../actions/session'
 import SettingsForm         from './SettingsForm'
+import SubscribeForm        from './SubscribeForm'
 import LoginForm            from './LoginForm'
 import Header               from './Header'
 import Sidebar              from './Sidebar'
@@ -21,7 +22,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { dispatch, session, isEditingSettings } = this.props
+		const { dispatch, session, isEditingSettings, isSubscribing } = this.props
 		const { isChecked, isAsking, url, sid } = session
 
 		let content
@@ -34,14 +35,22 @@ class App extends React.Component {
 					</div>
 				)
 			} else {
-				content = (
-					<div className="whole-wrap">
-						<Header />
-						<Sidebar />
-						<Main />
-						<Alert />
-					</div>
-				)
+				if ( isSubscribing ) {
+					content = (
+						<div className="whole-wrap">
+							<SubscribeForm />
+						</div>
+					)
+				} else {
+					content = (
+						<div className="whole-wrap">
+							<Header />
+							<Sidebar />
+							<Main />
+							<Alert />
+						</div>
+					)
+				}
 			}
 		} else {
 			if ( ! isChecked ) {
@@ -62,6 +71,7 @@ class App extends React.Component {
 
 App.propTypes = {
 	session:           PropTypes.object.isRequired,
+	isSubscribing:     PropTypes.bool.isRequired,
 	isEditingSettings: PropTypes.bool.isRequired,
 	dispatch:          PropTypes.func.isRequired
 }
@@ -69,6 +79,7 @@ App.propTypes = {
 function mapStateToProps( state ) {
 	return {
 		session: state.session,
+		isSubscribing:     state.subscription.isOpen,
 		isEditingSettings: state.settings.isEditing
 	}
 }
