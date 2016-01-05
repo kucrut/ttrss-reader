@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
-import { classNames }       from 'classnames'
-import { saveSettings }     from '../actions/settings'
+import React, { PropTypes }                from 'react'
+import { connect }                         from 'react-redux'
+import { classNames }                      from 'classnames'
+import { saveSettings, closeSettingsForm } from '../actions/settings'
 
 class SettingsForm extends React.Component {
 	constructor( props ) {
@@ -41,6 +41,10 @@ class SettingsForm extends React.Component {
 		this.setState({ [ e.target.name ]: value })
 	}
 
+	handleClickClose() {
+		this.props.dispatch( closeSettingsForm() )
+	}
+
 	render() {
 		const { unreadOnly, limit } = this.state
 
@@ -71,6 +75,8 @@ class SettingsForm extends React.Component {
 				<div className="form-row submit-row">
 					<button type="submit"><i className="fa-cog-alt" /> Save</button>
 				</div>
+
+				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose.bind( this ) } />
 			</form>
 		)
 	}

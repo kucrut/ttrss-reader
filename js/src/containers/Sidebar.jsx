@@ -2,7 +2,7 @@ import React, { PropTypes }     from 'react'
 import { connect }              from 'react-redux'
 import classNames               from 'classnames'
 import { getCategories }        from '../actions/categories'
-import { editSettings }         from '../actions/settings'
+import { openSettingsForm }     from '../actions/settings'
 import { openSubscriptionForm } from '../actions/subscription'
 import { requestLogout }        from '../actions/session'
 import CategoryList             from './CategoryList'
@@ -17,7 +17,7 @@ class Sidebar extends React.Component {
 	}
 
 	handleClickSettings() {
-		this.props.dispatch( editSettings() )
+		this.props.dispatch( openSettingsForm() )
 	}
 
 	handleClickSubscribe() {

@@ -1,4 +1,9 @@
-import { REQUESTED_SETTINGS_FORM, UPDATED_SETTINGS, UPDATED_SORT_ORDER } from '../actions/settings'
+import {
+	OPENED_SETTINGS_FORM,
+	UPDATED_SETTINGS,
+	UPDATED_SORT_ORDER,
+	CLOSED_SETTINGS_FORM
+} from '../actions/settings'
 
 const initialState = {
 	isEditing:   false,
@@ -9,9 +14,9 @@ const initialState = {
 
 export default function settings( state = initialState, action ) {
 	switch ( action.type ) {
-		case REQUESTED_SETTINGS_FORM:
+		case OPENED_SETTINGS_FORM:
 			return Object.assign( {}, state, {
-				isEditing: action.isEditing
+				isEditing: true
 			})
 
 		case UPDATED_SETTINGS:
@@ -24,6 +29,11 @@ export default function settings( state = initialState, action ) {
 		case UPDATED_SORT_ORDER:
 			return Object.assign( {}, state, {
 				dateReverse: action.dateReverse
+			})
+
+		case CLOSED_SETTINGS_FORM:
+			return Object.assign( {}, state, {
+				isEditing: false
 			})
 
 		default:
