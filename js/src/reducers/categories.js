@@ -53,6 +53,8 @@ const _allCategories = {
 }
 
 export function allCategories( state = _allCategories, action ) {
+	let categories
+
 	switch ( action.type ) {
 		case REQUESTED_ALL_CATEGORIES:
 			return Object.assign( {}, state, {
@@ -60,11 +62,15 @@ export function allCategories( state = _allCategories, action ) {
 			})
 
 		case RECEIEVED_ALL_CATEGORIES:
+			categories = action.categories.map( normalizeCategory )
+			categories = _.filter( categories, ( item ) => {
+				return -1 < item.id
+			})
+			categories = _.sortBy( categories, 'title' )
+
 			return Object.assign( {}, state, {
 				isFetching: false,
-				items: _.filter( action.categories.map( normalizeCategory ), function( item ) {
-					return -1 < item.id
-				})
+				items:      categories
 			})
 
 		default:
