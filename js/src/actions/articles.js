@@ -147,6 +147,30 @@ export function updateArticle( ids, field, mode ) {
 	}
 }
 
+/**
+ * Mark articles as read
+ *
+ * @param  {array} ids Article IDs
+ * @return void
+ */
+export function markArticlesRead( ids ) {
+	return function( dispatch, getState ) {
+		let items = getState().articles.items.map( item => {
+			if ( -1 < ids.indexOf( item.id ) ) {
+				item.unread = false
+				return item
+			}
+		})
+
+		dispatch({
+			type:  UPDATED_ARTICLES,
+			items: items
+		})
+
+		dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) )
+	}
+}
+
 export function selectArticle( currentId ) {
 	return function( dispatch ) {
 		dispatch({

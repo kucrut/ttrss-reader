@@ -1,7 +1,11 @@
-import React, { PropTypes }                 from 'react'
-import _                                    from 'lodash'
-import { updateArticle, fetchFeedArticles } from '../actions/articles'
-import { updateSortOrder }                  from '../actions/settings'
+import React, { PropTypes } from 'react'
+import _                    from 'lodash'
+import { updateSortOrder }  from '../actions/settings'
+import {
+	updateArticle,
+	fetchFeedArticles,
+	markArticlesRead
+} from '../actions/articles'
 
 class FeedActions extends React.Component {
 	handleClickCheck() {
@@ -11,11 +15,11 @@ class FeedActions extends React.Component {
 			return;
 		}
 
-		let ids = _.pluck( _.filter( articles.items, { unread: true } ), 'id' ).join( ',' )
+		let ids = _.pluck( _.filter( articles.items, { unread: true } ), 'id' )
 
-		dispatch( updateArticle( ids, 'unread', 0 ) )
+		dispatch( markArticlesRead( ids ) )
 
-		// TODO: Provide option for automatic refresh
+		// TODO: Maybe provide option for automatic refresh?
 		//this.handleClickRefresh()
 	}
 
