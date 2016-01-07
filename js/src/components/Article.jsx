@@ -131,7 +131,7 @@ class Article extends React.Component {
 		if ( isSingle ) {
 			return (
 				<Swipeable
-					delta="1"
+					delta={ 1 }
 					onSwipingLeft={ ( e, x ) => this.slideElement( 'left', x ) }
 					onSwipingRight={ ( e, x ) => this.slideElement( 'right', x ) }
 					onSwipedLeft={ this.handleSwiped.bind( this ) }
