@@ -12,7 +12,7 @@ class ArticlePagination extends React.Component {
 
 		if ( 0 < articles.currentIndex ) {
 			return (
-				<a onClick={ () => prevNextCallback( false ) } className="previous"><i className="fa-angle-double-left" /> Previous</a>
+				<a onClick={ () => prevNextCallback( false ) }><i className="fa-angle-double-left" /> Previous</a>
 			)
 		}
 	}
@@ -23,7 +23,7 @@ class ArticlePagination extends React.Component {
 
 		if ( ( currentIndex + 1 ) < items.length ) {
 			return (
-				<a onClick={ () => prevNextCallback( true ) } className="next">Next <i className="fa-angle-double-right" /></a>
+				<a onClick={ () => prevNextCallback( true ) }>Next <i className="fa-angle-double-right" /></a>
 			)
 		}
 	}
@@ -31,9 +31,9 @@ class ArticlePagination extends React.Component {
 	render() {
 		return (
 			<nav className="article-pagination">
-				{ this.maybeRenderPrevious() }
-				<a onClick={ this.handleClickIndex.bind( this ) }>Index</a>
-				{ this.maybeRenderNext() }
+				<span className="previous">{ this.maybeRenderPrevious() }</span>
+				<span className="index"><a onClick={ this.handleClickIndex.bind( this ) }>Index</a></span>
+				<span className="next">{ this.maybeRenderNext() }</span>
 			</nav>
 		)
 	}

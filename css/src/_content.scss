@@ -215,11 +215,13 @@ article {
 .article-pagination {
 	clear: both;
 	margin: 0;
-	padding: 1em;
+	padding: 1em 1.5em;
 	list-style: none;
-	text-align: center;
 	font-size: .875em;
 	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
 	&:before,
 	&:after {
@@ -230,21 +232,16 @@ article {
 		clear: both;
 	}
 
-	> li {
-		display: inline-block;
-		vertical-align: top;
+	> span {
+		display: block;
+		width: 33%;
 	}
 
-	.previous {
-		float: left;
+	.index {
+		text-align: center;
 	}
 	.next {
-		float: right;
-	}
-
-	a {
-		display: inline-block;
-		padding: .5em 1em;
+		text-align: right;
 	}
 }
 
