@@ -20,6 +20,7 @@ export function closeSettingsForm() {
 export function saveSettings( settings ) {
 	localStorage.setItem( 'ttrssSettingUnreadOnly', settings.unreadOnly )
 	localStorage.setItem( 'ttrssSettingLimit', settings.limit )
+	localStorage.setItem( 'ttrssSettingNoPagination', settings.noPagination )
 
 	return function( dispatch ) {
 		dispatch({

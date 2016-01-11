@@ -8,8 +8,9 @@ class SettingsForm extends React.Component {
 		super( props )
 
 		this.state = {
-			limit: props.settings.limit,
-			unreadOnly: props.settings.unreadOnly
+			limit:        props.settings.limit,
+			unreadOnly:   props.settings.unreadOnly,
+			noPagination: props.settings.noPagination
 		}
 	}
 
@@ -31,6 +32,7 @@ class SettingsForm extends React.Component {
 				break;
 
 			case 'unreadOnly':
+			case 'noPagination':
 				value = e.target.checked ? 1 : 0
 				break;
 
@@ -46,7 +48,7 @@ class SettingsForm extends React.Component {
 	}
 
 	render() {
-		const { unreadOnly, limit } = this.state
+		const { unreadOnly, limit, noPagination } = this.state
 
 		let modeClass = ''
 		let modeAttrs = {}
@@ -58,9 +60,23 @@ class SettingsForm extends React.Component {
 			modeClass = 'fa-toggle-off'
 		}
 
+		let noPaginationClass = ''
+		let noPaginationAttrs = {}
+
+		if ( noPagination ) {
+			noPaginationClass = 'fa-toggle-on'
+			noPaginationAttrs.checked = 'checked'
+		} else {
+			noPaginationClass = 'fa-toggle-off'
+		}
+
 		return (
 			<form className="login-form" onSubmit={ this.submitForm.bind( this ) }>
 				<h1><i className="fa-cog" /> Settings</h1>
+				<div className="form-row">
+					<label htmlFor="s-limit">Limit</label>
+					<input id="s-limit" type="number" name="limit" min="1" max="200" required value={ limit } onChange={ this.handleChange.bind( this ) } />
+				</div>
 				<div className="form-row">
 					<label htmlFor="s-mode">Mode</label>
 					<label className="iwrap">
@@ -69,8 +85,11 @@ class SettingsForm extends React.Component {
 					</label>
 				</div>
 				<div className="form-row">
-					<label htmlFor="s-limit">Limit</label>
-					<input id="s-limit" type="number" name="limit" min="1" max="200" required value={ limit } onChange={ this.handleChange.bind( this ) } />
+					<label htmlFor="s-noPagination">Pagination</label>
+					<label className="iwrap">
+						<input id="s-noPagination" type="checkbox" name="noPagination" value="1" { ...noPaginationAttrs } onChange={ this.handleChange.bind( this ) } />
+						<span><i className={ noPaginationClass } /> Disabled</span>
+					</label>
 				</div>
 				<div className="form-row submit-row">
 					<button type="submit"><i className="fa-cog-alt" /> Save</button>

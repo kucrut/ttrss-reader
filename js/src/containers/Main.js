@@ -54,13 +54,21 @@ class Main extends MenuToggle {
 		this.maybeShowSidebar( this.props )
 	}
 
+	renderPagination() {
+		if ( 1 > this.props.noPagination ) {
+			return (
+				<ArticlePagination prevNextCallback={ this.handleClickPreviousNext.bind( this ) } />
+			)
+		}
+	}
+
 	renderSingleArticle() {
 		let article = this.getSingleArticle()
 
 		return (
 			<div className="single-article inside">
 				<Article key={ article.id } article={ article } isSingle={ true } prevNextCallback={ this.handleClickPreviousNext.bind( this ) } />
-				<ArticlePagination prevNextCallback={ this.handleClickPreviousNext.bind( this ) } />
+				{ this.renderPagination() }
 			</div>
 		)
 	}
@@ -92,15 +100,17 @@ class Main extends MenuToggle {
 }
 
 Main.propTypes = {
-	feeds:    PropTypes.object.isRequired,
-	articles: PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
+	feeds:        PropTypes.object.isRequired,
+	articles:     PropTypes.object.isRequired,
+	noPagination: PropTypes.number.isRequired,
+	dispatch:     PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
 	return {
-		feeds:    state.feeds,
-		articles: state.articles
+		feeds:        state.feeds,
+		articles:     state.articles,
+		noPagination: state.settings.noPagination
 	}
 }
 

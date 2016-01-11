@@ -6,10 +6,11 @@ import {
 } from '../actions/settings'
 
 const initialState = {
-	isEditing:   false,
-	limit:       parseInt( localStorage.getItem( 'ttrssSettingLimit' ), 10 ) || 23,
-	unreadOnly:  parseInt( (localStorage.getItem( 'ttrssSettingUnreadOnly' ) || 0), 10 ),
-	dateReverse: parseInt( (localStorage.getItem( 'ttrssSettingDateReverse' ) || 0), 10 )
+	isEditing:    false,
+	limit:        parseInt( localStorage.getItem( 'ttrssSettingLimit' ), 10 ) || 23,
+	unreadOnly:   parseInt( (localStorage.getItem( 'ttrssSettingUnreadOnly' ) || 0), 10 ),
+	dateReverse:  parseInt( (localStorage.getItem( 'ttrssSettingDateReverse' ) || 0), 10 ),
+	noPagination: parseInt( (localStorage.getItem( 'ttrssSettingNoPagination' ) || 0), 10 )
 }
 
 export default function settings( state = initialState, action ) {
@@ -21,9 +22,10 @@ export default function settings( state = initialState, action ) {
 
 		case UPDATED_SETTINGS:
 			return Object.assign( {}, state, {
-				isEditing:  false,
-				limit:      action.settings.limit,
-				unreadOnly: action.settings.unreadOnly
+				isEditing:    false,
+				limit:        action.settings.limit,
+				unreadOnly:   action.settings.unreadOnly,
+				noPagination: action.settings.noPagination
 			})
 
 		case UPDATED_SORT_ORDER:
