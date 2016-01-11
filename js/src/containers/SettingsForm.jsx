@@ -81,14 +81,14 @@ class SettingsForm extends React.Component {
 					<label htmlFor="s-mode">Mode</label>
 					<label className="iwrap">
 						<input id="s-mode" type="checkbox" name="unreadOnly" value="1" { ...modeAttrs } onChange={ this.handleChange.bind( this ) } />
-						<span><i className={ modeClass } /> Unread Only</span>
+						<span className={ modeClass }>Unread Only</span>
 					</label>
 				</div>
 				<div className="form-row">
 					<label htmlFor="s-noPagination">Pagination</label>
 					<label className="iwrap">
 						<input id="s-noPagination" type="checkbox" name="noPagination" value="1" { ...noPaginationAttrs } onChange={ this.handleChange.bind( this ) } />
-						<span><i className={ noPaginationClass } /> Disabled</span>
+						<span className={ noPaginationClass }>Disabled</span>
 					</label>
 				</div>
 				<div className="form-row submit-row">

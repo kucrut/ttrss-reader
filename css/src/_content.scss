@@ -37,7 +37,7 @@
 
 	label {
 		float: left;
-		width: 25%;
+		width: 28%;
 		padding-top: .3em;
 	}
 
@@ -51,7 +51,7 @@
 		border: 1px solid $border-color;
 		border-radius: 3px;
 		float: right;
-		width: 73%;
+		width: 70%;
 		padding: .25em .4em;
 	}
 
@@ -65,8 +65,9 @@
 		padding: .3em 0;
 		cursor: pointer;
 
-		i {
-			vertical-align: middle;
+		::before {
+			vertical-align: baseline;
+			margin-right: .25em;
 		}
 	}
 
