@@ -97,6 +97,16 @@ img {
 		font-size: 1.5em;
 	}
 
+	.title {
+		font-size: inherit;
+		display: inline-block;
+		vertical-align: middle;
+
+		&::before {
+			margin-right: .25em;
+		}
+	}
+
 	.menu-toggle {
 		margin-right: .5em;
 		float: left;

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
 import _                    from 'lodash'
 import { toggleSidebar }    from '../actions/ui'
+import { selectArticle }    from '../actions/articles'
 import FeedActions          from '../components/FeedActions'
 import ArticleActions       from '../components/ArticleActions'
 
@@ -10,13 +11,17 @@ class Header extends React.Component {
 		this.props.dispatch( toggleSidebar() )
 	}
 
+	handleClickTitle() {
+		this.props.dispatch( selectArticle( '' ) )
+	}
+
 	renderFeedTitle() {
 		const { feed } = this.props
 
 		let title = feed.title ? feed.title : 'Tiny Tiny RSS Reader'
 
 		return (
-			<h2 className="text-truncate"><i className="fa-rss" />{ title }</h2>
+			<h2 className="text-truncate"><a className="fa-rss title" onClick={ this.handleClickTitle.bind( this ) }>{ title }</a></h2>
 		)
 	}
 
