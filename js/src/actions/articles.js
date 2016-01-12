@@ -155,10 +155,12 @@ export function updateArticle( ids, field, mode ) {
  */
 export function markArticlesRead( ids ) {
 	return function( dispatch, getState ) {
-		let items = getState().articles.items.map( item => {
+		let items = []
+
+		_.each( getState().articles.items, ( item ) => {
 			if ( -1 < ids.indexOf( item.id ) ) {
 				item.unread = false
-				return item
+				items.push( item )
 			}
 		})
 
