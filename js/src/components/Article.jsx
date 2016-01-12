@@ -54,6 +54,13 @@ class Article extends React.Component {
 		dispatch( selectArticle( article.id ) )
 	}
 
+	handleClickContent( e ) {
+		if ( 'A' === e.target.nodeName ) {
+			e.preventDefault()
+			window.open( e.target.getAttribute( 'href' ) )
+		}
+	}
+
 	scrollToTop() {
 		document.getElementsByClassName( 'content' )[0].scrollTop = 0;
 	}
@@ -101,7 +108,7 @@ class Article extends React.Component {
 	renderContent() {
 		if ( this.props.isSingle ) {
 			return (
-				<div className="article-content" dangerouslySetInnerHTML={ this.getContent() }/>
+				<div className="article-content" dangerouslySetInnerHTML={ this.getContent() } onClick={ this.handleClickContent.bind( this ) } />
 			)
 		}
 	}
