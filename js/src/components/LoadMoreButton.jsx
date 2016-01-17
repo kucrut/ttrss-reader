@@ -12,7 +12,7 @@ class LoadMoreButton extends React.Component {
 			return
 		}
 
-		if ( unreadOnly ) {
+		if ( unreadOnly && ! feed.is_cat ) {
 			skipNum = _.filter( articles.items, { unread: true } ).length
 		} else {
 			skipNum = articles.items.length
