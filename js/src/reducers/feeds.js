@@ -25,12 +25,19 @@ function groupify( feeds ) {
 export default function feeds( state = initialState, action ) {
 	switch ( action.type ) {
 		case RECEIEVED_FEEDS:
+			let newItems, allItems, current
+
 			// Remove current category feeds from `items` so we don't have duplicates.
 			_.remove( state.items, { cat_id: action.catId } )
 
-			let newItems = action.items.map( normalizeFeed )
-			let allItems = state.items.concat( newItems )
-			let current
+			newItems = action.items.map( normalizeFeed )
+			newItems.unshift({
+				id:     'c'+action.catId,
+				title:  'All Articles',
+				cat_id: action.catId,
+				unread: 0 // TODO
+			})
+			allItems = state.items.concat( newItems )
 
 			// Update the `current` feed object.
 			if ( state.current.id ) {
