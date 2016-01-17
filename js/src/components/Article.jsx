@@ -115,6 +115,19 @@ class Article extends React.Component {
 		}
 	}
 
+	renderMeta() {
+		const { author, updated } = this.props.article
+		let meta = getArticleDate( updated )
+
+		if ( author ) {
+			meta = 'By ' + author + ' on ' + meta
+		}
+
+		return (
+			<p className="article-meta">{ meta }</p>
+		)
+	}
+
 	renderContent() {
 		if ( this.props.isSingle ) {
 			return (
@@ -135,7 +148,7 @@ class Article extends React.Component {
 				<header>
 					{ this.renderTitle() }
 					{ this.renderFeedTitle() }
-					<p className="article-meta">By { author } on { getArticleDate( updated ) }</p>
+					{ this.renderMeta() }
 				</header>
 
 				{ this.renderContent() }
