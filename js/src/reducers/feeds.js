@@ -35,6 +35,7 @@ export default function feeds( state = initialState, action ) {
 				id:     'c'+action.catId,
 				title:  'All Articles',
 				cat_id: action.catId,
+				is_cat: true,
 				unread: 0 // TODO
 			})
 			allItems = state.items.concat( newItems )
