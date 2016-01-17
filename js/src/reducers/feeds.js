@@ -12,7 +12,8 @@ function normalizeFeed( feed ) {
 	return Object.assign({}, feed, {
 		id:     parseInt( feed.id, 10 ),
 		cat_id: parseInt( feed.cat_id, 10 ),
-		unread: parseInt( feed.unread, 10)
+		unread: parseInt( feed.unread, 10),
+		is_cat: false
 	})
 }
 
