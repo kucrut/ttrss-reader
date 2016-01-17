@@ -35,7 +35,15 @@ export function fetchFeedArticles( feed, clearExisting = true, params = {} ) {
 		const { limit, unreadOnly, dateReverse } = settings
 		const { url, sid } = session
 
-		params = Object.assign( {}, params, {
+		if ( feed.is_cat ) {
+			params = Object.assign( {}, params, {
+				is_cat:    true,
+				feed_id:   parseInt( feed.id.replace( /^c/, '' ), 10 ),
+				view_mode: 'all_articles'
+			})
+		}
+
+		_.defaults( params, {
 			op:           'getHeadlines',
 			sid:          sid,
 			feed_id:      feed.id,

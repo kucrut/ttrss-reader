@@ -105,6 +105,29 @@ class Article extends React.Component {
 		return title
 	}
 
+	renderFeedTitle() {
+		const { isSingle, feed, article } = this.props
+
+		if ( ! isSingle && ( feed.is_cat || 0 > feed.id ) ) {
+			return (
+				<p className="article-meta"><i className="fa-rss-squared" /> { article.feed_title }</p>
+			)
+		}
+	}
+
+	renderMeta() {
+		const { author, updated } = this.props.article
+		let meta = getArticleDate( updated )
+
+		if ( author ) {
+			meta = 'By ' + author + ' on ' + meta
+		}
+
+		return (
+			<p className="article-meta">{ meta }</p>
+		)
+	}
+
 	renderContent() {
 		if ( this.props.isSingle ) {
 			return (
@@ -124,7 +147,8 @@ class Article extends React.Component {
 			<article className={ articleClass } style={ this.state.style }>
 				<header>
 					{ this.renderTitle() }
-					<p className="article-meta">By { author } on { getArticleDate( updated ) }</p>
+					{ this.renderFeedTitle() }
+					{ this.renderMeta() }
 				</header>
 
 				{ this.renderContent() }
@@ -155,7 +179,15 @@ class Article extends React.Component {
 Article.propTypes = {
 	article:          PropTypes.object.isRequired,
 	isSingle:         PropTypes.bool.isRequired,
-	prevNextCallback: PropTypes.func
+	prevNextCallback: PropTypes.func,
+	feed:             PropTypes.object.isRequired,
+	dispatch:         PropTypes.func.isRequired
 }
 
-export default connect()( Article )
+function mapStateToProps( state ) {
+	return {
+		feed: state.feeds.current
+	}
+}
+
+export default connect( mapStateToProps )( Article )

@@ -9,7 +9,7 @@ class FeedList extends React.Component {
 	getFeeds() {
 		const { dispatch, category } = this.props
 
-		dispatch( fetchFeeds( category.id ) )
+		dispatch( fetchFeeds( category ) )
 	}
 
 	componentDidMount() {

@@ -18,7 +18,17 @@ class Header extends React.Component {
 	renderFeedTitle() {
 		const { feed } = this.props
 
-		let title = feed.title ? feed.title : 'Tiny Tiny RSS Reader'
+		let title
+
+		if ( feed.is_cat ) {
+			title = feed.cat_title
+		} else {
+			if ( feed.title ) {
+				title = feed.title
+			} else {
+				title = 'Tiny Tiny RSS Reader'
+			}
+		}
 
 		return (
 			<h2 className="text-truncate"><a className="fa-rss title" onClick={ this.handleClickTitle.bind( this ) }>{ title }</a></h2>
