@@ -9,7 +9,7 @@ class LoginForm extends React.Component {
 		this.state = {
 			user:     '',
 			password: '',
-			url:      '',
+			url:      window.location.origin,
 		}
 	}
 
