@@ -3,6 +3,7 @@ var InlineEnviromentVariablesPlugin = require('inline-environment-variables-webp
 var webpack = require("webpack");
 
 var assetsPath = path.join(__dirname, "..", "public", "assets");
+var appPath = path.join(__dirname, '..', 'app');
 var publicPath = "/";
 
 var commonLoaders = [
@@ -13,7 +14,7 @@ var commonLoaders = [
      */
     test: /\.js$|\.jsx$/,
     loader: 'babel',
-    include: path.join(__dirname, '..', 'js', 'src'),
+    include: appPath,
     exclude: path.join(__dirname, '/node_modules/')
   },
   { test: /\.json$/, loader: "json-loader" },
@@ -33,7 +34,7 @@ module.exports = [
     name: "browser",
     // A SourceMap is emitted.
     devtool: "source-map",
-    context: path.join(__dirname, "..", "js", "src"),
+    context: appPath,
     entry: {
       app: "./index"
     },
