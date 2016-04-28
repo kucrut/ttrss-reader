@@ -6,6 +6,11 @@
   "repository": "https://github.com/kucrut/ttrss-reader",
   "main": "js/bundle.js",
   "license": "GPL-2.0",
+  "scripts": {
+    "clean": "rimraf public/assets",
+    "build:prod": "cross-env NODE_ENV=production webpack --colors --config ./webpack/webpack.config.prod.js",
+    "build": "npm run clean && npm run build:prod"
+  },
   "devDependencies": {
     "babel-core": "^5.6.18",
     "babel-loader": "^5.1.4",
@@ -31,5 +36,10 @@
     "redux-thunk": "^0.1.0",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.0"
+  },
+  "dependencies": {
+    "cross-env": "^1.0.7",
+    "inline-environment-variables-webpack-plugin": "0.0.2",
+    "rimraf": "^2.5.2"
   }
 }
