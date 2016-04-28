@@ -9,37 +9,6 @@ var webpackConfig    = require( './webpack.config.js' );
 
 gulp.task( 'default', [ 'webpack-dev-server', 'watch' ] );
 
-// Production build
-gulp.task( 'build', [ 'webpack:build', 'styles' ] );
-
-gulp.task( 'webpack:build', function( callback ) {
-	// modify some webpack config options
-	var myConfig = Object.create( webpackConfig );
-
-	myConfig.plugins = myConfig.plugins.concat(
-		new webpack.DefinePlugin({
-			'process.env': {
-				// This has effect on the react lib size
-				'NODE_ENV': JSON.stringify( 'production' )
-			}
-		}),
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.UglifyJsPlugin()
-	);
-
-	// run webpack
-	webpack( myConfig, function( err, stats ) {
-		if ( err ) {
-			throw new gutil.PluginError( 'webpack:build', err );
-		}
-
-		gutil.log( '[webpack:build]', stats.toString({
-			colors: true
-		}));
-		callback();
-	});
-});
-
 gulp.task( 'webpack-dev-server', function( callback ) {
 	// modify some webpack config options
 	var myConfig     = Object.create( webpackConfig );
