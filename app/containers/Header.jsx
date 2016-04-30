@@ -14,6 +14,13 @@ class Header extends React.Component {
 		dispatch:    PropTypes.func.isRequired
 	}
 
+	constructor( props ) {
+		super( props );
+
+		this.handleClickMenu = this.handleClickMenu.bind( this );
+		this.handleClickTitle = this.handleClickTitle.bind( this );
+	}
+
 	handleClickMenu() {
 		this.props.dispatch( toggleSidebar() )
 	}
@@ -38,7 +45,7 @@ class Header extends React.Component {
 		}
 
 		return (
-			<h2 className="text-truncate"><a className="fa-rss title" onClick={ this.handleClickTitle.bind( this ) }>{ title }</a></h2>
+			<h2 className="text-truncate"><a className="fa-rss title" onClick={ this.handleClickTitle }>{ title }</a></h2>
 		)
 	}
 
@@ -57,7 +64,7 @@ class Header extends React.Component {
 		return (
 			<div className="head">
 				<div className="feed-title">
-					<a onClick={ this.handleClickMenu.bind( this ) } title="Show menu" className="menu-toggle fa-menu" />
+					<a onClick={ this.handleClickMenu } title="Show menu" className="menu-toggle fa-menu" />
 					{ this.renderFeedTitle() }
 				</div>
 
