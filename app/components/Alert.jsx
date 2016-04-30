@@ -35,7 +35,7 @@ class Alert extends React.Component {
 					<p>{ message }</p>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
