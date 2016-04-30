@@ -1,9 +1,7 @@
 import format from 'date-fns/format';
 
 export function getCount( num ) {
-	let count = 1000 < num ? '999+' : num;
-
-	return count
+	return 1000 < num ? '999+' : num;
 }
 
 /**
