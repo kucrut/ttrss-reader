@@ -9,6 +9,14 @@ import LoadMoreButton from 'components/LoadMoreButton';
 
 
 class ArticleList extends React.Component {
+	static propTypes = {
+		feed:       PropTypes.object.isRequired,
+		scrollPos:  PropTypes.object.isRequired,
+		articles:   PropTypes.object.isRequired,
+		unreadOnly: PropTypes.number.isRequired,
+		dispatch:   PropTypes.func.isRequired
+	}
+
 	componentDidMount() {
 		const { feed, articles, scrollPos } = this.props;
 
@@ -113,14 +121,6 @@ class ArticleList extends React.Component {
 		);
 	}
 }
-
-ArticleList.propTypes = {
-	feed:       PropTypes.object.isRequired,
-	scrollPos:  PropTypes.object.isRequired,
-	articles:   PropTypes.object.isRequired,
-	unreadOnly: PropTypes.number.isRequired,
-	dispatch:   PropTypes.func.isRequired
-};
 
 function mapStateToProps( state ) {
 	return {
