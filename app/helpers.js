@@ -1,4 +1,4 @@
-import moment from 'moment'
+import format from 'date-fns/format';
 
 export function getCount( num ) {
 	let count = 1000 < num ? '999+' : num;
@@ -15,5 +15,5 @@ export function getCount( num ) {
  * @return {string}
  */
 export function getArticleDate( date ) {
-	return moment( date * 1000 ).format( 'D MMMM YYYY @ hh:mm' )
+	return format( date * 1000, 'D MMMM YYYY @ hh:mm' );
 }

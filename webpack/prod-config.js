@@ -56,7 +56,6 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin( 'style.css' ),
 		new webpack.NoErrorsPlugin(),
-		new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ ),
 		new InlineEnviromentVariablesPlugin({ NODE_ENV: 'production' }),
 		new webpack.optimize.UglifyJsPlugin({
 			compressor: {
