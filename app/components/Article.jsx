@@ -6,6 +6,14 @@ import { getArticleDate }               from '../helpers'
 import Swipeable                        from 'react-swipeable'
 
 class Article extends React.Component {
+	static propTypes = {
+		article:          PropTypes.object.isRequired,
+		isSingle:         PropTypes.bool.isRequired,
+		prevNextCallback: PropTypes.func,
+		feed:             PropTypes.object.isRequired,
+		dispatch:         PropTypes.func.isRequired
+	}
+
 	constructor( props ) {
 		super( props )
 		this.state = {
@@ -174,14 +182,6 @@ class Article extends React.Component {
 			return ( this.renderElement() )
 		}
 	}
-}
-
-Article.propTypes = {
-	article:          PropTypes.object.isRequired,
-	isSingle:         PropTypes.bool.isRequired,
-	prevNextCallback: PropTypes.func,
-	feed:             PropTypes.object.isRequired,
-	dispatch:         PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
