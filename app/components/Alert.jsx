@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
+import { logsShape } from 'reducers/log';
 import { removeLog }        from '../actions/log'
 
 class Alert extends React.Component {
 	static propTypes = {
-		logs:     PropTypes.object.isRequired,
+		logs:     PropTypes.shape( logsShape ).isRequired,
 		dispatch: PropTypes.func.isRequired
 	}
 
