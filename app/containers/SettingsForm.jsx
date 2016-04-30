@@ -4,6 +4,11 @@ import { classNames }                      from 'classnames'
 import { saveSettings, closeSettingsForm } from '../actions/settings'
 
 class SettingsForm extends React.Component {
+	static propTypes = {
+		settings: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	constructor( props ) {
 		super( props )
 
@@ -99,11 +104,6 @@ class SettingsForm extends React.Component {
 			</form>
 		)
 	}
-}
-
-SettingsForm.propTypes = {
-	settings: PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default connect( state => ({ settings: state.settings }) )( SettingsForm )
