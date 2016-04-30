@@ -7,6 +7,13 @@ import FeedActions          from '../components/FeedActions'
 import ArticleActions       from '../components/ArticleActions'
 
 class Header extends React.Component {
+	static propTypes = {
+		feed:        PropTypes.object.isRequired,
+		articles:    PropTypes.object.isRequired,
+		dateReverse: PropTypes.number.isRequired,
+		dispatch:    PropTypes.func.isRequired
+	}
+
 	handleClickMenu() {
 		this.props.dispatch( toggleSidebar() )
 	}
@@ -58,13 +65,6 @@ class Header extends React.Component {
 			</div>
 		)
 	}
-}
-
-Header.propTypes = {
-	feed:        PropTypes.object.isRequired,
-	articles:    PropTypes.object.isRequired,
-	dateReverse: PropTypes.number.isRequired,
-	dispatch:    PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
