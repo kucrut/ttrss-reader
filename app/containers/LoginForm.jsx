@@ -11,11 +11,15 @@ class LoginForm extends React.Component {
 
 	constructor( props ) {
 		super( props )
+
 		this.state = {
 			user:     '',
 			password: '',
 			url:      window.location.origin,
-		}
+		};
+
+		this.handleChange = this.handleChange.bind( this );
+		this.submitForm = this.submitForm.bind( this );
 	}
 
 	handleChange( e ) {
@@ -52,15 +56,15 @@ class LoginForm extends React.Component {
 				<h1><i className="fa-rss" /> Tiny Tiny RSS Reader</h1>
 				<div className="form-row">
 					<label htmlFor="login-user">Username</label>
-					<input id="login-user" type="text" name="user" value={ user } onChange={ this.handleChange.bind( this ) } required autofocus  />
+					<input id="login-user" type="text" name="user" value={ user } onChange={ this.handleChange } required autofocus  />
 				</div>
 				<div className="form-row">
 					<label htmlFor="login-password">Password</label>
-					<input id="login-password" type="password" name="password" value={ password } onChange={ this.handleChange.bind( this ) } required />
+					<input id="login-password" type="password" name="password" value={ password } onChange={ this.handleChange } required />
 				</div>
 				<div className="form-row">
 					<label htmlFor="login-url">URL</label>
-					<input id="login-url" type="url" name="url" value={ url } onChange={ this.handleChange.bind( this ) } required />
+					<input id="login-url" type="url" name="url" value={ url } onChange={ this.handleChange } required />
 				</div>
 				<div className="form-row submit-row">
 					{ this.renderButton() }
