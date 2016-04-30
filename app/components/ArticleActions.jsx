@@ -3,6 +3,11 @@ import { connect }          from 'react-redux'
 import { updateArticle }    from '../actions/articles'
 
 class ArticleActions extends React.Component {
+	static propTypes = {
+		article:  PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	constructor( props ) {
 		super( props )
 		this.state = {
@@ -51,11 +56,6 @@ class ArticleActions extends React.Component {
 			</div>
 		)
 	}
-}
-
-ArticleActions.propTypes = {
-	article:  PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default connect()( ArticleActions )
