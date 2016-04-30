@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchFeeds } from 'actions/feeds';
-import FeedItem from '../components/FeedItem';
-import Spinner from '../components/Spinner';
+import FeedItem from 'components/FeedItem';
+import Spinner from 'components/Spinner';
 
 
 class FeedList extends React.Component {
