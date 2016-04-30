@@ -19,6 +19,10 @@ class SubscribeForm extends React.Component {
 			category: 0,
 			feeds:    []
 		}
+
+		this.submitForm = this.submitForm.bind( this );
+		this.handleChange = this.handleChange.bind( this );
+		this.handleClickClose = this.handleClickClose.bind( this );
 	}
 
 	submitForm( e ) {
@@ -92,7 +96,7 @@ class SubscribeForm extends React.Component {
 
 		if ( feeds.length ) {
 			element = (
-				<select id="s-url" name="url" value={ url } onChange={ this.handleChange.bind( this ) }>
+				<select id="s-url" name="url" value={ url } onChange={ this.handleChange }>
 					{ feeds.map( feed => {
 						return <option key={ feed.url } value={ feed.url }>{ feed.title }</option>
 					}) }
@@ -100,7 +104,7 @@ class SubscribeForm extends React.Component {
 			)
 		} else {
 			element = (
-				<input id="s-url" type="url" name="url" required value={ url } onChange={ this.handleChange.bind( this ) } />
+				<input id="s-url" type="url" name="url" required value={ url } onChange={ this.handleChange } />
 			)
 		}
 
@@ -118,7 +122,7 @@ class SubscribeForm extends React.Component {
 			)
 		} else {
 			element = (
-				<select id="s-category" name="category" value={ category } onChange={ this.handleChange.bind( this ) }>
+				<select id="s-category" name="category" value={ category } onChange={ this.handleChange }>
 					{ allCategories.items.map( item => {
 						return <option key={ item.id } value={ item.id }>{ item.title }</option>
 					}) }
@@ -148,7 +152,7 @@ class SubscribeForm extends React.Component {
 		const { url } = this.state
 
 		return (
-			<form className="login-form" onSubmit={ this.submitForm.bind( this ) }>
+			<form className="login-form" onSubmit={ this.submitForm }>
 				<h1><i className="fa-rss" /> Subscribe to Feed</h1>
 				{ this.renderMessage() }
 				<div className="form-row">
@@ -163,7 +167,7 @@ class SubscribeForm extends React.Component {
 					{ this.renderButton() }
 				</div>
 
-				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose.bind( this ) } />
+				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose } />
 			</form>
 		)
 	}
