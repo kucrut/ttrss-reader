@@ -57,4 +57,10 @@ class CategoryList extends React.Component {
 	}
 }
 
-export default connect( state => ({ categories: state.categories }) )( CategoryList );
+function mapStateToProps( state ) {
+	return {
+		categories: state.categories
+	};
+}
+
+export default connect( mapStateToProps )( CategoryList );
