@@ -3,6 +3,11 @@ import { connect }          from 'react-redux'
 import { selectArticle }    from '../actions/articles'
 
 class ArticlePagination extends React.Component {
+	static propTypes = {
+		articles: PropTypes.object.isRequired,
+		prevNextCallback: PropTypes.func.isRequired
+	}
+
 	handleClickIndex() {
 		this.props.dispatch( selectArticle( '' ) )
 	}
@@ -37,11 +42,6 @@ class ArticlePagination extends React.Component {
 			</nav>
 		)
 	}
-}
-
-ArticlePagination.propTypes = {
-	articles: PropTypes.object.isRequired,
-	prevNextCallback: PropTypes.func.isRequired
 }
 
 export default connect( state => ({ articles: state.articles }) )( ArticlePagination )
