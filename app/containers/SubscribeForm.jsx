@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { getAllCategories } from 'actions/categories';
 import { subscribeToFeed, closeSubscriptionForm } from 'actions/subscription';
 
@@ -48,7 +47,7 @@ class SubscribeForm extends React.Component {
 				break;
 
 			case 4:
-				feedsUrls = _.keys( status.feeds );
+				feedsUrls = Object.keys( status.feeds );
 				feeds     = feedsUrls.map( feedUrl => ({
 					url:   feedUrl,
 					title: status.feeds[ url ]
