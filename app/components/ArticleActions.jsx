@@ -11,10 +11,14 @@ class ArticleActions extends React.Component {
 
 	constructor( props ) {
 		super( props );
+
 		this.state = {
 			unread: false,
 			marked: false
 		};
+
+		this.toggleRead = this.toggleRead.bind( this );
+		this.toggleMarked = this.toggleMarked.bind( this );
 	}
 
 	componentWillMount() {
@@ -30,6 +34,14 @@ class ArticleActions extends React.Component {
 
 		this.setState({ [ action ]: ! this.state[ action ] });
 		dispatch( updateArticle( article.id, action, 2 ) );
+	}
+
+	toggleRead() {
+		this.handleClickAction( 'unread' );
+	}
+
+	toggleMarked() {
+		this.handleClickAction( 'marked' );
 	}
 
 	updateState( props ) {
@@ -52,8 +64,8 @@ class ArticleActions extends React.Component {
 
 		return (
 			<div className="actions">
-				<a onClick={ () => { this.handleClickAction( 'unread' ); } } title={ readTitle } className={ readIcon } />
-				<a onClick={ () => { this.handleClickAction( 'marked' ); } } title={ starTitle } className={ starIcon } />
+				<a onClick={ this.toggleRead } title={ readTitle } className={ readIcon } />
+				<a onClick={ this.toggleMarked } title={ starTitle } className={ starIcon } />
 			</div>
 		);
 	}
