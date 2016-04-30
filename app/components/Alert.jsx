@@ -33,4 +33,10 @@ class Alert extends React.Component {
 	}
 }
 
-export default connect( state => ({ logs: state.logs }) )( Alert )
+function mapStateToProps( state ) {
+	return {
+		logs: state.logs
+	};
+}
+
+export default connect( mapStateToProps )( Alert );
