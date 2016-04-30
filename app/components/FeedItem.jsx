@@ -6,6 +6,12 @@ import { hideSidebar }      from '../actions/ui'
 import { getCount }         from '../helpers'
 
 class FeedItem extends React.Component {
+	static ppropTypes = {
+		feed:     PropTypes.object.isRequired,
+		current:  PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	handleClick() {
 		const { feed, current, dispatch } = this.props;
 
@@ -43,12 +49,6 @@ class FeedItem extends React.Component {
 			</li>
 		)
 	}
-}
-
-FeedItem.propTypes = {
-	feed:     PropTypes.object.isRequired,
-	current:  PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default connect()( FeedItem )
