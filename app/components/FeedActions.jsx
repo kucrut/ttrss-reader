@@ -90,7 +90,7 @@ export default class FeedActions extends React.Component {
 			iconClass = 'fa-sort-alt-down';
 		}
 
-		if ( isFetching, ! items.length ) {
+		if ( isFetching || ! items.length ) {
 			iconClass += ' disabled';
 		}
 
