@@ -3,6 +3,11 @@ import { connect }          from 'react-redux'
 import { removeLog }        from '../actions/log'
 
 class Alert extends React.Component {
+	static propTypes = {
+		logs:     PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	handleClick() {
 		this.props.dispatch( removeLog() )
 	}
@@ -25,11 +30,6 @@ class Alert extends React.Component {
 			</div>
 		)
 	}
-}
-
-Alert.propTypes = {
-	logs:     PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default connect( state => ({ logs: state.logs }) )( Alert )
