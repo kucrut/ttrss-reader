@@ -72,7 +72,7 @@ export function allCategories( state = initialAllCategories, action ) {
 			});
 
 		case RECEIEVED_ALL_CATEGORIES:
-			feedCategories = action.feedCategories.map( normalizeCategory );
+			feedCategories = action.categories.map( normalizeCategory );
 			feedCategories = filter( feedCategories, ( item ) => -1 < item.id );
 			feedCategories = sortBy( feedCategories, 'title' );
 
