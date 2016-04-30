@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
-import classNames           from 'classnames'
-import { fetchFeeds }       from '../actions/feeds'
-import FeedItem             from '../components/FeedItem'
-import Spinner              from '../components/Spinner'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { fetchFeeds } from 'actions/feeds';
+import FeedItem from '../components/FeedItem';
+import Spinner from '../components/Spinner';
+
 
 class FeedList extends React.Component {
 	static propTypes = {
@@ -12,58 +12,57 @@ class FeedList extends React.Component {
 		dispatch: PropTypes.func.isRequired
 	}
 
-	getFeeds() {
-		const { dispatch, category } = this.props
-
-		dispatch( fetchFeeds( category ) )
-	}
-
 	componentDidMount() {
-		this.getFeeds()
+		this.getFeeds();
 	}
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.category.unread !== this.props.category.unread ) {
-			this.getFeeds()
+			this.getFeeds();
 		}
+	}
+
+	getFeeds() {
+		const { dispatch, category } = this.props;
+
+		dispatch( fetchFeeds( category ) );
 	}
 
 	renderSpinner() {
 		return (
 			<li className="placeholder"><Spinner /> Loading Feeds</li>
-		)
+		);
 	}
 
 	renderNoFeed() {
 		return (
 			<li className="placeholder">No Feeds found.</li>
-		)
+		);
 	}
 
 	renderList( items ) {
-		const { current } = this.props.feeds
+		const { current } = this.props.feeds;
 
 		return (
 			items.map( feed => (
 				<FeedItem key={ feed.id } feed={ feed } current={ current } />
-			))
-		)
+			) )
+		);
 	}
 
 	render() {
-		const { feeds, category } = this.props
-		let key = 'c' + category.id
-
-		let items = feeds.groups[ key ]
-		let listItems
+		const { feeds, category } = this.props;
+		const key = `c${category.id}`;
+		const items = feeds.groups[ key ];
+		let listItems;
 
 		if ( ! items ) {
-			listItems = this.renderSpinner()
+			listItems = this.renderSpinner();
 		} else {
 			if ( items.length ) {
-				listItems = this.renderList( items )
+				listItems = this.renderList( items );
 			} else {
-				listItems = this.renderNoFeed()
+				listItems = this.renderNoFeed();
 			}
 		}
 
@@ -71,7 +70,7 @@ class FeedList extends React.Component {
 			<ul className="feed-list">
 				{ listItems }
 			</ul>
-		)
+		);
 	}
 }
 
@@ -81,4 +80,4 @@ function mapStateToProps( state ) {
 	};
 }
 
-export default connect( mapStateToProps )( FeedList )
+export default connect( mapStateToProps )( FeedList );
