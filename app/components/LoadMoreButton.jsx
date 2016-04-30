@@ -4,6 +4,12 @@ import { fetchFeedArticles } from '../actions/articles'
 import Spinner               from './Spinner'
 
 class LoadMoreButton extends React.Component {
+	static propTypes = {
+		feed:     PropTypes.object.isRequired,
+		articles: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	handleClick() {
 		const { feed, articles, unreadOnly, dispatch } = this.props
 		let skipNum
@@ -43,12 +49,6 @@ class LoadMoreButton extends React.Component {
 			<p className="load-more-wrap"><button className="uk-button uk-button-large" { ...attrs } onClick={ this.handleClick.bind( this ) }>{ icon } Load More</button></p>
 		)
 	}
-}
-
-LoadMoreButton.propTypes = {
-	feed:     PropTypes.object.isRequired,
-	articles: PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default ( LoadMoreButton )
