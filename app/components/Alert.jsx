@@ -9,6 +9,11 @@ class Alert extends React.Component {
 		dispatch: PropTypes.func.isRequired
 	}
 
+	constructor( props ) {
+		super( props );
+		this.handleClick = this.handleClick.bind( this );
+	}
+
 	handleClick() {
 		this.props.dispatch( removeLog() )
 	}
@@ -24,7 +29,7 @@ class Alert extends React.Component {
 		}
 
 		return (
-			<div className={ className } onClick={ this.handleClick.bind( this ) }>
+			<div className={ className } onClick={ this.handleClick }>
 				<div className="inside">
 					<p>{ message }</p>
 				</div>
