@@ -4,6 +4,11 @@ import _                    from 'lodash'
 import { requestLogin }     from '../actions/session'
 
 class LoginForm extends React.Component {
+	static propTypes = {
+		isAsking: PropTypes.bool.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	constructor( props ) {
 		super( props )
 		this.state = {
@@ -63,11 +68,6 @@ class LoginForm extends React.Component {
 			</form>
 		)
 	}
-}
-
-LoginForm.PropTypes = {
-	isAsking: PropTypes.bool.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default ( LoginForm )
