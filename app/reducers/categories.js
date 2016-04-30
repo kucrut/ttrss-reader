@@ -1,5 +1,5 @@
 import { PropTypes } from 'react';
-import _ from 'lodash';
+import { filter, findIndex, sortBy } from 'lodash';
 import { REQUESTED_LOGOUT } from 'actions/session';
 import {
 	REQUESTED_CATEGORIES,
@@ -38,7 +38,7 @@ export function categories( state = initialState, action ) {
 
 		case RECEIEVED_CATEGORIES:
 			feedCategories = action.categories.map( normalizeCategory );
-			specialIdx     = _.findIndex( feedCategories, { id: -1 });
+			specialIdx     = findIndex( feedCategories, { id: -1 });
 
 			if ( 0 < specialIdx ) {
 				feedCategories.splice( 0, 0, feedCategories.splice( specialIdx, 1 )[ 0 ] );
@@ -73,8 +73,8 @@ export function allCategories( state = initialAllCategories, action ) {
 
 		case RECEIEVED_ALL_CATEGORIES:
 			feedCategories = action.feedCategories.map( normalizeCategory );
-			feedCategories = _.filter( feedCategories, ( item ) => -1 < item.id );
-			feedCategories = _.sortBy( feedCategories, 'title' );
+			feedCategories = filter( feedCategories, ( item ) => -1 < item.id );
+			feedCategories = sortBy( feedCategories, 'title' );
 
 			return Object.assign({}, state, {
 				isFetching: false,
