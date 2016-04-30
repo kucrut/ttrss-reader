@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
-import _                    from 'lodash'
-import { toggleSidebar }    from '../actions/ui'
-import { selectArticle }    from '../actions/articles'
-import FeedActions          from '../components/FeedActions'
-import ArticleActions       from '../components/ArticleActions'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { toggleSidebar } from 'actions/ui';
+import { selectArticle } from 'actions/articles';
+import FeedActions from 'components/FeedActions';
+import ArticleActions from 'components/ArticleActions';
+
 
 class Header extends React.Component {
 	static propTypes = {
@@ -22,42 +22,46 @@ class Header extends React.Component {
 	}
 
 	handleClickMenu() {
-		this.props.dispatch( toggleSidebar() )
+		this.props.dispatch( toggleSidebar() );
 	}
 
 	handleClickTitle() {
-		this.props.dispatch( selectArticle( '' ) )
+		this.props.dispatch( selectArticle( '' ) );
 	}
 
 	renderFeedTitle() {
-		const { feed } = this.props
-
-		let title
+		const { feed } = this.props;
+		let title;
 
 		if ( feed.is_cat ) {
-			title = feed.cat_title
+			title = feed.cat_title;
 		} else {
 			if ( feed.title ) {
-				title = feed.title
+				title = feed.title;
 			} else {
-				title = 'Tiny Tiny RSS Reader'
+				title = 'Tiny Tiny RSS Reader';
 			}
 		}
 
 		return (
-			<h2 className="text-truncate"><a className="fa-rss title" onClick={ this.handleClickTitle }>{ title }</a></h2>
-		)
+			<h2 className="text-truncate">
+				<a className="fa-rss title" onClick={ this.handleClickTitle }>{ title }</a>
+			</h2>
+		);
 	}
 
 	renderActions() {
-		const { feed, articles } = this.props
-		const { currentId, currentIndex, items } = articles
+		const { feed, articles } = this.props;
+		const { currentId, currentIndex, items } = articles;
+		let actions;
 
 		if ( currentId ) {
-			return ( <ArticleActions article={ items[ currentIndex ] } /> )
+			actions = ( <ArticleActions article={ items[ currentIndex ] } /> );
 		} else if ( feed.id ) {
-			return ( <FeedActions { ...this.props } /> )
+			actions = ( <FeedActions { ...this.props } /> );
 		}
+
+		return actions;
 	}
 
 	render() {
@@ -70,7 +74,7 @@ class Header extends React.Component {
 
 				{ this.renderActions() }
 			</div>
-		)
+		);
 	}
 }
 
@@ -79,7 +83,7 @@ function mapStateToProps( state ) {
 		feed:        state.feeds.current,
 		articles:    state.articles,
 		dateReverse: state.settings.dateReverse
-	}
+	};
 }
 
-export default connect( mapStateToProps )( Header )
+export default connect( mapStateToProps )( Header );
