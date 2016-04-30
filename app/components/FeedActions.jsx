@@ -1,13 +1,10 @@
-import React, { PropTypes } from 'react'
-import _                    from 'lodash'
-import { updateSortOrder }  from '../actions/settings'
-import {
-	updateArticle,
-	fetchFeedArticles,
-	markArticlesRead
-} from '../actions/articles'
+import React, { PropTypes } from 'react';
+import _ from 'lodash';
+import { updateSortOrder } from 'actions/settings';
+import { fetchFeedArticles, markArticlesRead } from 'actions/articles';
 
-class FeedActions extends React.Component {
+
+export default class FeedActions extends React.Component {
 	static propTypes = {
 		feed:        PropTypes.object.isRequired,
 		articles:    PropTypes.object.isRequired,
@@ -15,82 +12,90 @@ class FeedActions extends React.Component {
 		dispatch:    PropTypes.func.isRequired
 	}
 
+	constructor( props ) {
+		super( props );
+
+		this.handleClickSort = this.handleClickSort.bind( this );
+		this.handleClickCheck = this.handleClickCheck.bind( this );
+		this.handleClickRefresh = this.handleClickRefresh.bind( this );
+	}
+
 	handleClickCheck() {
-		const { articles, dispatch } = this.props
+		const { articles, dispatch } = this.props;
 
 		if ( articles.isFetching ) {
 			return;
 		}
 
-		let ids = _.pluck( _.filter( articles.items, { unread: true } ), 'id' )
+		const ids = _.pluck( _.filter( articles.items, { unread: true }), 'id' );
 
-		dispatch( markArticlesRead( ids ) )
+		dispatch( markArticlesRead( ids ) );
 
 		// TODO: Maybe provide option for automatic refresh?
-		//this.handleClickRefresh()
+		// this.handleClickRefresh()
 	}
 
 	handleClickRefresh() {
-		const { feed, dispatch } = this.props
+		const { feed, dispatch } = this.props;
 
-		dispatch( fetchFeedArticles( feed ) )
+		dispatch( fetchFeedArticles( feed ) );
 	}
 
 	handleClickSort() {
-		const { dateReverse, dispatch } = this.props
-		let val = dateReverse ? 0 : 1
+		const { dateReverse, dispatch } = this.props;
+		const val = dateReverse ? 0 : 1;
 
-		dispatch( updateSortOrder( val ) )
-		this.handleClickRefresh()
+		dispatch( updateSortOrder( val ) );
+		this.handleClickRefresh();
 	}
 
 	renderCheck() {
-		const { items, isFetching } = this.props.articles
-		let unread = _.filter( items, { unread: true } )
-		let classes = 'fa-ok'
+		const { items, isFetching } = this.props.articles;
+		const unread = _.filter( items, { unread: true });
+		let classes = 'fa-ok';
 
 		if ( isFetching || ! unread.length ) {
-			classes += ' disabled'
+			classes += ' disabled';
 		}
 
 		return (
-			<a onClick={ this.handleClickCheck.bind( this ) } title="Mark all as read" className={ classes } />
-		)
+			<a onClick={ this.handleClickCheck } title="Mark all as read" className={ classes } />
+		);
 	}
 
 	renderRefresh() {
-		const { isFetching } = this.props.articles
-		let classes = 'fa-arrows-cw'
+		const { isFetching } = this.props.articles;
+		let classes = 'fa-arrows-cw';
 
 		if ( isFetching ) {
-			classes += ' disabled'
+			classes += ' disabled';
 		}
 
-
 		return (
-			<a onClick={ this.handleClickRefresh.bind( this ) } title="Refresh" className={ classes } />
-		)
+			<a onClick={ this.handleClickRefresh } title="Refresh" className={ classes } />
+		);
 	}
 
 	renderSort() {
-		const { dateReverse, articles } = this.props
-		let iconClass, title
+		const { dateReverse, articles } = this.props;
+		let iconClass;
+		let title;
 
 		if ( dateReverse ) {
-			title = 'Oldest First'
-			iconClass = 'fa-sort-alt-up'
+			title = 'Oldest First';
+			iconClass = 'fa-sort-alt-up';
 		} else {
-			title = 'Newest First'
-			iconClass = 'fa-sort-alt-down'
+			title = 'Newest First';
+			iconClass = 'fa-sort-alt-down';
 		}
 
 		if ( articles.isFetching ) {
-			iconClass += ' disabled'
+			iconClass += ' disabled';
 		}
 
 		return (
-			<a className={ iconClass } title={ title } onClick={ this.handleClickSort.bind( this ) } />
-		)
+			<a className={ iconClass } title={ title } onClick={ this.handleClickSort } />
+		);
 	}
 
 	render() {
@@ -100,8 +105,6 @@ class FeedActions extends React.Component {
 				{ this.renderRefresh() }
 				{ this.renderSort() }
 			</div>
-		)
+		);
 	}
 }
-
-export default ( FeedActions )
