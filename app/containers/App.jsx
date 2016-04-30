@@ -1,31 +1,32 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
-import { checkLastSession } from '../actions/session'
-import SettingsForm         from './SettingsForm'
-import SubscribeForm        from './SubscribeForm'
-import LoginForm            from './LoginForm'
-import Header               from './Header'
-import Sidebar              from './Sidebar'
-import Main                 from './Main'
-import Alert                from '../components/Alert'
-import Spinner              from '../components/Spinner'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { checkLastSession } from 'actions/session';
+import SettingsForm from 'containers/SettingsForm';
+import SubscribeForm from 'containers/SubscribeForm';
+import LoginForm from 'containers/LoginForm';
+import Header from 'containers/Header';
+import Sidebar from 'containers/Sidebar';
+import Main from 'containers/Main';
+import Alert from 'components/Alert';
+import Spinner from 'components/Spinner';
+
 
 class App extends React.Component {
 	componentDidMount() {
-		this.props.dispatch( checkLastSession() )
+		this.props.dispatch( checkLastSession() );
 	}
 
 	renderSpinner() {
 		return (
 			<div className="main-init"><Spinner /></div>
-		)
+		);
 	}
 
 	render() {
-		const { dispatch, session, isEditingSettings, isSubscribing } = this.props
-		const { isChecked, isAsking, url, sid } = session
+		const { dispatch, session, isEditingSettings, isSubscribing } = this.props;
+		const { isChecked, isAsking, url, sid } = session;
 
-		let content
+		let content;
 
 		if ( url && sid ) {
 			if ( isEditingSettings ) {
@@ -33,14 +34,14 @@ class App extends React.Component {
 					<div className="whole-wrap">
 						<SettingsForm />
 					</div>
-				)
+				);
 			} else {
 				if ( isSubscribing ) {
 					content = (
 						<div className="whole-wrap">
 							<SubscribeForm />
 						</div>
-					)
+					);
 				} else {
 					content = (
 						<div className="whole-wrap">
@@ -49,39 +50,39 @@ class App extends React.Component {
 							<Main />
 							<Alert />
 						</div>
-					)
+					);
 				}
 			}
 		} else {
 			if ( ! isChecked ) {
-				content = this.renderSpinner()
+				content = this.renderSpinner();
 			} else {
 				content = (
 					<div className="whole-wrap">
 						<LoginForm dispatch={ dispatch } isAsking={ isAsking } />
 						<Alert />
 					</div>
-				)
+				);
 			}
 		}
 
 		return content;
 	}
-};
+}
 
 App.propTypes = {
 	session:           PropTypes.object.isRequired,
 	isSubscribing:     PropTypes.bool.isRequired,
 	isEditingSettings: PropTypes.bool.isRequired,
 	dispatch:          PropTypes.func.isRequired
-}
+};
 
 function mapStateToProps( state ) {
 	return {
-		session: state.session,
+		session:           state.session,
 		isSubscribing:     state.subscription.isOpen,
 		isEditingSettings: state.settings.isEditing
-	}
+	};
 }
 
-export default connect( mapStateToProps )( App )
+export default connect( mapStateToProps )( App );
