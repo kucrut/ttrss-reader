@@ -78,6 +78,7 @@ export default class FeedActions extends React.Component {
 
 	renderSort() {
 		const { dateReverse, articles } = this.props;
+		const { isFetching, items } = articles;
 		let iconClass;
 		let title;
 
@@ -89,7 +90,7 @@ export default class FeedActions extends React.Component {
 			iconClass = 'fa-sort-alt-down';
 		}
 
-		if ( articles.isFetching ) {
+		if ( isFetching, ! items.length ) {
 			iconClass += ' disabled';
 		}
 
