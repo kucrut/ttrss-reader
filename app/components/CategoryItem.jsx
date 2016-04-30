@@ -11,6 +11,7 @@ class CategoryItem extends Component{
 	constructor( props ) {
 		super( props )
 		this.state = { isOpen: false }
+		this.handleClick = this.handleClick.bind( this );
 	}
 
 	handleClick() {
@@ -41,7 +42,7 @@ class CategoryItem extends Component{
 
 		return (
 			<li className={ itemClass } key={ category.id }>
-				<a onClick={ this.handleClick.bind( this ) }>
+				<a onClick={ this.handleClick }>
 					<i className={ iconClass } />
 					<span className="name">{ category.title }</span>
 					{ this.renderCount() }
