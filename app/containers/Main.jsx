@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
-import _                    from 'lodash'
-import { showSidebar }      from '../actions/ui'
-import { selectArticle }    from '../actions/articles'
-import ArticleList          from './ArticleList'
-import MenuToggle           from '../mixins/MenuToggle'
-import Article              from '../components/Article'
-import ArticlePagination    from '../components/ArticlePagination'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { showSidebar } from 'actions/ui';
+import { selectArticle } from 'actions/articles';
+import ArticleList from 'containers/ArticleList';
+import MenuToggle from 'mixins/MenuToggle';
+import Article from 'components/Article';
+import ArticlePagination from 'components/ArticlePagination';
+
 
 class Main extends MenuToggle {
 	static propTypes = {
@@ -25,92 +25,100 @@ class Main extends MenuToggle {
 	}
 
 	handleClickPreviousNext( next = true ) {
-		const { articles, dispatch }  = this.props
-		const { currentIndex, items } = articles
-
-		let newIndex = next ? currentIndex + 1 : currentIndex - 1
-		let article  = items[ newIndex ]
+		const { articles, dispatch }  = this.props;
+		const { currentIndex, items } = articles;
+		const newIndex = next ? currentIndex + 1 : currentIndex - 1;
+		const article  = items[ newIndex ];
 
 		if ( article ) {
-			dispatch( selectArticle( article.id ) )
+			dispatch( selectArticle( article.id ) );
 		}
 	}
 
 	getSingleArticle() {
-		const { items, currentIndex } = this.props.articles
+		const { items, currentIndex } = this.props.articles;
 
-		return Object.assign( {}, items[ currentIndex ], {
+		return Object.assign({}, items[ currentIndex ], {
 			hasPrev: 0 < currentIndex,
 			hasNext: ( currentIndex + 1 ) < items.length
-		})
+		});
 	}
 
 	maybeShowSidebar( props ) {
-		const { feeds, articles, dispatch } = props
+		const { feeds, articles, dispatch } = props;
 
 		if ( ! articles.currentId && ! feeds.current.id ) {
-			dispatch( showSidebar() )
+			dispatch( showSidebar() );
 		}
 	}
 
 	maybeHideSidebar() {
-		const { feeds, articles } = this.props
+		const { feeds, articles } = this.props;
 
 		if ( feeds.current.id || articles.currentId ) {
-			this.handleClickHide()
+			this.handleClickHide();
 		}
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		this.maybeShowSidebar( nextProps )
+		this.maybeShowSidebar( nextProps );
 	}
 
 	componentWillMount() {
-		this.maybeShowSidebar( this.props )
+		this.maybeShowSidebar( this.props );
 	}
 
 	renderPagination() {
+		let pagination;
+
 		if ( 1 > this.props.noPagination ) {
-			return (
+			pagination = (
 				<ArticlePagination prevNextCallback={ this.handleClickPreviousNext } />
-			)
+			);
 		}
+
+		return pagination;
 	}
 
 	renderSingleArticle() {
-		let article = this.getSingleArticle()
+		let article = this.getSingleArticle();
 
 		return (
 			<div className="single-article inside">
-				<Article key={ article.id } article={ article } isSingle={ true } prevNextCallback={ this.handleClickPreviousNext } />
+				<Article
+					key={ article.id }
+					article={ article }
+					isSingle={ true }
+					prevNextCallback={ this.handleClickPreviousNext }
+				/>
 				{ this.renderPagination() }
 			</div>
-		)
+		);
 	}
 
 	renderIcon() {
 		return (
 			<div className="main-init inside"><i className="fa-rss" /></div>
-		)
+		);
 	}
 
 	render() {
-		const { feeds, articles } = this.props
-		let content
+		const { feeds, articles } = this.props;
+		let content;
 
 		if ( articles.currentId ) {
-			content = this.renderSingleArticle()
+			content = this.renderSingleArticle();
 		} else if ( feeds.current.id ) {
-			content = ( <ArticleList feed={ feeds.current } /> )
+			content = ( <ArticleList feed={ feeds.current } /> );
 		} else {
-			content = this.renderIcon()
+			content = this.renderIcon();
 		}
 
 		return (
 			<main onClick={ this.maybeHideSidebar } className="content">
 				{ content }
 			</main>
-		)
+		);
 	}
 }
 
@@ -119,7 +127,7 @@ function mapStateToProps( state ) {
 		feeds:        state.feeds,
 		articles:     state.articles,
 		noPagination: state.settings.noPagination
-	}
+	};
 }
 
-export default connect( mapStateToProps )( Main )
+export default connect( mapStateToProps )( Main );
