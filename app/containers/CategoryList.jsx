@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { categoriesShape } from 'reducers/categories';
 import { getCategories } from 'actions/categories';
 import CategoryItem from 'components/CategoryItem';
 import Spinner from 'components/Spinner';
@@ -7,7 +8,7 @@ import Spinner from 'components/Spinner';
 
 class CategoryList extends React.Component {
 	static propTypes = {
-		categories: PropTypes.object.isRequired,
+		categories: PropTypes.shape( categoriesShape ).isRequired,
 		dispatch:   PropTypes.func.isRequired
 	}
 

@@ -1,3 +1,4 @@
+import { PropTypes } from 'react';
 import _ from 'lodash'
 import { REQUESTED_LOGOUT } from '../actions/session'
 import {
@@ -11,6 +12,11 @@ const initialState = {
 	isFetching: true,
 	items:      []
 }
+
+export const categoriesShape = {
+	isFetching: PropTypes.bool,
+	items:      PropTypes.array
+};
 
 function normalizeCategory( category ) {
 	return Object.assign({}, category, {
