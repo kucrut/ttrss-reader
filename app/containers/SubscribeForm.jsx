@@ -5,6 +5,12 @@ import { getAllCategories } from '../actions/categories'
 import { subscribeToFeed, closeSubscriptionForm }  from '../actions/subscription'
 
 class SubscribeForm extends React.Component {
+	static propTypes = {
+		allCategories: PropTypes.object.isRequired,
+		subscription:  PropTypes.object.isRequired,
+		dispatch:      PropTypes.func.isRequired
+	}
+
 	constructor( props ) {
 		super( props )
 
@@ -161,12 +167,6 @@ class SubscribeForm extends React.Component {
 			</form>
 		)
 	}
-}
-
-SubscribeForm.propTypes = {
-	allCategories: PropTypes.object.isRequired,
-	subscription:  PropTypes.object.isRequired,
-	dispatch:      PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
