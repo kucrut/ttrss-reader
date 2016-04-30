@@ -6,6 +6,12 @@ import FeedItem             from '../components/FeedItem'
 import Spinner              from '../components/Spinner'
 
 class FeedList extends React.Component {
+	static propTypes = {
+		category: PropTypes.object.isRequired,
+		feeds:    PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
+	}
+
 	getFeeds() {
 		const { dispatch, category } = this.props
 
@@ -67,12 +73,6 @@ class FeedList extends React.Component {
 			</ul>
 		)
 	}
-}
-
-FeedList.propTypes = {
-	category: PropTypes.object.isRequired,
-	feeds:    PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
 }
 
 export default connect( state => ({ feeds: state.feeds }) )( FeedList )
