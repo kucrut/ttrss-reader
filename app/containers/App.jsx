@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { sessionShape } from 'reducers/session';
 import { checkLastSession } from 'actions/session';
 import SettingsForm from 'containers/SettingsForm';
 import SubscribeForm from 'containers/SubscribeForm';
@@ -13,7 +14,7 @@ import Spinner from 'components/Spinner';
 
 class App extends React.Component {
 	static propTypes = {
-		session:           PropTypes.object.isRequired,
+		session:           PropTypes.shape( sessionShape ).isRequired,
 		isSubscribing:     PropTypes.bool.isRequired,
 		isEditingSettings: PropTypes.bool.isRequired,
 		dispatch:          PropTypes.func.isRequired

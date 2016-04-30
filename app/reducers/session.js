@@ -1,3 +1,4 @@
+import { PropTypes } from 'react';
 import { REQUESTED_SESSION, SESSION_CHECKED, RECEIEVED_SID, RECEIEVED_URL, REQUESTED_LOGOUT } from '../actions/session'
 
 const initialState = {
@@ -6,6 +7,13 @@ const initialState = {
 	isAsking:  false,
 	isChecked: false
 }
+
+export const sessionShape = {
+	url:       PropTypes.string,
+	sid:       PropTypes.string,
+	isAsking:  PropTypes.bool,
+	isChecked: PropTypes.bool
+};
 
 export default function session( state = initialState, action ) {
 	switch ( action.type ) {
