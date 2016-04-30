@@ -106,4 +106,10 @@ class SettingsForm extends React.Component {
 	}
 }
 
-export default connect( state => ({ settings: state.settings }) )( SettingsForm )
+function mapStateToProps( state ) {
+	return {
+		settings: state.settings
+	};
+}
+
+export default connect( mapStateToProps )( SettingsForm );
