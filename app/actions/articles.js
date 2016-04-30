@@ -1,124 +1,125 @@
-import Api               from '../api'
-import lodash            from 'lodash'
-import { addLog }        from './log'
-import { getCategories } from './categories'
+import Api from 'api';
+import { each } from 'lodash';
+import { addLog } from 'actions/log';
+import { getCategories } from 'actions/categories';
+
+
+export const REQUESTED_ARTICLES = 'REQUESTED_ARTICLES';
+export const RECEIEVED_ARTICLES = 'RECEIEVED_ARTICLES';
+export const SELECTED_ARTICLE = 'SELECTED_ARTICLE';
+export const UPDATED_ARTICLES = 'UPDATED_ARTICLES';
+export const CLEARED_ARTICLES = 'CLEARED_ARTICLES';
+
 
 export const updateFields = [
 	'marked',
 	'published',
 	'unread',
 	'note'
-]
-
-export const REQUESTED_ARTICLES = 'REQUESTED_ARTICLES'
-export const RECEIEVED_ARTICLES = 'RECEIEVED_ARTICLES'
-export const SELECTED_ARTICLE = 'SELECTED_ARTICLE'
-export const UPDATED_ARTICLES = 'UPDATED_ARTICLES'
-export const CLEARED_ARTICLES = 'CLEARED_ARTICLES'
+];
 
 function logError( dispatch, error ) {
 	dispatch( addLog({
 		source:  'articles',
 		type:    'error',
 		message: error.message
-	}) )
+	}) );
 
 	dispatch({
 		type:   REQUESTED_ARTICLES,
 		status: false
-	})
+	});
 }
 
-export function fetchFeedArticles( feed, clearExisting = true, params = {} ) {
-	return function( dispatch, getState ) {
-		const { session, settings } = getState()
-		const { limit, unreadOnly, dateReverse } = settings
-		const { url, sid } = session
+export function clearArticles( feedId ) {
+	return ( dispatch ) => dispatch({
+		type: CLEARED_ARTICLES,
+		feedId
+	});
+}
+
+export function fetchFeedArticles( feed, clearExisting = true, params = {}) {
+	return ( dispatch, getState ) => {
+		const { session, settings } = getState();
+		const { limit, unreadOnly, dateReverse } = settings;
+		const { url, sid } = session;
+		let fetchParams = Object.assign({}, params );
 
 		if ( feed.is_cat ) {
-			params = Object.assign( {}, params, {
+			fetchParams = Object.assign({}, fetchParams, {
 				is_cat:    true,
 				feed_id:   parseInt( feed.id.replace( /^c/, '' ), 10 ),
 				view_mode: 'all_articles'
-			})
+			});
 		}
 
-		_.defaults( params, {
+		fetchParams = Object.assign({
 			op:           'getHeadlines',
-			sid:          sid,
 			feed_id:      feed.id,
-			limit:        limit,
 			view_mode:    unreadOnly ? 'unread' : 'adaptive',
 			show_excerpt: true,
-			show_content: true
-		})
+			show_content: true,
+			limit,
+			sid
+		}, fetchParams );
 
 		if ( dateReverse ) {
-			params.order_by = 'date_reverse'
+			fetchParams = Object.assign({}, fetchParams, {
+				order_by: 'date_reverse'
+			});
 		}
 
 		dispatch({
 			type:   REQUESTED_ARTICLES,
 			status: true
-		})
+		});
 
 		if ( clearExisting ) {
-			dispatch( clearArticles( feed.id ) )
+			dispatch( clearArticles( feed.id ) );
 		}
 
-		return Api.request( url, params )
-			.then( response => {
-				return response.json()
-			})
+		return Api.request( url, fetchParams )
+			.then( response => response.json() )
 			.then( json => {
-				let items = json.content
+				const items = json.content;
 
 				// TODO: Check if `items` is empty
 
 				dispatch({
 					type:    RECEIEVED_ARTICLES,
-					feed:    feed,
-					items:   items,
-					hasMore: items.length >= limit
-				})
+					hasMore: items.length >= limit,
+					feed,
+					items
+				});
 			})
-			.catch( err => logError( dispatch, err ) )
-	}
-}
-
-export function clearArticles( feedId ) {
-	return function ( dispatch, getState ) {
-		return dispatch({
-			type: CLEARED_ARTICLES,
-			feedId
-		})
-	}
+			.catch( err => logError( dispatch, err ) );
+	};
 }
 
 export function fetchArticles( ids ) {
-	return function( dispatch, getState ) {
-		const { url, sid } = getState().session
+	return ( dispatch, getState ) => {
+		const { url, sid } = getState().session;
 
 		dispatch({
 			type:   REQUESTED_ARTICLES,
 			status: true
-		})
+		});
 
 		return Api.request( url, {
-			sid:        sid,
 			op:         'getArticle',
-			article_id: ids
+			article_id: ids,
+			sid
 		})
 			.then( response => response.json() )
 			.then( json => {
 				dispatch({
 					type:  UPDATED_ARTICLES,
 					items: json.content
-				})
-				dispatch( getCategories() )
+				});
+				dispatch( getCategories() );
 			})
-			.catch( err => logError( dispatch, err ) )
-	}
+			.catch( err => logError( dispatch, err ) );
+	};
 }
 
 /**
@@ -137,22 +138,20 @@ export function fetchArticles( ids ) {
  * @return void
  */
 export function updateArticle( ids, field, mode ) {
-	return function( dispatch, getState ) {
-		const { url, sid } = getState().session
+	return ( dispatch, getState ) => {
+		const { url, sid } = getState().session;
 
 		return Api.request( url, {
-			sid:         sid,
 			op:          'updateArticle',
 			article_ids: ids,
 			field:       updateFields.indexOf( field ),
-			mode:        mode
+			mode,
+			sid
 		})
 			.then( response => response.json() )
-			.then( json => {
-				dispatch( fetchArticles( ids ) )
-			})
-			.catch( err => logError( dispatch, err ) )
-	}
+			.then( () => dispatch( fetchArticles( ids ) ) )
+			.catch( err => logError( dispatch, err ) );
+	};
 }
 
 /**
@@ -162,30 +161,31 @@ export function updateArticle( ids, field, mode ) {
  * @return void
  */
 export function markArticlesRead( ids ) {
-	return function( dispatch, getState ) {
-		let items = []
+	return ( dispatch, getState ) => {
+		const items = [];
 
-		_.each( getState().articles.items, ( item ) => {
+		each( getState().articles.items, ( item ) => {
 			if ( -1 < ids.indexOf( item.id ) ) {
-				item.unread = false
-				items.push( item )
+				items.push( Object.assign({
+					unread: false
+				}), item );
 			}
-		})
+		});
 
 		dispatch({
-			type:  UPDATED_ARTICLES,
-			items: items
-		})
+			type: UPDATED_ARTICLES,
+			items
+		});
 
-		dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) )
-	}
+		dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) );
+	};
 }
 
 export function selectArticle( currentId ) {
-	return function( dispatch ) {
+	return ( dispatch ) => {
 		dispatch({
 			type: SELECTED_ARTICLE,
 			currentId
-		})
-	}
+		});
+	};
 }
