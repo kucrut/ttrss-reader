@@ -14,6 +14,7 @@
 	},
 	"rules": {
 		"comma-dangle": 0,
+		"computed-property-spacing": ["error", "always" ],
 		"indent": [ "error", "tab", {"SwitchCase": 1} ],
 		"key-spacing": ["error", { "align": "value" }],
 		"no-multi-spaces": ["error", { "exceptions": {
