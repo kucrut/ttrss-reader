@@ -16,6 +16,7 @@
 		"comma-dangle": 0,
 		"indent": [ "error", "tab", {"SwitchCase": 1} ],
 		"key-spacing": ["error", { "align": "value" }],
+		"no-multi-spaces": ["error", "always", "exceptions": { "VariableDeclarator": true }],
 		"space-in-parens": ["error", "always", { "exceptions": ["{}"] } ],
 		"yoda": ["error", "always"],
 		"react/forbid-prop-types": 1,
