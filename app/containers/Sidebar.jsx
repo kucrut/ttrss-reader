@@ -14,6 +14,15 @@ class Sidebar extends React.Component {
 		dispatch:     PropTypes.func.isRequired
 	}
 
+	constructor( props ) {
+		super( props );
+
+		this.handleClickLogout = this.handleClickLogout.bind( this );
+		this.handleClickRefresh = this.handleClickRefresh.bind( this );
+		this.handleClickSettings = this.handleClickSettings.bind( this );
+		this.handleClickSubscribe = this.handleClickSubscribe.bind( this );
+	}
+
 	handleClickRefresh() {
 		this.props.dispatch( getCategories() )
 	}
@@ -46,10 +55,10 @@ class Sidebar extends React.Component {
 		return (
 			<div className={ sidebarClass }>
 				<div className="actions">
-					<a onClick={ this.handleClickRefresh.bind( this ) } className="refresh"><i className={ refreshClass } />Refresh</a>
-					<a onClick={ this.handleClickSubscribe.bind( this ) } className="fa-eye" title="Subscribe to feed" />
-					<a onClick={ this.handleClickSettings.bind( this ) } className="fa-cog" title="Settings" />
-					<a onClick={ this.handleClickLogout.bind( this ) } className="fa-logout" title="Logout" />
+					<a onClick={ this.handleClickRefresh } className="refresh"><i className={ refreshClass } />Refresh</a>
+					<a onClick={ this.handleClickSubscribe } className="fa-eye" title="Subscribe to feed" />
+					<a onClick={ this.handleClickSettings } className="fa-cog" title="Settings" />
+					<a onClick={ this.handleClickLogout } className="fa-logout" title="Logout" />
 				</div>
 				<div className="inside">
 					<CategoryList />
