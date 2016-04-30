@@ -18,6 +18,10 @@ class SettingsForm extends React.Component {
 			unreadOnly:   props.settings.unreadOnly,
 			noPagination: props.settings.noPagination
 		};
+
+		this.submitForm = this.submitForm.bind( this );
+		this.handleChange = this.handleChange.bind( this );
+		this.handleClickClose = this.handleClickClose.bind( this );
 	}
 
 	submitForm( e ) {
@@ -77,7 +81,7 @@ class SettingsForm extends React.Component {
 		}
 
 		return (
-			<form className="login-form" onSubmit={ this.submitForm.bind( this ) }>
+			<form className="login-form" onSubmit={ this.submitForm }>
 				<h1><i className="fa-cog" /> Settings</h1>
 				<div className="form-row">
 					<label htmlFor="s-limit">Limit</label>
@@ -89,7 +93,8 @@ class SettingsForm extends React.Component {
 						max="200"
 						required
 						value={ limit }
-						onChange={ this.handleChange.bind( this ) } />
+						onChange={ this.handleChange }
+					/>
 				</div>
 				<div className="form-row">
 					<label htmlFor="s-mode">Mode</label>
@@ -100,7 +105,7 @@ class SettingsForm extends React.Component {
 							name="unreadOnly"
 							value="1"
 							{ ...modeAttrs }
-							onChange={ this.handleChange.bind( this ) }
+							onChange={ this.handleChange }
 						/>
 						<span className={ modeClass }>Unread Only</span>
 					</label>
@@ -114,7 +119,7 @@ class SettingsForm extends React.Component {
 							name="noPagination"
 							value="1"
 							{ ...noPaginationAttrs }
-							onChange={ this.handleChange.bind( this ) }
+							onChange={ this.handleChange }
 						/>
 						<span className={ noPaginationClass }>Disabled</span>
 					</label>
@@ -123,7 +128,7 @@ class SettingsForm extends React.Component {
 					<button type="submit"><i className="fa-cog-alt" /> Save</button>
 				</div>
 
-				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose.bind( this ) } />
+				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose } />
 			</form>
 		);
 	}
