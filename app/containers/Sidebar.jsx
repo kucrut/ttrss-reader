@@ -8,6 +8,12 @@ import { requestLogout }        from '../actions/session'
 import CategoryList             from './CategoryList'
 
 class Sidebar extends React.Component {
+	static propTypes = {
+		isVisible:    PropTypes.bool.isRequired,
+		isRefreshing: PropTypes.bool.isRequired,
+		dispatch:     PropTypes.func.isRequired
+	}
+
 	handleClickRefresh() {
 		this.props.dispatch( getCategories() )
 	}
@@ -51,12 +57,6 @@ class Sidebar extends React.Component {
 			</div>
 		)
 	}
-}
-
-Sidebar.propTypes = {
-	isVisible:    PropTypes.bool.isRequired,
-	isRefreshing: PropTypes.bool.isRequired,
-	dispatch:     PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
