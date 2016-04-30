@@ -16,6 +16,14 @@ class Main extends MenuToggle {
 		dispatch:     PropTypes.func.isRequired
 	}
 
+	constructor( props ) {
+		super( props );
+
+		this.maybeHideSidebar = this.maybeHideSidebar.bind( this );
+		this.handleClickHide = this.handleClickHide.bind( this );
+		this.handleClickPreviousNext = this.handleClickPreviousNext.bind( this );
+	}
+
 	handleClickPreviousNext( next = true ) {
 		const { articles, dispatch }  = this.props
 		const { currentIndex, items } = articles
@@ -64,7 +72,7 @@ class Main extends MenuToggle {
 	renderPagination() {
 		if ( 1 > this.props.noPagination ) {
 			return (
-				<ArticlePagination prevNextCallback={ this.handleClickPreviousNext.bind( this ) } />
+				<ArticlePagination prevNextCallback={ this.handleClickPreviousNext } />
 			)
 		}
 	}
@@ -74,7 +82,7 @@ class Main extends MenuToggle {
 
 		return (
 			<div className="single-article inside">
-				<Article key={ article.id } article={ article } isSingle={ true } prevNextCallback={ this.handleClickPreviousNext.bind( this ) } />
+				<Article key={ article.id } article={ article } isSingle={ true } prevNextCallback={ this.handleClickPreviousNext } />
 				{ this.renderPagination() }
 			</div>
 		)
@@ -99,7 +107,7 @@ class Main extends MenuToggle {
 		}
 
 		return (
-			<main onClick={ this.maybeHideSidebar.bind( this ) } className="content">
+			<main onClick={ this.maybeHideSidebar } className="content">
 				{ content }
 			</main>
 		)
