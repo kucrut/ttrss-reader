@@ -50,7 +50,7 @@ class SubscribeForm extends React.Component {
 				feedsUrls = Object.keys( status.feeds );
 				feeds     = feedsUrls.map( feedUrl => ({
 					url:   feedUrl,
-					title: status.feeds[ url ]
+					title: status.feeds[ feedUrl ]
 				}) );
 
 				state.feeds = feeds;
