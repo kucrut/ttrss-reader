@@ -4,6 +4,10 @@ import FeedList                        from '../containers/FeedList'
 import { getCount }                    from '../helpers'
 
 class CategoryItem extends Component{
+	static propTypes = {
+		category: PropTypes.object.isRequired
+	}
+
 	constructor( props ) {
 		super( props )
 		this.state = { isOpen: false }
@@ -46,10 +50,6 @@ class CategoryItem extends Component{
 			</li>
 		);
 	}
-}
-
-CategoryItem.propTypes = {
-	category: PropTypes.object.isRequired
 }
 
 export default ( CategoryItem )
