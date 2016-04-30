@@ -12,6 +12,13 @@ import Spinner from 'components/Spinner';
 
 
 class App extends React.Component {
+	static propTypes = {
+		session:           PropTypes.object.isRequired,
+		isSubscribing:     PropTypes.bool.isRequired,
+		isEditingSettings: PropTypes.bool.isRequired,
+		dispatch:          PropTypes.func.isRequired
+	}
+
 	componentDidMount() {
 		this.props.dispatch( checkLastSession() );
 	}
@@ -69,13 +76,6 @@ class App extends React.Component {
 		return content;
 	}
 }
-
-App.propTypes = {
-	session:           PropTypes.object.isRequired,
-	isSubscribing:     PropTypes.bool.isRequired,
-	isEditingSettings: PropTypes.bool.isRequired,
-	dispatch:          PropTypes.func.isRequired
-};
 
 function mapStateToProps( state ) {
 	return {
