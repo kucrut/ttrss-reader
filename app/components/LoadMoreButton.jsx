@@ -1,54 +1,73 @@
-import React, { PropTypes }  from 'react'
-import _                     from 'lodash'
-import { fetchFeedArticles } from '../actions/articles'
-import Spinner               from './Spinner'
+import React, { PropTypes } from 'react';
+import _ from 'lodash';
+import { fetchFeedArticles } from 'actions/articles';
+import Spinner from 'components/Spinner';
+
 
 class LoadMoreButton extends React.Component {
 	static propTypes = {
-		feed:     PropTypes.object.isRequired,
-		articles: PropTypes.object.isRequired,
-		dispatch: PropTypes.func.isRequired
+		feed:       PropTypes.object.isRequired,
+		articles:   PropTypes.object.isRequired,
+		unreadOnly: PropTypes.number.isRequired,
+		dispatch:   PropTypes.func.isRequired
+	}
+
+	constructor( props ) {
+		super( props );
+		this.handleClick = this.handleClick.bind( this );
 	}
 
 	handleClick() {
-		const { feed, articles, unreadOnly, dispatch } = this.props
-		let skipNum
+		const { feed, articles, unreadOnly, dispatch } = this.props;
+		let skipNum;
 
 		if ( articles.isFetching ) {
-			return
+			return;
 		}
 
 		if ( unreadOnly && ! feed.is_cat ) {
-			skipNum = _.filter( articles.items, { unread: true } ).length
+			skipNum = _.filter( articles.items, { unread: true }).length;
 		} else {
-			skipNum = articles.items.length
+			skipNum = articles.items.length;
 		}
 
 		dispatch( fetchFeedArticles( feed, false, {
 			skip: skipNum
-		}) )
+		}) );
 	}
 
 	renderIcon() {
+		let element;
+
 		if ( this.props.articles.isFetching ) {
-			return ( <Spinner /> )
+			element = ( <Spinner /> );
 		} else {
-			return ( <i className="fa-cw" /> )
+			element = ( <i className="fa-cw" /> );
 		}
+
+		return element;
 	}
 
 	render() {
-		let icon  = this.renderIcon()
-		let attrs = {}
+		let icon  = this.renderIcon();
+		let attrs;
 
 		if ( this.props.articles.isFetching ) {
-			attrs.disabled = 'disabled'
+			attrs = { disabled: 'disabled' };
+		} else {
+			attrs = {};
 		}
 
 		return (
-			<p className="load-more-wrap"><button className="uk-button uk-button-large" { ...attrs } onClick={ this.handleClick.bind( this ) }>{ icon } Load More</button></p>
-		)
+			<p className="load-more-wrap">
+				<button
+					{ ...attrs }
+					className="uk-button uk-button-large"
+					onClick={ this.handleClick }
+				>{ icon } Load More</button>
+			</p>
+		);
 	}
 }
 
-export default ( LoadMoreButton )
+export default ( LoadMoreButton );
