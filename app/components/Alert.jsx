@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import { connect }          from 'react-redux'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { logsShape } from 'reducers/log';
-import { removeLog }        from '../actions/log'
+import { removeLog } from 'actions/log';
+
 
 class Alert extends React.Component {
 	static propTypes = {
@@ -15,17 +16,17 @@ class Alert extends React.Component {
 	}
 
 	handleClick() {
-		this.props.dispatch( removeLog() )
+		this.props.dispatch( removeLog() );
 	}
 
 	render() {
-		const { item } = this.props.logs
-		let message = ''
-		let className = 'alert-error'
+		const { item } = this.props.logs;
+		let message   = '';
+		let className = 'alert-error';
 
 		if ( item.message ) {
-			message    = item.message
-			className += ' is-visible'
+			message    = item.message;
+			className += ' is-visible';
 		}
 
 		return (
