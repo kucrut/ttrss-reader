@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
+import { filter, map } from 'lodash';
 import { updateSortOrder } from 'actions/settings';
 import { fetchFeedArticles, markArticlesRead } from 'actions/articles';
 
@@ -27,7 +27,7 @@ export default class FeedActions extends React.Component {
 			return;
 		}
 
-		const ids = _.pluck( _.filter( articles.items, { unread: true }), 'id' );
+		const ids = map( filter( articles.items, { unread: true }), 'id' );
 
 		dispatch( markArticlesRead( ids ) );
 
@@ -51,7 +51,7 @@ export default class FeedActions extends React.Component {
 
 	renderCheck() {
 		const { items, isFetching } = this.props.articles;
-		const unread = _.filter( items, { unread: true });
+		const unread = filter( items, { unread: true });
 		let classes = 'fa-ok';
 
 		if ( isFetching || ! unread.length ) {
