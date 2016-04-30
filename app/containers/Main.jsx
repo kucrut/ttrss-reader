@@ -9,6 +9,13 @@ import Article              from '../components/Article'
 import ArticlePagination    from '../components/ArticlePagination'
 
 class Main extends MenuToggle {
+	static propTypes = {
+		feeds:        PropTypes.object.isRequired,
+		articles:     PropTypes.object.isRequired,
+		noPagination: PropTypes.number.isRequired,
+		dispatch:     PropTypes.func.isRequired
+	}
+
 	handleClickPreviousNext( next = true ) {
 		const { articles, dispatch }  = this.props
 		const { currentIndex, items } = articles
@@ -97,13 +104,6 @@ class Main extends MenuToggle {
 			</main>
 		)
 	}
-}
-
-Main.propTypes = {
-	feeds:        PropTypes.object.isRequired,
-	articles:     PropTypes.object.isRequired,
-	noPagination: PropTypes.number.isRequired,
-	dispatch:     PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
