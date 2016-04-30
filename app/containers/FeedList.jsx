@@ -75,4 +75,10 @@ class FeedList extends React.Component {
 	}
 }
 
-export default connect( state => ({ feeds: state.feeds }) )( FeedList )
+function mapStateToProps( state ) {
+	return {
+		feeds: state.feeds
+	};
+}
+
+export default connect( mapStateToProps )( FeedList )
