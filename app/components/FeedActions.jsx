@@ -8,6 +8,13 @@ import {
 } from '../actions/articles'
 
 class FeedActions extends React.Component {
+	static propTypes = {
+		feed:        PropTypes.object.isRequired,
+		articles:    PropTypes.object.isRequired,
+		dateReverse: PropTypes.number.isRequired,
+		dispatch:    PropTypes.func.isRequired
+	}
+
 	handleClickCheck() {
 		const { articles, dispatch } = this.props
 
@@ -95,13 +102,6 @@ class FeedActions extends React.Component {
 			</div>
 		)
 	}
-}
-
-FeedActions.PropTypes = {
-	feed:        PropTypes.object.isRequired,
-	articles:    PropTypes.object.isRequired,
-	dateReverse: PropTypes.number.isRequired,
-	dispatch:    PropTypes.func.isRequired
 }
 
 export default ( FeedActions )
