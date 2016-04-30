@@ -13,6 +13,7 @@
 		"comma-dangle": 0,
 		"indent": [ "error", "tab", {"SwitchCase": 1} ],
 		"space-in-parens": ["error", "always", { "exceptions": ["{}"] } ],
+		"yoda": ["error", "always"],
 		"react/forbid-prop-types": 1,
 		"react/jsx-indent": ["error", "tab"],
 		"react/jsx-curly-spacing": ["error", "always"]
