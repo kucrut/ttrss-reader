@@ -1,4 +1,4 @@
-import { trimRight } from 'lodash'
+import { trimEnd } from 'lodash'
 import Api           from '../api'
 import { addLog }    from '../actions/log'
 
@@ -67,7 +67,7 @@ export function requestLogin( creds ) {
 		password: creds.password
 	}
 
-	const url = trimRight( creds.url, '/' ) + '/api/';
+	const url = trimEnd( creds.url, '/' ) + '/api/';
 
 	return function( dispatch, getState ) {
 		dispatch({
