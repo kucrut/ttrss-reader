@@ -1,7 +1,7 @@
 import {
 	OPENED_SUBSCRIPTION,
-	REQUESTED_SUBSCRIPTION,
-	RECEIVED_SUBSCRIPTION,
+	SUBSCRIBE_REQUEST,
+	SUBSCRIBE_SUCCESS,
 	CLOSED_SUBSCRIPTION
 } from 'actions/subscription';
 
@@ -23,20 +23,24 @@ const initialState = {
 };
 
 export default function subscription( state = initialState, action ) {
+	let status;
+
 	switch ( action.type ) {
 		case OPENED_SUBSCRIPTION:
 			return Object.assign({}, initialState, { isOpen: true });
 
-		case REQUESTED_SUBSCRIPTION:
+		case SUBSCRIBE_REQUEST:
 			return Object.assign({}, state, {
-				isSubscribing: action.isSubscribing
+				isSubscribing: true
 			});
 
-		case RECEIVED_SUBSCRIPTION:
+		case SUBSCRIBE_SUCCESS:
+			status = action.req.data.content.status;
+
 			return Object.assign({}, state, {
 				isSubscribing: false,
-				status:        action.status,
-				message:       messages[ action.status.code ]
+				message:       messages[ status.code ],
+				status
 			});
 
 		case CLOSED_SUBSCRIPTION:

@@ -44,6 +44,14 @@ class SubscribeForm extends React.Component {
 					url:   '',
 					feeds: []
 				};
+
+				if ( 1 === status.code ) {
+					/**
+					 * TODO:
+					 * - Refresh categories.
+					 * - Fetch feeds of the category where the new feed was added to.
+					 */
+				}
 				break;
 
 			case 4:
