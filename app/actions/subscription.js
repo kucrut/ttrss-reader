@@ -1,4 +1,4 @@
-import Api from 'api';
+import Api from 'api-old';
 import { addLog } from 'actions/log';
 import { getCategories } from 'actions/categories';
 import { fetchFeeds } from 'actions/feeds';

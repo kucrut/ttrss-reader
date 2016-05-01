@@ -1,4 +1,4 @@
-import Api from 'api';
+import Api from 'api-old';
 import { each } from 'lodash';
 import { addLog } from 'actions/log';
 import { getCategories } from 'actions/categories';

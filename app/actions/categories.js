@@ -1,4 +1,4 @@
-import Api from 'api';
+import Api from 'api-old';
 import { addLog } from 'actions/log';
 
 export const REQUESTED_CATEGORIES = 'REQUESTED_CATEGORIES';

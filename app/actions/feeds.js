@@ -1,4 +1,4 @@
-import Api from 'api';
+import Api from 'api-old';
 import { find } from 'lodash';
 import { clearArticles } from 'actions/articles';
 
