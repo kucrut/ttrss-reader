@@ -1,13 +1,15 @@
 import { each, findIndex } from 'lodash';
-import { REQUESTED_LOGOUT } from 'actions/session';
 import { UPDATED_SETTINGS } from 'actions/settings';
 import {
-	REQUESTED_ARTICLES,
-	RECEIEVED_ARTICLES,
+	GET_ARTICLES_REQUEST,
+	GET_ARTICLES_SUCCESS,
+	UPDATE_LOCAL_ARTICLES,
+	UPDATE_ARTICLES_REQUEST,
+	UPDATE_ARTICLES_SUCCESS,
 	SELECTED_ARTICLE,
-	UPDATED_ARTICLES,
 	CLEARED_ARTICLES
 } from 'actions/articles';
+import { LOGOUT } from 'actions/session';
 
 
 const initialState = {
@@ -33,33 +35,35 @@ export default function articles( state = initialState, action ) {
 	let currentIndex;
 
 	switch ( action.type ) {
-		case REQUESTED_ARTICLES:
+		case GET_ARTICLES_REQUEST:
+		case UPDATE_ARTICLES_REQUEST:
 			return Object.assign({}, state, {
-				isFetching: action.status
+				isFetching: true
 			});
 
-		case RECEIEVED_ARTICLES:
-			if ( action.feed.id !== state.feedId ) {
+		case GET_ARTICLES_SUCCESS:
+			newItems = action.req.data.content;
+
+			if ( action.feed && action.feed.id !== state.feedId ) {
 				newState = Object.assign({}, initialState, {
-					feedId: action.feed.id
+					feedId:     action.feed.id,
+					isFetching: false
 				});
 			} else {
-				newState = Object.assign({}, state );
+				newState = Object.assign({}, state, {
+					isFetching: false
+				});
 			}
 
-			newState = Object.assign({}, newState, {
-				isFetching: false
-			});
-
-			if ( ! action.items || ! action.items.length ) {
+			if ( ! newItems || ! newItems.length ) {
 				return Object.assign({}, newState, {
 					hasMore: false
 				});
 			}
 
 			return Object.assign({}, newState, {
-				items:   newState.items.concat( action.items.map( normalizeArticle ) ),
-				hasMore: action.hasMore
+				items:   newState.items.concat( newItems.map( normalizeArticle ) ),
+				hasMore: newItems.length === action.limit
 			});
 
 		case SELECTED_ARTICLE:
@@ -82,16 +86,18 @@ export default function articles( state = initialState, action ) {
 				currentIndex
 			});
 
-		case UPDATED_ARTICLES:
+		case UPDATE_LOCAL_ARTICLES:
+		case UPDATE_ARTICLES_SUCCESS:
+			newItems = action.items ? action.items : action.req.data.content;
 			newState = Object.assign({}, state, {
 				isFetching: false
 			});
 
-			if ( ! action.items || ! action.items.length ) {
+			if ( ! newItems || ! newItems.length ) {
 				return newState;
 			}
 
-			newItems = action.items.map( normalizeArticle );
+			newItems = newItems.map( normalizeArticle );
 
 			each( newItems, ( item ) => {
 				const index = findIndex( newState.items, { id: item.id });
@@ -112,7 +118,7 @@ export default function articles( state = initialState, action ) {
 				hasMore:      false
 			});
 
-		case REQUESTED_LOGOUT:
+		case LOGOUT:
 		case UPDATED_SETTINGS:
 			return Object.assign({}, initialState );
 

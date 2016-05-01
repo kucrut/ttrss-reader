@@ -1,13 +1,20 @@
-import Api from 'api-old';
+import axios from 'axios';
+import { polyfill } from 'es6-promise';
 import { each } from 'lodash';
-import { addLog } from 'actions/log';
 import { getCategories } from 'actions/categories';
 
 
-export const REQUESTED_ARTICLES = 'REQUESTED_ARTICLES';
-export const RECEIEVED_ARTICLES = 'RECEIEVED_ARTICLES';
+polyfill();
+
+export const GET_ARTICLES = 'GET_ARTICLES';
+export const GET_ARTICLES_REQUEST = 'GET_ARTICLES_REQUEST';
+export const GET_ARTICLES_SUCCESS = 'GET_ARTICLES_SUCCESS';
+export const GET_ARTICLES_FAILURE = 'GET_ARTICLES_FAILURE';
+export const UPDATE_LOCAL_ARTICLES = 'UPDATE_LOCAL_ARTICLES';
+export const UPDATE_ARTICLES_REQUEST = 'UPDATE_ARTICLES_REQUEST';
+export const UPDATE_ARTICLES_SUCCESS = 'UPDATE_ARTICLES_SUCCESS';
+export const UPDATE_ARTICLES_FAILURE = 'UPDATE_ARTICLES_FAILURE';
 export const SELECTED_ARTICLE = 'SELECTED_ARTICLE';
-export const UPDATED_ARTICLES = 'UPDATED_ARTICLES';
 export const CLEARED_ARTICLES = 'CLEARED_ARTICLES';
 
 
@@ -17,19 +24,6 @@ export const updateFields = [
 	'unread',
 	'note'
 ];
-
-function logError( dispatch, error ) {
-	dispatch( addLog({
-		source:  'articles',
-		type:    'error',
-		message: error.message
-	}) );
-
-	dispatch({
-		type:   REQUESTED_ARTICLES,
-		status: false
-	});
-}
 
 export function clearArticles( feedId ) {
 	return ( dispatch ) => dispatch({
@@ -44,6 +38,10 @@ export function fetchFeedArticles( feed, clearExisting = true, params = {}) {
 		const { limit, unreadOnly, dateReverse } = settings;
 		const { url, sid } = session;
 		let fetchParams = Object.assign({}, params );
+
+		if ( clearExisting ) {
+			dispatch( clearArticles( feed.id ) );
+		}
 
 		if ( feed.is_cat ) {
 			fetchParams = Object.assign({}, fetchParams, {
@@ -70,29 +68,11 @@ export function fetchFeedArticles( feed, clearExisting = true, params = {}) {
 		}
 
 		dispatch({
-			type:   REQUESTED_ARTICLES,
-			status: true
+			type:    GET_ARTICLES,
+			promise: axios.post( url, fetchParams ),
+			limit,
+			feed
 		});
-
-		if ( clearExisting ) {
-			dispatch( clearArticles( feed.id ) );
-		}
-
-		return Api.request( url, fetchParams )
-			.then( response => response.json() )
-			.then( json => {
-				const items = json.content;
-
-				// TODO: Check if `items` is empty
-
-				dispatch({
-					type:    RECEIEVED_ARTICLES,
-					hasMore: items.length >= limit,
-					feed,
-					items
-				});
-			})
-			.catch( err => logError( dispatch, err ) );
 	};
 }
 
@@ -100,25 +80,17 @@ export function fetchArticles( ids ) {
 	return ( dispatch, getState ) => {
 		const { url, sid } = getState().session;
 
-		dispatch({
-			type:   REQUESTED_ARTICLES,
-			status: true
-		});
-
-		return Api.request( url, {
+		axios.post( url, {
 			op:         'getArticle',
 			article_id: ids,
 			sid
-		})
-			.then( response => response.json() )
-			.then( json => {
-				dispatch({
-					type:  UPDATED_ARTICLES,
-					items: json.content
-				});
-				dispatch( getCategories() );
-			})
-			.catch( err => logError( dispatch, err ) );
+		}).then( response => {
+			dispatch( getCategories() );
+			dispatch({
+				type: UPDATE_ARTICLES_SUCCESS,
+				req:  response
+			});
+		});
 	};
 }
 
@@ -141,16 +113,15 @@ export function updateArticle( ids, field, mode ) {
 	return ( dispatch, getState ) => {
 		const { url, sid } = getState().session;
 
-		return Api.request( url, {
+		dispatch({ type: UPDATE_ARTICLES_REQUEST });
+
+		axios.post( url, {
 			op:          'updateArticle',
 			article_ids: ids,
 			field:       updateFields.indexOf( field ),
 			mode,
 			sid
-		})
-			.then( response => response.json() )
-			.then( () => dispatch( fetchArticles( ids ) ) )
-			.catch( err => logError( dispatch, err ) );
+		}).then( () => dispatch( fetchArticles( ids ) ) );
 	};
 }
 
@@ -166,14 +137,16 @@ export function markArticlesRead( ids ) {
 
 		each( getState().articles.items, ( item ) => {
 			if ( -1 < ids.indexOf( item.id ) ) {
-				items.push( Object.assign({
+				items.push( Object.assign( item, {
 					unread: false
-				}), item );
+				}) );
 			}
 		});
 
+		// Update articles in store first, so the UI
+		// doesn't have to wait for `updateArticle()`.
 		dispatch({
-			type: UPDATED_ARTICLES,
+			type: UPDATE_LOCAL_ARTICLES,
 			items
 		});
 
