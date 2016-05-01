@@ -13,6 +13,7 @@
     "build": "npm run clean && NODE_ENV=production webpack --colors --config ./webpack/prod-config.js"
   },
   "dependencies": {
+    "axios": "^0.11.0",
     "babel": "^6.5.2",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",
