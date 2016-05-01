@@ -1,12 +1,13 @@
-import { combineReducers }           from 'redux'
-import session                       from './session'
-import { categories, allCategories } from './categories'
-import feeds                         from './feeds'
-import articles                      from './articles'
-import settings                      from './settings'
-import logs                          from './log'
-import ui                            from './ui'
-import subscription                  from './subscription'
+import { combineReducers } from 'redux';
+import session from 'reducers/session';
+import { categories, allCategories } from 'reducers/categories';
+import feeds from 'reducers/feeds';
+import articles from 'reducers/articles';
+import settings from 'reducers/settings';
+import logs from 'reducers/log';
+import ui from 'reducers/ui';
+import subscription from 'reducers/subscription';
+
 
 module.exports = combineReducers({
 	session,
@@ -18,4 +19,4 @@ module.exports = combineReducers({
 	logs,
 	ui,
 	subscription
-})
+});
