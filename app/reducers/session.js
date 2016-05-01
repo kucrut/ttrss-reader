@@ -1,10 +1,12 @@
 import { PropTypes } from 'react';
+import { get } from 'lodash';
 import {
-	REQUESTED_SESSION,
-	SESSION_CHECKED,
-	RECEIEVED_SID,
-	RECEIEVED_URL,
-	REQUESTED_LOGOUT
+	CHECK_SESSION_SUCCESS,
+	CHECK_SESSION_FAILURE,
+	LOGIN_REQUEST,
+	LOGIN_SUCCESS,
+	LOGIN_FAILURE,
+	LOGOUT
 } from 'actions/session';
 
 const initialState = {
@@ -14,6 +16,11 @@ const initialState = {
 	isChecked: false
 };
 
+function saveSession( url, sid ) {
+	localStorage.setItem( 'ttrssUrl', url );
+	localStorage.setItem( 'ttrssSid', sid );
+}
+
 export const sessionShape = {
 	url:       PropTypes.string,
 	sid:       PropTypes.string,
@@ -22,43 +29,61 @@ export const sessionShape = {
 };
 
 export default function session( state = initialState, action ) {
+	let status;
+	let url;
+	let sid;
+
 	switch ( action.type ) {
-		case SESSION_CHECKED:
-			return Object.assign({}, state, {
-				isChecked: action.isChecked
-			});
-
-		case REQUESTED_SESSION:
-			return Object.assign({}, state, {
-				isAsking: action.isAsking
-			});
-
-		case RECEIEVED_URL:
-			if ( action.url ) {
-				localStorage.setItem( 'ttrssUrl', action.url );
-
+		case CHECK_SESSION_SUCCESS:
+			// No URL/session ID found in local storage.
+			if ( ! action.req ) {
 				return Object.assign({}, state, {
-					url: action.url
+					isChecked: true
 				});
 			}
 
-			return state;
+			status = get( action, 'req.data.content.status' );
+			url    = action.req.config.url;
 
-		case RECEIEVED_SID:
-			if ( action.sid ) {
-				localStorage.setItem( 'ttrssSid', action.sid );
-
-				return Object.assign({}, state, {
-					sid: action.sid
-				});
+			// We already have a valid session.
+			if ( true === status ) {
+				sid = action.sid;
+			} else {
+				sid = '';
+				saveSession( '', '' );
 			}
 
-			return state;
-
-		case REQUESTED_LOGOUT:
 			return Object.assign({}, state, {
-				url: initialState.url,
-				sid: initialState.sid
+				isAsking:  false,
+				isChecked: true,
+				url,
+				sid
+			});
+
+		case CHECK_SESSION_FAILURE:
+		case LOGIN_FAILURE:
+		case LOGOUT:
+			saveSession( '', '' );
+
+			return Object.assign({}, initialState, {
+				isChecked: true
+			});
+
+		case LOGIN_REQUEST:
+			return Object.assign({}, state, {
+				isAsking: true
+			});
+
+		case LOGIN_SUCCESS:
+			url = action.req.config.url;
+			sid = action.req.data.content.session_id;
+
+			saveSession( url, sid );
+
+			return Object.assign({}, state, {
+				isAsking: false,
+				url,
+				sid
 			});
 
 		default:
