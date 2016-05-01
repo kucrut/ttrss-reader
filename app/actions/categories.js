@@ -1,7 +1,5 @@
-import Api from 'api-old';
 import { polyfill } from 'es6-promise';
 import axios from 'axios';
-import { addLog } from 'actions/log';
 
 
 polyfill();
@@ -10,25 +8,11 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_CATEGORIES_REQUEST = 'GET_CATEGORIES_REQUEST';
 export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
 export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
+export const GET_ALL_CATEGORIES_REQUEST = 'GET_ALL_CATEGORIES_REQUEST';
+export const GET_ALL_CATEGORIES_SUCCESS = 'GET_ALL_CATEGORIES_SUCCESS';
+export const GET_ALL_CATEGORIES_FAILURE = 'GET_ALL_CATEGORIES_FAILURE';
 
-export const REQUESTED_CATEGORIES = 'REQUESTED_CATEGORIES';
-export const RECEIEVED_CATEGORIES = 'RECEIEVED_CATEGORIES';
-export const REQUESTED_ALL_CATEGORIES = 'REQUESTED_ALL_CATEGORIES';
-export const RECEIEVED_ALL_CATEGORIES = 'RECEIEVED_ALL_CATEGORIES';
-
-
-function logError( dispatch, error ) {
-	dispatch( addLog({
-		source:  'categories',
-		type:    'error',
-		message: error.message
-	}) );
-
-	dispatch({
-		type:       REQUESTED_CATEGORIES,
-		isFetching: false
-	});
-}
 
 export function getCategories() {
 	return ( dispatch, getState ) => {
@@ -50,20 +34,12 @@ export function getAllCategories() {
 		const { url, sid } = getState().session;
 
 		dispatch({
-			type:       REQUESTED_ALL_CATEGORIES,
-			isFetching: true
+			type:    GET_ALL_CATEGORIES,
+			promise: axios.post( url, {
+				op:            'getCategories',
+				include_empty: true,
+				sid
+			})
 		});
-
-		return Api.request( url, {
-			op:            'getCategories',
-			include_empty: true,
-			sid
-		})
-			.then( response => response.json() )
-			.then( json => dispatch({
-				type:       RECEIEVED_ALL_CATEGORIES,
-				categories: json.content
-			}) )
-			.catch( err => logError( dispatch, err ) );
 	};
 }

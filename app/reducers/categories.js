@@ -4,8 +4,8 @@ import { LOGOUT } from 'actions/session';
 import {
 	GET_CATEGORIES_REQUEST,
 	GET_CATEGORIES_SUCCESS,
-	REQUESTED_ALL_CATEGORIES,
-	RECEIEVED_ALL_CATEGORIES
+	GET_ALL_CATEGORIES_REQUEST,
+	GET_ALL_CATEGORIES_SUCCESS
 } from 'actions/categories';
 
 
@@ -57,22 +57,17 @@ export function categories( state = initialState, action ) {
 	}
 }
 
-const initialAllCategories = {
-	items:      [],
-	isFetching: false
-};
-
-export function allCategories( state = initialAllCategories, action ) {
+export function allCategories( state = initialState, action ) {
 	let feedCategories;
 
 	switch ( action.type ) {
-		case REQUESTED_ALL_CATEGORIES:
+		case GET_ALL_CATEGORIES_REQUEST:
 			return Object.assign({}, state, {
-				isFetching: action.isFetching
+				isFetching: true
 			});
 
-		case RECEIEVED_ALL_CATEGORIES:
-			feedCategories = action.categories.map( normalizeCategory );
+		case GET_ALL_CATEGORIES_SUCCESS:
+			feedCategories = action.req.data.content.map( normalizeCategory );
 			feedCategories = filter( feedCategories, ( item ) => -1 < item.id );
 			feedCategories = sortBy( feedCategories, 'title' );
 
