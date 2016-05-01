@@ -1,6 +1,10 @@
 import { find, groupBy, reject } from 'lodash';
-import { REQUESTED_LOGOUT } from 'actions/session';
-import { RECEIEVED_FEEDS, SELECTED_FEED } from 'actions/feeds';
+import {
+	GET_FEEDS_SUCCESS,
+	SELECTED_FEED
+} from 'actions/feeds';
+import { LOGOUT } from 'actions/session';
+
 
 const initialState = {
 	current: {},
@@ -30,13 +34,13 @@ export default function feeds( state = initialState, action ) {
 	let newState;
 
 	switch ( action.type ) {
-		case RECEIEVED_FEEDS:
+		case GET_FEEDS_SUCCESS:
 			category = action.category;
 			newState = Object.assign({}, state );
 
 			// Remove current category feeds from `items` so we don't have duplicates.
 			oldItems = reject( state.items, { cat_id: category.id });
-			newItems = action.items.map( normalizeFeed );
+			newItems = action.req.data.content.map( normalizeFeed );
 
 			// Add "All Articles" feed to all categories.
 			if ( -1 < category.id ) {
@@ -79,7 +83,7 @@ export default function feeds( state = initialState, action ) {
 				current: Object.assign({}, find( state.items, { id: action.id }) )
 			});
 
-		case REQUESTED_LOGOUT:
+		case LOGOUT:
 			return Object.assign({}, initialState );
 
 		default:
