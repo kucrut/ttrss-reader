@@ -1,10 +1,21 @@
 import Api from 'api-old';
+import { polyfill } from 'es6-promise';
+import axios from 'axios';
 import { addLog } from 'actions/log';
+
+
+polyfill();
+
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_CATEGORIES_REQUEST = 'GET_CATEGORIES_REQUEST';
+export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
+export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 
 export const REQUESTED_CATEGORIES = 'REQUESTED_CATEGORIES';
 export const RECEIEVED_CATEGORIES = 'RECEIEVED_CATEGORIES';
 export const REQUESTED_ALL_CATEGORIES = 'REQUESTED_ALL_CATEGORIES';
 export const RECEIEVED_ALL_CATEGORIES = 'RECEIEVED_ALL_CATEGORIES';
+
 
 function logError( dispatch, error ) {
 	dispatch( addLog({
@@ -22,25 +33,15 @@ function logError( dispatch, error ) {
 export function getCategories() {
 	return ( dispatch, getState ) => {
 		const { session, settings } = getState();
-		const { unreadOnly } = settings;
-		const { url, sid } = session;
 
 		dispatch({
-			type:       REQUESTED_CATEGORIES,
-			isFetching: true
+			type:    GET_CATEGORIES,
+			promise: axios.post( session.url, {
+				op:          'getCategories',
+				sid:         session.sid,
+				unread_only: 0 < settings.unreadOnly
+			})
 		});
-
-		return Api.request( url, {
-			op:          'getCategories',
-			unread_only: 0 < unreadOnly,
-			sid
-		})
-			.then( response => response.json() )
-			.then( json => dispatch({
-				type:       RECEIEVED_CATEGORIES,
-				categories: json.content
-			}) )
-			.catch( err => logError( dispatch, err ) );
 	};
 }
 

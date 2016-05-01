@@ -1,9 +1,9 @@
 import { PropTypes } from 'react';
 import { filter, findIndex, sortBy } from 'lodash';
-import { REQUESTED_LOGOUT } from 'actions/session';
+import { LOGOUT } from 'actions/session';
 import {
-	REQUESTED_CATEGORIES,
-	RECEIEVED_CATEGORIES,
+	GET_CATEGORIES_REQUEST,
+	GET_CATEGORIES_SUCCESS,
 	REQUESTED_ALL_CATEGORIES,
 	RECEIEVED_ALL_CATEGORIES
 } from 'actions/categories';
@@ -31,13 +31,13 @@ export function categories( state = initialState, action ) {
 	let specialIdx;
 
 	switch ( action.type ) {
-		case REQUESTED_CATEGORIES:
+		case GET_CATEGORIES_REQUEST:
 			return Object.assign({}, state, {
-				isFetching: action.isFetching
+				isFetching: true
 			});
 
-		case RECEIEVED_CATEGORIES:
-			feedCategories = action.categories.map( normalizeCategory );
+		case GET_CATEGORIES_SUCCESS:
+			feedCategories = action.req.data.content.map( normalizeCategory );
 			specialIdx     = findIndex( feedCategories, { id: -1 });
 
 			if ( 0 < specialIdx ) {
@@ -49,7 +49,7 @@ export function categories( state = initialState, action ) {
 				isFetching: false
 			});
 
-		case REQUESTED_LOGOUT:
+		case LOGOUT:
 			return Object.assign({}, initialState );
 
 		default:
