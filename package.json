@@ -29,6 +29,7 @@
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "date-fns": "^1.0.0-rc19",
+    "es6-promise": "^3.1.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "inline-environment-variables-webpack-plugin": "0.0.2",
