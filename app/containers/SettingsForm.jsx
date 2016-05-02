@@ -14,6 +14,7 @@ class SettingsForm extends React.Component {
 
 		this.state = {
 			limit:        props.settings.limit,
+			interval:     props.settings.interval,
 			unreadOnly:   props.settings.unreadOnly,
 			noPagination: props.settings.noPagination
 		};
@@ -57,7 +58,7 @@ class SettingsForm extends React.Component {
 	}
 
 	render() {
-		const { unreadOnly, limit, noPagination } = this.state;
+		const { unreadOnly, limit, interval, noPagination } = this.state;
 
 		let modeClass = '';
 		let modeAttrs = {};
@@ -94,6 +95,21 @@ class SettingsForm extends React.Component {
 						value={ limit }
 						onChange={ this.handleChange }
 					/>
+				</div>
+				<div className="form-row">
+					<label htmlFor="s-interval">Refresh Int.</label>
+					<input
+						id="s-interval"
+						type="number"
+						name="interval"
+						min="0"
+						required
+						value={ interval }
+						onChange={ this.handleChange }
+					/>
+					<label htmlFor="s-interval" className="iwrap">
+						<small><em>Set to <code>0</code> to disable auto-refresh.</em></small>
+					</label>
 				</div>
 				<div className="form-row">
 					<label htmlFor="s-mode">Mode</label>

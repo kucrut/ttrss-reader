@@ -9,6 +9,7 @@ import {
 const initialState = {
 	isEditing:    false,
 	limit:        parseInt( localStorage.getItem( 'ttrssSettingLimit' ), 10 ) || 23,
+	interval:     parseInt( localStorage.getItem( 'ttrssSettingInterval' ), 10 ) || 0,
 	unreadOnly:   parseInt( ( localStorage.getItem( 'ttrssSettingUnreadOnly' ) || 0 ), 10 ),
 	dateReverse:  parseInt( ( localStorage.getItem( 'ttrssSettingDateReverse' ) || 0 ), 10 ),
 	noPagination: parseInt( ( localStorage.getItem( 'ttrssSettingNoPagination' ) || 0 ), 10 )
@@ -25,6 +26,7 @@ export default function settings( state = initialState, action ) {
 			return Object.assign({}, state, {
 				isEditing:    false,
 				limit:        action.settings.limit,
+				interval:     action.settings.interval,
 				unreadOnly:   action.settings.unreadOnly,
 				noPagination: action.settings.noPagination
 			});
