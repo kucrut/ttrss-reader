@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames/bind';
 import { showSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
 import ArticleList from 'containers/ArticleList';
@@ -7,6 +8,9 @@ import MenuToggle from 'mixins/MenuToggle';
 import MainIcon from 'components/MainIcon';
 import Article from 'components/Article';
 import ArticlePagination from 'components/ArticlePagination';
+
+import stlLayout from 'css/common/layout';
+const cx = classNames.bind( Object.assign({}, stlLayout ) );
 
 
 class Main extends MenuToggle {
@@ -82,10 +86,11 @@ class Main extends MenuToggle {
 	}
 
 	renderSingleArticle() {
-		let article = this.getSingleArticle();
+		const article = this.getSingleArticle();
+		const clsWrap = cx( ['single-article', 'inside'] );
 
 		return (
-			<div className="single-article inside">
+			<div className={ clsWrap }>
 				<Article
 					key={ article.id }
 					article={ article }
@@ -99,6 +104,7 @@ class Main extends MenuToggle {
 
 	render() {
 		const { feeds, articles } = this.props;
+		const clsContent = cx( 'content' );
 		let content;
 
 		if ( articles.currentId ) {
@@ -110,7 +116,7 @@ class Main extends MenuToggle {
 		}
 
 		return (
-			<main onClick={ this.maybeHideSidebar } className="content">
+			<main onClick={ this.maybeHideSidebar } className={ clsContent }>
 				{ content }
 			</main>
 		);

@@ -23,3 +23,27 @@
 		vertical-align: middle;
 	}
 }
+
+.content {
+	position: relative;
+	padding-bottom: 1em;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.single-article {
+	header {
+		margin-bottom: 1.25em;
+	}
+}
+
+@media (min-width: 1020px) {
+	.content {
+		margin-left: $sidebar-max-width;
+		padding-left: 20px;
+
+		.inside {
+			max-width: $max-content-width;
+		}
+	}
+}
