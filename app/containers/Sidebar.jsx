@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import { getCategories } from 'actions/categories';
 import { openSettingsForm } from 'actions/settings';
 import { openSubscriptionForm } from 'actions/subscription';
 import { requestLogout } from 'actions/session';
 import CategoryList from 'containers/CategoryList';
 
+import stlFa from 'css/common/fa';
+import stlSidebar from 'css/containers/sidebar';
+const styles = Object.assign({}, stlFa, stlSidebar );
+const cx = classNames.bind( styles );
 
 class Sidebar extends React.Component {
 	static propTypes = {
@@ -43,27 +47,39 @@ class Sidebar extends React.Component {
 	render() {
 		const { isVisible, isRefreshing } = this.props;
 
-		let sidebarClass = classNames({
+		let sidebarClass = cx({
 			sidebar:      true,
 			'is-visible': isVisible
 		});
 
-		let refreshClass = classNames({
+		let refreshClass = cx({
 			'fa-arrows-cw':            ! isRefreshing,
 			'fa-spinner animate-spin': isRefreshing
 		});
 
 		return (
 			<div className={ sidebarClass }>
-				<div className="actions">
-					<a onClick={ this.handleClickRefresh } className="refresh">
+				<div className={ styles.actions }>
+					<a onClick={ this.handleClickRefresh } className={ styles.refresh }>
 						<i className={ refreshClass } />Refresh
 					</a>
-					<a onClick={ this.handleClickSubscribe } className="fa-eye" title="Subscribe to feed" />
-					<a onClick={ this.handleClickSettings } className="fa-cog" title="Settings" />
-					<a onClick={ this.handleClickLogout } className="fa-logout" title="Logout" />
+					<a
+						onClick={ this.handleClickSubscribe }
+						className={ styles[ 'fa-eye' ] }
+						title="Subscribe to feed"
+					/>
+					<a
+						onClick={ this.handleClickSettings }
+						className={ styles[ 'fa-cog' ] }
+						title="Settings"
+					/>
+					<a
+						onClick={ this.handleClickLogout }
+						className={ styles[ 'fa-logout' ] }
+						title="Logout"
+					/>
 				</div>
-				<div className="inside">
+				<div className={ styles.inside }>
 					<CategoryList />
 				</div>
 			</div>

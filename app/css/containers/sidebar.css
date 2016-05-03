@@ -1,0 +1,96 @@
+@value white from '../common/variables.css';
+@value bar-height from '../common/variables.css';
+@value border-color from '../common/variables.css';
+@value shadow-color from '../common/variables.css';
+@value sidebar-max-width from '../common/variables.css';
+
+.sidebar {
+	position: absolute;
+	z-index: 2;
+	top: bar-height;
+	bottom: 0;
+	width: 100%;
+	max-width: sidebar-max-width;
+	padding-top: 3em;
+	overflow: hidden;
+	transform: translate3d( -100%, 0, 0 );
+	transition: all .5s;
+
+	.inside,
+	.actions {
+		background: white;
+	}
+
+	.inside {
+		position: relative;
+		height: 100%;
+		overflow-y: scroll;
+
+		@include scrollbars( 3px, #d2d2d2, none );
+	}
+
+	&.is-visible {
+		transform: translate3d( 0, 0, 0 );
+		box-shadow: 1px 2px 5px shadow-color;
+	}
+
+	.actions {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 0 1.25em;
+		z-index: 3;
+		height: 3em;
+		line-height: 3em;
+		text-align: right;
+
+		a {
+			display: inline-block;
+			margin-left: 1.5em;
+
+			&:before {
+				font-size: 1.4em;
+			}
+		}
+
+		.refresh {
+			float: left;
+			margin-left: 0;
+		}
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+	}
+
+	i {
+		margin-right: .25em;
+
+		&::before {
+			width: 1.5em;
+		}
+	}
+
+	.placeholder {
+		font-style: italic;
+	}
+}
+
+@media (min-width: 1020px) {
+	.sidebar {
+		width: sidebar-max-width;
+		transform: none;
+
+		.inside,
+		.actions {
+			background: #fafafa;
+			border-right: 1px solid border-color;
+		}
+
+		&.is-visible {
+			box-shadow: none;
+		}
+	}
+}
