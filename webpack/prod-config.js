@@ -22,7 +22,7 @@ module.exports = {
 		// The filename of the entry chunk as relative path inside the output.path directory
 		filename: '[name].js',
 		// The output path from the view of the Javascript
-		publicPath: '/assets/'
+		publicPath: './assets/'
 	},
 	module: {
 		loaders: sharedConfig.loaders.concat([{
@@ -46,7 +46,7 @@ module.exports = {
 			exclude: path.join( __dirname, '/node_modules/' )
 		}, {
 			test: /\.css$/,
-			loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader!postcss-loader' )
+			loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader?module!postcss-loader' )
 		}])
 	},
 	resolve: {
@@ -63,26 +63,5 @@ module.exports = {
 			}
 		})
 	],
-	postcss: function() {
-		return [
-			require( 'postcss-import' )({
-				path: path.join( __dirname, '..', 'app', 'css' ),
-				// addDependencyTo is used for hot-reloading in webpack
-				addDependencyTo: webpack
-			}),
-			require( 'postcss-mixins' )(),
-			require( 'postcss-simple-vars' )(),
-			// Unwrap nested rules like how Sass does it
-			require( 'postcss-nested' )(),
-			//  parse CSS and add vendor prefixes to CSS rules
-			require( 'autoprefixer' )({
-				browsers: [ 'last 2 versions', 'IE > 8' ]
-			}),
-			// A PostCSS plugin to console.log() the messages registered by other
-			// PostCSS plugins
-			require( 'postcss-reporter' )({
-				clearMessages: true
-			})
-		];
-	}
+	postcss: sharedConfig.postcss
 };

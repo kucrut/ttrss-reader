@@ -22,7 +22,7 @@ module.exports = {
 			limit: 10000,
 		}
 	}],
-	postCSS: function() {
+	postcss: function() {
 		return [
 			require( 'postcss-import' )({
 				path: path.join( __dirname, '..', 'app', 'css' ),
