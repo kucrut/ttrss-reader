@@ -1,0 +1,36 @@
+@value white from '../common/variables.css';
+@value border-color from '../common/variables.css';
+
+.sidebarActions {
+	background: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 0 1.25em;
+	z-index: 3;
+	height: 3em;
+	line-height: 3em;
+	text-align: right;
+
+	a {
+		display: inline-block;
+		margin-left: 1.5em;
+
+		&:before {
+			font-size: 1.4em;
+		}
+	}
+
+	.refresh {
+		float: left;
+		margin-left: 0;
+	}
+}
+
+@media (min-width: 1020px) {
+	.sidebarActions {
+		background: #fafafa;
+		border-right: 1px solid border-color;
+	}
+}
