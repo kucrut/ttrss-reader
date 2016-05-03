@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchFeeds } from 'actions/feeds';
 import FeedItem from 'components/FeedItem';
 import Spinner from 'components/Spinner';
+import styles from 'css/containers/feed-list';
 
 
 class FeedList extends React.Component {
@@ -67,7 +68,7 @@ class FeedList extends React.Component {
 		}
 
 		return (
-			<ul className="feed-list">
+			<ul className={ styles.feedList }>
 				{ listItems }
 			</ul>
 		);
