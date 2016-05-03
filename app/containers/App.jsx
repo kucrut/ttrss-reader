@@ -5,6 +5,7 @@ import { getCategories } from 'actions/categories';
 import { checkLastSession } from 'actions/session';
 import { fetchUnreadCount } from 'actions/articles';
 import { getCount } from 'helpers';
+import classNames from 'classnames/bind';
 import SettingsForm from 'containers/SettingsForm';
 import SubscribeForm from 'containers/SubscribeForm';
 import LoginForm from 'containers/LoginForm';
@@ -14,7 +15,9 @@ import Main from 'containers/Main';
 import Alert from 'components/Alert';
 import Spinner from 'components/Spinner';
 import Helmet from 'react-helmet';
+import styles from 'css/common/layout';
 
+const cx = classNames.bind( styles );
 
 class App extends React.Component {
 	static propTypes = {
@@ -38,10 +41,6 @@ class App extends React.Component {
 		this.props.dispatch( checkLastSession() );
 	}
 
-	componentDidUpdate() {
-		this.updateRefresher();
-	}
-
 	componentWillReceiveProps( nextProps ) {
 		const { session, refreshInterval } = nextProps;
 		let newInterval;
@@ -53,6 +52,10 @@ class App extends React.Component {
 		}
 
 		this.setState({ refreshInterval: newInterval });
+	}
+
+	componentDidUpdate() {
+		this.updateRefresher();
 	}
 
 	updateCounts() {
@@ -74,21 +77,25 @@ class App extends React.Component {
 	}
 
 	renderSpinner() {
+		const clsMainInit = cx( 'main-init' );
+
 		return (
-			<div className="main-init"><Spinner /></div>
+			<div className={ clsMainInit }><Spinner /></div>
 		);
 	}
 
 	render() {
 		const { dispatch, session, isEditingSettings, isSubscribing, unreadCount } = this.props;
 		const { isChecked, isAsking, url, sid } = session;
+		const clsWholeWrap = cx( 'whole-wrap' );
+
 		let title = 'Tiny Tiny RSS Reader';
 		let content;
 
 		if ( url && sid ) {
 			if ( isEditingSettings ) {
 				content = (
-					<div className="whole-wrap">
+					<div className={ clsWholeWrap }>
 						<Helmet title={ `Settings « ${title}` } />
 						<SettingsForm />
 					</div>
@@ -96,7 +103,7 @@ class App extends React.Component {
 			} else {
 				if ( isSubscribing ) {
 					content = (
-						<div className="whole-wrap">
+						<div className={ clsWholeWrap }>
 							<Helmet title={ `Add Feed « ${title}` } />
 							<SubscribeForm />
 						</div>
@@ -107,7 +114,7 @@ class App extends React.Component {
 					}
 
 					content = (
-						<div className="whole-wrap">
+						<div className={ clsWholeWrap }>
 							<Helmet title={ title } />
 							<Header />
 							<Sidebar />
