@@ -4,6 +4,7 @@ var appPath = path.join( __dirname, '..', 'app' );
 var assetsPath = path.join( __dirname, '..', 'public', 'assets' );
 //var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 var sharedConfig = require( './shared.js' );
+var PORT = process.env.PORT || 8080;
 
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
 	// https://github.com/glenjamin/webpack-hot-middleware/blob/master/example/webpack.config.multientry.js
 	entry: {
 		app: [
-			'webpack-dev-server/client?http://localhost:8080',
+			'webpack-dev-server/client?http://localhost:' + PORT,
 			'webpack/hot/dev-server',
 			'./index'
 		]
