@@ -8,8 +8,15 @@ module.exports = {
 	}, {
 		test: /\.json$/, loader: 'json-loader'
 	}, {
-		test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|otf)$/,
+		test: /\.(png|jpg|jpeg|gif|woff|woff2)/,
 		loader: 'url',
+		query: {
+			name: '[hash].[ext]',
+			limit: 10000,
+		}
+	}, {
+		test: /\.(otf|ttf|eot|svg)/,
+		loader: 'file-loader',
 		query: {
 			name: '[hash].[ext]',
 			limit: 10000,
@@ -22,6 +29,7 @@ module.exports = {
 				// addDependencyTo is used for hot-reloading in webpack
 				addDependencyTo: webpack
 			}),
+			require( 'postcss-fontpath' )(),
 			require( 'postcss-mixins' )(),
 			require( 'postcss-simple-vars' )(),
 			// Unwrap nested rules like how Sass does it
