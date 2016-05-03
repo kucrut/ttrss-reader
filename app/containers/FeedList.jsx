@@ -17,7 +17,7 @@ class FeedList extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getFeeds();
+		// this.getFeeds();
 	}
 
 	componentWillReceiveProps( nextProps ) {
@@ -34,13 +34,13 @@ class FeedList extends React.Component {
 
 	renderSpinner() {
 		return (
-			<li className="placeholder"><Spinner /> Loading Feeds</li>
+			<li className={ styles.placeholder }><Spinner /> Loading Feeds</li>
 		);
 	}
 
 	renderNoFeed() {
 		return (
-			<li className="placeholder">No Feeds found.</li>
+			<li className={ styles.placeholder }>No Feeds found.</li>
 		);
 	}
 

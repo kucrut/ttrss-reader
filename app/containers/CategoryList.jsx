@@ -19,13 +19,13 @@ class CategoryList extends React.Component {
 
 	renderSpinner() {
 		return (
-			<li className="placeholder"><Spinner /> Loading Categories</li>
+			<li className={ styles.placeholder }><Spinner /> Loading Categories</li>
 		);
 	}
 
 	renderNoCategories() {
 		return (
-			<li className="placeholder">No categories found.</li>
+			<li className={ styles.placeholder }>No categories found.</li>
 		);
 	}
 
