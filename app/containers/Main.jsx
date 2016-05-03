@@ -4,6 +4,7 @@ import { showSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
 import ArticleList from 'containers/ArticleList';
 import MenuToggle from 'mixins/MenuToggle';
+import MainIcon from 'components/MainIcon';
 import Article from 'components/Article';
 import ArticlePagination from 'components/ArticlePagination';
 
@@ -96,12 +97,6 @@ class Main extends MenuToggle {
 		);
 	}
 
-	renderIcon() {
-		return (
-			<div className="main-init inside"><i className="fa-rss" /></div>
-		);
-	}
-
 	render() {
 		const { feeds, articles } = this.props;
 		let content;
@@ -111,7 +106,7 @@ class Main extends MenuToggle {
 		} else if ( feeds.current.id ) {
 			content = ( <ArticleList feed={ feeds.current } /> );
 		} else {
-			content = this.renderIcon();
+			content = ( <MainIcon /> );
 		}
 
 		return (
