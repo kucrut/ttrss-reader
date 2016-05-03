@@ -34,6 +34,7 @@
     "file-loader": "^0.8.5",
     "inline-environment-variables-webpack-plugin": "0.0.2",
     "lodash": "^4.11.1",
+    "postcss-fontpath": "^0.3.0",
     "postcss-import": "^8.1.0",
     "postcss-loader": "^0.8.2",
     "postcss-mixins": "^4.0.1",
