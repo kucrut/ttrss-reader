@@ -1,10 +1,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import { selectFeed } from 'actions/feeds';
 import { hideSidebar } from 'actions/ui';
 import { getCount } from 'helpers';
 
+import stlFa from 'css/common/fa';
+import stlElements from 'css/common/elements';
+import stlCategoryList from 'css/containers/category-list';
+const styles = Object.assign({}, stlFa, stlCategoryList, stlElements );
+const cx = classNames.bind( styles );
 
 class FeedItem extends React.Component {
 	static propTypes = {
@@ -33,7 +38,7 @@ class FeedItem extends React.Component {
 
 		if ( 0 < feed.unread ) {
 			element = (
-				<span className="count">{ getCount( feed.unread ) }</span>
+				<span className={ styles.count }>{ getCount( feed.unread ) }</span>
 			);
 		}
 
@@ -43,16 +48,15 @@ class FeedItem extends React.Component {
 	render() {
 		const { feed, current } = this.props;
 		const isSelected = feed.id === current.id;
-
-		let linkClass = classNames({
-			current: isSelected
-		});
+		const clsIcon = cx( 'fa-rss-squared' );
+		const clsName = cx( ['name', 'text-truncate'] );
+		const clsLink = cx({ current: isSelected });
 
 		return (
 			<li>
-				<a onClick={ this.handleClick } className={ linkClass }>
-					<i className="fa-rss-squared" />
-					<span className="name text-truncate">{ feed.title }</span>
+				<a onClick={ this.handleClick } className={ clsLink }>
+					<i className={ clsIcon } />
+					<span className={ clsName }>{ feed.title }</span>
 					{ this.renderCount() }
 				</a>
 			</li>
