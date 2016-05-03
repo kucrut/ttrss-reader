@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { sessionShape } from 'reducers/session';
 import { checkLastSession } from 'actions/session';
+import { getCategories } from 'actions/categories';
 import { getCount } from 'helpers';
 import SettingsForm from 'containers/SettingsForm';
 import SubscribeForm from 'containers/SubscribeForm';
@@ -18,13 +19,43 @@ class App extends React.Component {
 	static propTypes = {
 		session:           PropTypes.shape( sessionShape ).isRequired,
 		freshCount:        PropTypes.number.isRequired,
+		refreshInterval:   PropTypes.number.isRequired,
 		isSubscribing:     PropTypes.bool.isRequired,
 		isEditingSettings: PropTypes.bool.isRequired,
 		dispatch:          PropTypes.func.isRequired
 	}
 
+	constructor( props ) {
+		super( props );
+
+		this.state = { refreshInterval: props.refreshInterval };
+		this.refresher = null;
+		this.updateCounts = this.updateCounts.bind( this );
+	}
+
 	componentDidMount() {
 		this.props.dispatch( checkLastSession() );
+		this.updateRefresher();
+	}
+
+	componentWillReceiveProps( nextProps, nextState ) {
+		if ( nextState.refreshInterval && nextState.refreshInterval !== this.state.refreshInterval ) {
+			this.updateRefresher();
+		}
+	}
+
+	updateCounts() {
+		this.props.dispatch( getCategories() );
+	}
+
+	updateRefresher() {
+		const { refreshInterval } = this.state;
+
+		clearInterval( this.refresher );
+
+		if ( 0 < refreshInterval ) {
+			this.refresher = setInterval( this.updateCounts, ( refreshInterval * 60 * 1000 ) );
+		}
 	}
 
 	renderSpinner() {
@@ -93,6 +124,7 @@ function mapStateToProps( state ) {
 	return {
 		session:           state.session,
 		freshCount:        state.categories.freshCount,
+		refreshInterval:   state.settings.interval,
 		isSubscribing:     state.subscription.isOpen,
 		isEditingSettings: state.settings.isEditing
 	};
