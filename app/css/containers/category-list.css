@@ -1,0 +1,59 @@
+@import 'common/variables';
+
+.categoryList {
+	min-height: 100%;
+	padding: 0 0 1em;
+
+	i {
+		color: #bbb;
+		vertical-align: middle;
+	}
+
+	a,
+	.placeholder {
+		display: block;
+		padding: .4em 1.25em;
+	}
+
+	.name {
+		max-width: 80%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	a {
+		position: relative;
+
+		&:active,
+		&:hover,
+		&:focus {
+			background: rgba(0, 0, 0, .03);
+			color: #444;
+			outline: none;
+			box-shadow: inset 0 0 1px rgba(0, 0, 0, .06);
+			text-shadow: 0 -1px 0 #fff;
+
+			i {
+				color: inherit;
+			}
+		}
+
+		&.current {
+			.name {
+				font-weight: bold;
+			}
+
+			i {
+				color: $orange;
+			}
+		}
+
+		.count {
+			font-size: .8em;
+			color: #aaa;
+			position: absolute;
+			top: .8em;
+			right: 1.5625em;
+		}
+	}
+}

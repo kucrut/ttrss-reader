@@ -4,6 +4,7 @@ import { categoriesShape } from 'reducers/categories';
 import { getCategories } from 'actions/categories';
 import CategoryItem from 'components/CategoryItem';
 import Spinner from 'components/Spinner';
+import styles from 'css/containers/category-list';
 
 
 class CategoryList extends React.Component {
@@ -51,7 +52,7 @@ class CategoryList extends React.Component {
 		}
 
 		return (
-			<ul className="category-list">
+			<ul className={ styles.categoryList }>
 				{ listItems }
 			</ul>
 		);
