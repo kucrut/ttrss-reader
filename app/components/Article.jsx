@@ -12,6 +12,7 @@ class Article extends React.Component {
 		isSingle:         PropTypes.bool.isRequired,
 		prevNextCallback: PropTypes.func,
 		feed:             PropTypes.object.isRequired,
+		mainContent:      PropTypes.element.isRequired,
 		dispatch:         PropTypes.func.isRequired
 	}
 
@@ -90,7 +91,7 @@ class Article extends React.Component {
 	}
 
 	scrollToTop() {
-		document.getElementsByClassName( 'content' )[ 0 ].scrollTop = 0;
+		this.props.mainContent.scrollTop = 0;
 	}
 
 	slideElement( dir, n ) {

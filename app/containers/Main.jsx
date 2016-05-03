@@ -95,6 +95,7 @@ class Main extends MenuToggle {
 					key={ article.id }
 					article={ article }
 					isSingle={ true }
+					mainContent={ this.refs.mainContent }
 					prevNextCallback={ this.handleClickPreviousNext }
 				/>
 				{ this.renderPagination() }
@@ -110,13 +111,13 @@ class Main extends MenuToggle {
 		if ( articles.currentId ) {
 			content = this.renderSingleArticle();
 		} else if ( feeds.current.id ) {
-			content = ( <ArticleList feed={ feeds.current } /> );
+			content = ( <ArticleList feed={ feeds.current } mainContent={ this.refs.mainContent } /> );
 		} else {
 			content = ( <MainIcon /> );
 		}
 
 		return (
-			<main onClick={ this.maybeHideSidebar } className={ clsContent }>
+			<main onClick={ this.maybeHideSidebar } className={ clsContent } ref="mainContent">
 				{ content }
 			</main>
 		);

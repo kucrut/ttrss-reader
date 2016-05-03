@@ -10,21 +10,22 @@ import LoadMoreButton from 'components/LoadMoreButton';
 
 class ArticleList extends React.Component {
 	static propTypes = {
-		feed:       PropTypes.object.isRequired,
-		scrollPos:  PropTypes.object.isRequired,
-		articles:   PropTypes.object.isRequired,
-		unreadOnly: PropTypes.number.isRequired,
-		dispatch:   PropTypes.func.isRequired
+		feed:        PropTypes.object.isRequired,
+		scrollPos:   PropTypes.object.isRequired,
+		articles:    PropTypes.object.isRequired,
+		unreadOnly:  PropTypes.number.isRequired,
+		mainContent: PropTypes.element.isRequired,
+		dispatch:    PropTypes.func.isRequired
 	}
 
 	componentDidMount() {
-		const { feed, articles, scrollPos } = this.props;
+		const { feed, articles, scrollPos, mainContent } = this.props;
 
 		if ( ! articles.items.length ) {
 			this.fetchArticles( feed );
 		} else {
 			if ( scrollPos.feedId === feed.id ) {
-				document.getElementsByClassName( 'content' )[ 0 ].scrollTop = scrollPos.top;
+				mainContent.scrollTop = scrollPos.top;
 			}
 		}
 	}
@@ -38,11 +39,11 @@ class ArticleList extends React.Component {
 	}
 
 	componentWillUnmount() {
-		const { feed, dispatch } = this.props;
+		const { feed, dispatch, mainContent } = this.props;
 
 		dispatch( setArticleListPosition({
 			feedId: feed.id,
-			top:    document.getElementsByClassName( 'content' )[ 0 ].scrollTop
+			top:    mainContent.scrollTop
 		}) );
 	}
 
