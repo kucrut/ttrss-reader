@@ -1,8 +1,13 @@
 import React, { PropTypes } from 'react';
 import { filter, map } from 'lodash';
+import classNames from 'classnames/bind';
 import { updateSortOrder } from 'actions/settings';
 import { fetchFeedArticles, markArticlesRead } from 'actions/articles';
 
+import stlFa from 'css/common/fa';
+import stlHeader from 'css/containers/header';
+const styles = Object.assign({}, stlFa, stlHeader );
+const cx = classNames.bind( styles );
 
 export default class FeedActions extends React.Component {
 	static propTypes = {
@@ -52,56 +57,46 @@ export default class FeedActions extends React.Component {
 	renderCheck() {
 		const { items, isFetching } = this.props.articles;
 		const unread = filter( items, { unread: true });
-		let classes = 'fa-ok';
-
-		if ( isFetching || ! unread.length ) {
-			classes += ' disabled';
-		}
+		const clsIcon = cx({
+			'fa-ok':    true,
+			'disabled': ( isFetching || ! unread.length )
+		});
 
 		return (
-			<a onClick={ this.handleClickCheck } title="Mark all as read" className={ classes } />
+			<a onClick={ this.handleClickCheck } title="Mark all as read" className={ clsIcon } />
 		);
 	}
 
 	renderRefresh() {
 		const { isFetching } = this.props.articles;
-		let classes = 'fa-arrows-cw';
-
-		if ( isFetching ) {
-			classes += ' disabled';
-		}
+		const clsIcon = cx({
+			'fa-arrows-cw': true,
+			disabled:       isFetching
+		});
 
 		return (
-			<a onClick={ this.handleClickRefresh } title="Refresh" className={ classes } />
+			<a onClick={ this.handleClickRefresh } title="Refresh" className={ clsIcon } />
 		);
 	}
 
 	renderSort() {
 		const { dateReverse, articles } = this.props;
 		const { isFetching, items } = articles;
-		let iconClass;
-		let title;
-
-		if ( dateReverse ) {
-			title = 'Oldest First';
-			iconClass = 'fa-sort-alt-up';
-		} else {
-			title = 'Newest First';
-			iconClass = 'fa-sort-alt-down';
-		}
-
-		if ( isFetching || ! items.length ) {
-			iconClass += ' disabled';
-		}
+		const title = dateReverse ? 'Oldest First' : 'Newest First';
+		const clsIcon = cx({
+			'fa-sort-alt-up':   dateReverse,
+			'fa-sort-alt-down': ! dateReverse,
+			disabled:           ( isFetching || ! items.length )
+		});
 
 		return (
-			<a className={ iconClass } title={ title } onClick={ this.handleClickSort } />
+			<a className={ clsIcon } title={ title } onClick={ this.handleClickSort } />
 		);
 	}
 
 	render() {
 		return (
-			<div className="actions">
+			<div className={ styles.actions }>
 				{ this.renderCheck() }
 				{ this.renderRefresh() }
 				{ this.renderSort() }
