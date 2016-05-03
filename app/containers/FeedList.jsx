@@ -1,15 +1,18 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames/bind';
 import { fetchFeeds } from 'actions/feeds';
 import FeedItem from 'components/FeedItem';
 import Spinner from 'components/Spinner';
-import styles from 'css/containers/feed-list';
 
+import styles from 'css/containers/feed-list';
+const cx = classNames.bind( styles );
 
 class FeedList extends React.Component {
 	static propTypes = {
 		category: PropTypes.object.isRequired,
 		feeds:    PropTypes.object.isRequired,
+		isOpen:   PropTypes.bool.isRequired,
 		dispatch: PropTypes.func.isRequired
 	}
 
@@ -52,7 +55,11 @@ class FeedList extends React.Component {
 	}
 
 	render() {
-		const { feeds, category } = this.props;
+		const { feeds, category, isOpen } = this.props;
+		const clsFeedList = cx({
+			feedList:  true,
+			'is-open': isOpen
+		});
 		const key = `c${category.id}`;
 		const items = feeds.groups[ key ];
 		let listItems;
@@ -68,7 +75,7 @@ class FeedList extends React.Component {
 		}
 
 		return (
-			<ul className={ styles.feedList }>
+			<ul className={ clsFeedList }>
 				{ listItems }
 			</ul>
 		);

@@ -1,8 +1,12 @@
 import React, { PropTypes, Component } from 'react';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import FeedList from 'containers/FeedList';
 import { getCount } from 'helpers';
 
+import stlFa from 'css/common/fa';
+import stlCategoryList from 'css/containers/category-list';
+const styles = Object.assign({}, stlFa, stlCategoryList );
+const cx = classNames.bind( styles );
 
 class CategoryItem extends Component {
 	static propTypes = {
@@ -25,7 +29,7 @@ class CategoryItem extends Component {
 
 		if ( 0 < category.unread ) {
 			count = (
-				<span className="count">{ getCount( category.unread ) }</span>
+				<span className={ styles.count }>{ getCount( category.unread ) }</span>
 			);
 		}
 
@@ -36,8 +40,8 @@ class CategoryItem extends Component {
 		const { isOpen } = this.state;
 		const { category } = this.props;
 
-		let itemClass = classNames({ 'is-open': isOpen });
-		let iconClass = classNames({
+		let itemClass = cx({ 'is-open': isOpen });
+		let iconClass = cx({
 			'fa-folder':            ( 0 < category.unread && ! isOpen ),
 			'fa-folder-open':       ( 0 < category.unread && isOpen ),
 			'fa-folder-empty':      ( 0 === category.unread && ! isOpen ),
@@ -48,10 +52,10 @@ class CategoryItem extends Component {
 			<li className={ itemClass } key={ category.id }>
 				<a onClick={ this.handleClick }>
 					<i className={ iconClass } />
-					<span className="name">{ category.title }</span>
+					<span className={ styles.name }>{ category.title }</span>
 					{ this.renderCount() }
 				</a>
-				<FeedList category={ category } />
+				<FeedList category={ category } isOpen={ isOpen } />
 			</li>
 		);
 	}

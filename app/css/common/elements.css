@@ -3,3 +3,11 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.count {
+	font-size: .8em;
+	color: #aaa;
+	position: absolute;
+	top: .8em;
+	right: 1.5625em;
+}
