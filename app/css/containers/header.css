@@ -1,7 +1,4 @@
-@value bar-height from '../common/variables.css';
-@value border-color from '../common/variables.css';
-@value sidebar-max-width from '../common/variables.css';
-@value max-content-width from '../common/variables.css';
+@import 'common/variables';
 
 .head {
 	position: absolute;
@@ -9,9 +6,9 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: bar-height;
-	line-height: bar-height;
-	border-bottom: 1px solid border-color;
+	height: $bar-height;
+	line-height: $bar-height;
+	border-bottom: 1px solid $border-color;
 	overflow: hidden;
 	background: #f0f0f0;
 
@@ -38,7 +35,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: ( sidebar-max-width - 6px );
+		width: ( $sidebar-max-width - 6px );
 		max-width: 70vw;
 		padding-left: 1.25em;
 
@@ -81,8 +78,8 @@
 		}
 		.actions {
 			float: none;
-			margin-left: sidebar-max-width;
-			max-width: max-content-width;
+			margin-left: $sidebar-max-width;
+			max-width: $max-content-width;
 			padding: 0;
 			left: 1.25em;
 		}

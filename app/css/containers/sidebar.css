@@ -1,34 +1,30 @@
+@import 'common/variables';
 @import 'common/mixins';
-@value white from '../common/variables.css';
-@value bar-height from '../common/variables.css';
-@value border-color from '../common/variables.css';
-@value shadow-color from '../common/variables.css';
-@value sidebar-max-width from '../common/variables.css';
 
 .sidebar {
 	position: absolute;
 	z-index: 2;
-	top: bar-height;
+	top: $bar-height;
 	bottom: 0;
 	width: 100%;
-	max-width: sidebar-max-width;
+	max-width: $sidebar-max-width;
 	padding-top: 3em;
 	overflow: hidden;
 	transform: translate3d( -100%, 0, 0 );
 	transition: all .5s;
 
 	.inside {
-		background: white;
+		background: $white;
 		position: relative;
 		height: 100%;
 		overflow-y: scroll;
 
-		@mixin scrollbars 3px, #d2d2d2, none
+		@mixin scrollbars 3px, #d2d2d2, none;
 	}
 
 	&.is-visible {
 		transform: translate3d( 0, 0, 0 );
-		box-shadow: 1px 2px 5px shadow-color;
+		box-shadow: 1px 2px 5px $shadow-color;
 	}
 
 	ul {
@@ -51,12 +47,12 @@
 
 @media (min-width: 1020px) {
 	.sidebar {
-		width: sidebar-max-width;
+		width: $sidebar-max-width;
 		transform: none;
 
 		.inside {
 			background: #fafafa;
-			border-right: 1px solid border-color;
+			border-right: 1px solid $border-color;
 		}
 
 		&.is-visible {

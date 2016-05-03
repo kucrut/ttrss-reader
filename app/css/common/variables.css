@@ -1,16 +1,16 @@
 /* Fonts */
-@value font-stack: Helvetica Neue, sans-serif;
+$font-stack: Helvetica Neue, sans-serif;
 
 /* Colors */
-@value white: #fff;
-@value orange: #e28327;
-@value green: #659f13;
-@value light-grey: #f0f0f0;
+$white: #fff;
+$orange: #e28327;
+$green: #659f13;
+$light-grey: #f0f0f0;
 
-@value border-color: #ddd;
-@value shadow-color: #8f8f8f;
+$border-color: #ddd;
+$shadow-color: #8f8f8f;
 
 /* Layout */
-@value bar-height: 3.125em;
-@value sidebar-max-width: 360px;
-@value max-content-width: 640px;
+$bar-height: 3.125em;
+$sidebar-max-width: 360px;
+$max-content-width: 640px;

@@ -1,8 +1,8 @@
-@value font-stack from './variables.css';
+@import 'common/variables';
 
 body {
 	color: #222;
-	font-family: font-stack;
+	font-family: $font-stack;
 }
 
 h1, h2 {

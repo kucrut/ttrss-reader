@@ -1,15 +1,13 @@
-@import 'normalize.css';
-@import 'base.css';
-@import 'typography.css';
-
-@value bar-height from './variables.css';
-@value light-grey from './variables.css';
+@import 'common/normalize';
+@import 'common/variables';
+@import 'common/base';
+@import 'common/typography';
 
 .whole-wrap {
 	position: relative;
 	height: 100vh;
 	max-height: 100vh;
-	padding-top: bar-height;
+	padding-top: $bar-height;
 	overflow: hidden;
 }
 
@@ -21,7 +19,7 @@
 
 	> i {
 		font-size: 8em;
-		color: light-grey;
+		color: $light-grey;
 		vertical-align: middle;
 	}
 }
