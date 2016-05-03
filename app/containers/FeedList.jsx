@@ -17,7 +17,7 @@ class FeedList extends React.Component {
 	}
 
 	componentDidMount() {
-		// this.getFeeds();
+		this.getFeeds();
 	}
 
 	componentWillReceiveProps( nextProps ) {
