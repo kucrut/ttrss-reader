@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { updateArticle } from 'actions/articles';
 
+import stlFa from 'css/common/fa';
+import stlHeader from 'css/containers/header';
+
 
 class ArticleActions extends React.Component {
 	static propTypes = {
@@ -56,16 +59,16 @@ class ArticleActions extends React.Component {
 	render() {
 		const { unread, marked } = this.state;
 
-		let starTitle = marked ? 'Unstar' : 'Star';
-		let starIcon  = marked ? 'fa-star' : 'fa-star-empty';
+		const starIcon  = marked ? 'fa-star' : 'fa-star-empty';
+		const starTitle = marked ? 'Unstar' : 'Star';
 
-		let readTitle = unread ? 'Mark as read' : 'Mark as unread';
-		let readIcon  = unread ? 'fa-check-empty' : 'fa-check';
+		const readIcon  = unread ? 'fa-check-empty' : 'fa-check';
+		const readTitle = unread ? 'Mark as read' : 'Mark as unread';
 
 		return (
-			<div className="actions">
-				<a onClick={ this.toggleRead } title={ readTitle } className={ readIcon } />
-				<a onClick={ this.toggleMarked } title={ starTitle } className={ starIcon } />
+			<div className={ stlHeader.actions }>
+				<a onClick={ this.toggleRead } title={ readTitle } className={ stlFa[ readIcon ] } />
+				<a onClick={ this.toggleMarked } title={ starTitle } className={ stlFa[ starIcon ] } />
 			</div>
 		);
 	}
