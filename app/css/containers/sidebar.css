@@ -1,3 +1,4 @@
+@import 'common/mixins';
 @value white from '../common/variables.css';
 @value bar-height from '../common/variables.css';
 @value border-color from '../common/variables.css';
@@ -22,7 +23,7 @@
 		height: 100%;
 		overflow-y: scroll;
 
-		@include scrollbars( 3px, #d2d2d2, none );
+		@mixin scrollbars 3px, #d2d2d2, none
 	}
 
 	&.is-visible {
