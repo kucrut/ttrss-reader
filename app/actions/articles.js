@@ -6,6 +6,10 @@ import { getCategories } from 'actions/categories';
 
 polyfill();
 
+export const GET_UNREAD = 'GET_UNREAD';
+export const GET_UNREAD_REQUEST = 'GET_UNREAD_REQUEST';
+export const GET_UNREAD_SUCCESS = 'GET_UNREAD_SUCCESS';
+export const GET_UNREAD_FAILURE = 'GET_UNREAD_FAILURE';
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const GET_ARTICLES_REQUEST = 'GET_ARTICLES_REQUEST';
 export const GET_ARTICLES_SUCCESS = 'GET_ARTICLES_SUCCESS';
@@ -30,6 +34,20 @@ export function clearArticles( feedId ) {
 		type: CLEARED_ARTICLES,
 		feedId
 	});
+}
+
+export function fetchUnreadCount() {
+	return ( dispatch, getState ) => {
+		const { url, sid } = getState().session;
+
+		dispatch({
+			type:    GET_UNREAD,
+			promise: axios.post( url, {
+				op: 'getUnread',
+				sid
+			})
+		});
+	};
 }
 
 export function fetchFeedArticles( feed, clearExisting = true, params = {}) {

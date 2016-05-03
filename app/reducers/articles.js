@@ -1,6 +1,7 @@
-import { each, findIndex } from 'lodash';
+import { get, each, findIndex } from 'lodash';
 import { UPDATED_SETTINGS } from 'actions/settings';
 import {
+	GET_UNREAD_SUCCESS,
 	GET_ARTICLES_REQUEST,
 	GET_ARTICLES_SUCCESS,
 	UPDATE_LOCAL_ARTICLES,
@@ -13,6 +14,7 @@ import { LOGOUT } from 'actions/session';
 
 
 const initialState = {
+	unread:       0,
 	feedId:       '',
 	currentId:    '',
 	currentIndex: '',
@@ -35,6 +37,11 @@ export default function articles( state = initialState, action ) {
 	let currentIndex;
 
 	switch ( action.type ) {
+		case GET_UNREAD_SUCCESS:
+			return Object.assign({}, state, {
+				unread: parseInt( get( action, 'req.data.content.unread' ), 10 )
+			});
+
 		case GET_ARTICLES_REQUEST:
 		case UPDATE_ARTICLES_REQUEST:
 			return Object.assign({}, state, {

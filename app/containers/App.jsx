@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { sessionShape } from 'reducers/session';
-import { checkLastSession } from 'actions/session';
 import { getCategories } from 'actions/categories';
+import { checkLastSession } from 'actions/session';
+import { fetchUnreadCount } from 'actions/articles';
 import { getCount } from 'helpers';
 import SettingsForm from 'containers/SettingsForm';
 import SubscribeForm from 'containers/SubscribeForm';
@@ -18,7 +19,7 @@ import Helmet from 'react-helmet';
 class App extends React.Component {
 	static propTypes = {
 		session:           PropTypes.shape( sessionShape ).isRequired,
-		freshCount:        PropTypes.number.isRequired,
+		unreadCount:       PropTypes.number.isRequired,
 		refreshInterval:   PropTypes.number.isRequired,
 		isSubscribing:     PropTypes.bool.isRequired,
 		isEditingSettings: PropTypes.bool.isRequired,
@@ -28,23 +29,34 @@ class App extends React.Component {
 	constructor( props ) {
 		super( props );
 
-		this.state = { refreshInterval: props.refreshInterval };
+		this.state = { refreshInterval: 0 };
 		this.refresher = null;
 		this.updateCounts = this.updateCounts.bind( this );
 	}
 
 	componentDidMount() {
 		this.props.dispatch( checkLastSession() );
+	}
+
+	componentDidUpdate() {
 		this.updateRefresher();
 	}
 
-	componentWillReceiveProps( nextProps, nextState ) {
-		if ( nextState.refreshInterval && nextState.refreshInterval !== this.state.refreshInterval ) {
-			this.updateRefresher();
+	componentWillReceiveProps( nextProps ) {
+		const { session, refreshInterval } = nextProps;
+		let newInterval;
+
+		if ( session.url && session.sid ) {
+			newInterval = refreshInterval;
+		} else {
+			newInterval = 0;
 		}
+
+		this.setState({ refreshInterval: newInterval });
 	}
 
 	updateCounts() {
+		this.props.dispatch( fetchUnreadCount() );
 		this.props.dispatch( getCategories() );
 	}
 
@@ -53,9 +65,12 @@ class App extends React.Component {
 
 		clearInterval( this.refresher );
 
-		if ( 0 < refreshInterval ) {
-			this.refresher = setInterval( this.updateCounts, ( refreshInterval * 60 * 1000 ) );
+		if ( 1 > refreshInterval ) {
+			return;
 		}
+
+		this.refresher = setInterval( this.updateCounts, ( refreshInterval * 60 * 1000 ) );
+		this.updateCounts();
 	}
 
 	renderSpinner() {
@@ -65,7 +80,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { dispatch, session, isEditingSettings, isSubscribing, freshCount } = this.props;
+		const { dispatch, session, isEditingSettings, isSubscribing, unreadCount } = this.props;
 		const { isChecked, isAsking, url, sid } = session;
 		let title = 'Tiny Tiny RSS Reader';
 		let content;
@@ -87,8 +102,8 @@ class App extends React.Component {
 						</div>
 					);
 				} else {
-					if ( 0 < freshCount ) {
-						title = `(${getCount( freshCount )}) ${title}`;
+					if ( 0 < unreadCount ) {
+						title = `(${getCount( unreadCount )}) ${title}`;
 					}
 
 					content = (
@@ -123,7 +138,7 @@ class App extends React.Component {
 function mapStateToProps( state ) {
 	return {
 		session:           state.session,
-		freshCount:        state.categories.freshCount,
+		unreadCount:       state.articles.unread,
 		refreshInterval:   state.settings.interval,
 		isSubscribing:     state.subscription.isOpen,
 		isEditingSettings: state.settings.isEditing

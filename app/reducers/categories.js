@@ -11,7 +11,6 @@ import {
 
 const initialState = {
 	isFetching: true,
-	freshCount: 0,
 	items:      []
 };
 
@@ -28,7 +27,6 @@ function normalizeCategory( category ) {
 }
 
 export function categories( state = initialState, action ) {
-	let freshCount = 0;
 	let feedCategories;
 	let specialIdx;
 
@@ -43,14 +41,12 @@ export function categories( state = initialState, action ) {
 			specialIdx     = findIndex( feedCategories, { id: -1 });
 
 			if ( 0 < specialIdx ) {
-				freshCount = parseInt( feedCategories[ specialIdx ].unread, 10 );
 				feedCategories.splice( 0, 0, feedCategories.splice( specialIdx, 1 )[ 0 ] );
 			}
 
 			return Object.assign({}, state, {
 				items:      feedCategories,
-				isFetching: false,
-				freshCount
+				isFetching: false
 			});
 
 		case LOGOUT:
