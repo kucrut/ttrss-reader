@@ -61,5 +61,5 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 	],
-	postcss: sharedConfig.postCSS
+	postcss: sharedConfig.postcss
 };
