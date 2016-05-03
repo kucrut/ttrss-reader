@@ -1,0 +1,95 @@
+@value bar-height from '../common/variables.css';
+@value border-color from '../common/variables.css';
+@value sidebar-max-width from '../common/variables.css';
+@value max-content-width from '../common/variables.css';
+
+.head {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: bar-height;
+	line-height: bar-height;
+	border-bottom: 1px solid border-color;
+	overflow: hidden;
+	background: #f0f0f0;
+
+	a,
+	.menu-toggle {
+		font-size: 1.5em;
+	}
+
+	.title {
+		font-size: inherit;
+		vertical-align: middle;
+
+		&::before {
+			margin-right: .25em;
+		}
+	}
+
+	.menu-toggle {
+		margin-right: .5em;
+		float: left;
+	}
+
+	.feed-title {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: ( sidebar-max-width - 6px );
+		max-width: 70vw;
+		padding-left: 1.25em;
+
+		h2 {
+			margin: 0;
+			font-size: 1.125em;
+		}
+
+		i {
+			display: none;
+		}
+	}
+
+	.actions {
+		position: relative;
+		float: right;
+		text-align: right;
+		padding-right: 1.25em;
+
+		a {
+			margin-left: .5em;
+			margin-right: 0;
+
+			&.disabled {
+				color: #dfdfdf;
+				cursor: default;
+			}
+
+			&:before {
+				width: .8335em;
+			}
+		}
+	}
+}
+
+@media (min-width: 1020px) {
+	.head {
+		.menu-toggle {
+			display: none;
+		}
+		.actions {
+			float: none;
+			margin-left: sidebar-max-width;
+			max-width: max-content-width;
+			padding: 0;
+			left: 1.25em;
+		}
+
+		.feed-title i {
+			display: inline-block;
+			margin-right: .5em;
+		}
+	}
+}

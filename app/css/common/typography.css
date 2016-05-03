@@ -19,12 +19,6 @@ a {
 	text-decoration: none;
 }
 
-.text-truncate {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 pre {
 	padding: 10px;
 	background: #fafafa;

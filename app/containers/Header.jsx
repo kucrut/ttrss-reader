@@ -2,8 +2,16 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { toggleSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
+import classNames from 'classnames/bind';
 import FeedActions from 'components/FeedActions';
 import ArticleActions from 'components/ArticleActions';
+
+const styles = {};
+import stlFa from 'css/common/fa';
+import stlElements from 'css/common/elements';
+import stlHeader from 'css/containers/header';
+Object.assign( styles, stlElements, stlFa, stlHeader );
+const cx = classNames.bind( styles );
 
 
 class Header extends React.Component {
@@ -31,6 +39,8 @@ class Header extends React.Component {
 
 	renderFeedTitle() {
 		const { feed } = this.props;
+		const clsTextTruncate = cx( 'text-truncate' );
+		const clsHeadLink = cx( ['title', 'fa-rss'] );
 		let title;
 
 		if ( feed.is_cat ) {
@@ -44,8 +54,8 @@ class Header extends React.Component {
 		}
 
 		return (
-			<h2 className="text-truncate">
-				<a className="fa-rss title" onClick={ this.handleClickTitle }>{ title }</a>
+			<h2 className={ clsTextTruncate }>
+				<a className={ clsHeadLink } onClick={ this.handleClickTitle }>{ title }</a>
 			</h2>
 		);
 	}
@@ -65,10 +75,14 @@ class Header extends React.Component {
 	}
 
 	render() {
+		const clsHead = cx( 'head' );
+		const clsFeedTitle = cx( 'feed-title' );
+		const clsFeedTitleLink = cx( ['menu-toggle', 'fa-menu'] );
+
 		return (
-			<div className="head">
-				<div className="feed-title">
-					<a onClick={ this.handleClickMenu } title="Show menu" className="menu-toggle fa-menu" />
+			<div className={ clsHead }>
+				<div className={ clsFeedTitle }>
+					<a onClick={ this.handleClickMenu } title="Show menu" className={ clsFeedTitleLink } />
 					{ this.renderFeedTitle() }
 				</div>
 
