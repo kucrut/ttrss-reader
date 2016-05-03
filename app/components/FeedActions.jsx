@@ -58,6 +58,7 @@ export default class FeedActions extends React.Component {
 		const { items, isFetching } = this.props.articles;
 		const unread = filter( items, { unread: true });
 		const clsIcon = cx({
+			fa:         true,
 			'fa-ok':    true,
 			'disabled': ( isFetching || ! unread.length )
 		});
@@ -70,6 +71,7 @@ export default class FeedActions extends React.Component {
 	renderRefresh() {
 		const { isFetching } = this.props.articles;
 		const clsIcon = cx({
+			fa:             true,
 			'fa-arrows-cw': true,
 			disabled:       isFetching
 		});
@@ -84,6 +86,7 @@ export default class FeedActions extends React.Component {
 		const { isFetching, items } = articles;
 		const title = dateReverse ? 'Oldest First' : 'Newest First';
 		const clsIcon = cx({
+			fa:                 true,
 			'fa-sort-alt-up':   dateReverse,
 			'fa-sort-alt-down': ! dateReverse,
 			disabled:           ( isFetching || ! items.length )

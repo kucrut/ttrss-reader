@@ -42,6 +42,7 @@ class CategoryItem extends Component {
 
 		let itemClass = cx({ 'is-open': isOpen });
 		let iconClass = cx({
+			fa:                     true,
 			'fa-folder':            ( 0 < category.unread && ! isOpen ),
 			'fa-folder-open':       ( 0 < category.unread && isOpen ),
 			'fa-folder-empty':      ( 0 === category.unread && ! isOpen ),

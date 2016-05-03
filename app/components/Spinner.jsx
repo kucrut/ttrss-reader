@@ -7,7 +7,7 @@ const styles = Object.assign({}, stlFa, stlElements );
 const cx = classNames.bind( styles );
 
 export default function Spinner() {
-	const clsIcon = cx( ['fa-spinner', 'animate-spin'] );
+	const clsIcon = cx( ['fa', 'fa-spinner', 'animate-spin'] );
 
 	return (
 		<i className={ clsIcon } />

@@ -48,7 +48,7 @@ class FeedItem extends React.Component {
 	render() {
 		const { feed, current } = this.props;
 		const isSelected = feed.id === current.id;
-		const clsIcon = cx( 'fa-rss-squared' );
+		const clsIcon = cx( ['fa', 'fa-rss-squared'] );
 		const clsName = cx( ['name', 'text-truncate'] );
 		const clsLink = cx({ current: isSelected });
 

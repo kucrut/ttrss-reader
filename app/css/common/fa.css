@@ -15,10 +15,7 @@
 }
 */
 
-[class^="fa-"]:before,
-[class*=" fa-"]:before,
-[class^="fa__"]:before,
-[class*=" fa__"]:before {
+.fa:before {
   font-family: "fa";
   font-style: normal;
   font-weight: normal;

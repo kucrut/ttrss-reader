@@ -7,8 +7,9 @@ import { openSubscriptionForm } from 'actions/subscription';
 import { requestLogout } from 'actions/session';
 
 import stlFa from 'css/common/fa';
+import stlElements from 'css/common/elements';
 import stlActions from 'css/components/sidebar-actions';
-const styles = Object.assign({}, stlFa, stlActions );
+const styles = Object.assign({}, stlFa, stlElements, stlActions );
 const cx = classNames.bind( styles );
 
 class SidebarActions extends React.Component {
@@ -44,9 +45,14 @@ class SidebarActions extends React.Component {
 
 	render() {
 		const { isRefreshing } = this.props;
-		const clsRefresh = cx({
-			'fa-arrows-cw':            ! isRefreshing,
-			'fa-spinner animate-spin': isRefreshing
+		const clsSubscribe     = cx( ['fa', 'fa-eye'] );
+		const clsSettings      = cx( ['fa', 'fa-cog'] );
+		const clsLogout        = cx( ['fa', 'fa-logout'] );
+		const clsRefresh       = cx({
+			fa:             true,
+			'fa-spinner':   isRefreshing,
+			'animate-spin': isRefreshing,
+			'fa-arrows-cw': ! isRefreshing
 		});
 
 		return (
@@ -56,17 +62,17 @@ class SidebarActions extends React.Component {
 				</a>
 				<a
 					onClick={ this.handleClickSubscribe }
-					className={ styles[ 'fa-eye' ] }
+					className={ clsSubscribe }
 					title="Subscribe to feed"
 				/>
 				<a
 					onClick={ this.handleClickSettings }
-					className={ styles[ 'fa-cog' ] }
+					className={ clsSettings }
 					title="Settings"
 				/>
 				<a
 					onClick={ this.handleClickLogout }
-					className={ styles[ 'fa-logout' ] }
+					className={ clsLogout }
 					title="Logout"
 				/>
 			</div>

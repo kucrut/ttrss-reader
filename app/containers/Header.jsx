@@ -40,7 +40,7 @@ class Header extends React.Component {
 	renderFeedTitle() {
 		const { feed } = this.props;
 		const clsTextTruncate = cx( 'text-truncate' );
-		const clsHeadLink = cx( ['title', 'fa-rss'] );
+		const clsHeadLink = cx( ['title', 'fa', 'fa-rss'] );
 		let title;
 
 		if ( feed.is_cat ) {
@@ -77,7 +77,7 @@ class Header extends React.Component {
 	render() {
 		const clsHead = cx( 'head' );
 		const clsFeedTitle = cx( 'feed-title' );
-		const clsFeedTitleLink = cx( ['menu-toggle', 'fa-menu'] );
+		const clsFeedTitleLink = cx( ['menu-toggle', 'fa', 'fa-menu'] );
 
 		return (
 			<div className={ clsHead }>
