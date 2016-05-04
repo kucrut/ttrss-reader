@@ -1,12 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames/bind';
 import { updateArticle } from 'actions/articles';
-
-import stlFa from 'css/common/fa';
-import stlHeader from 'css/containers/header';
-const styles = Object.assign({}, stlFa, stlHeader );
-const cx = classNames.bind( styles );
+import IconLink from 'components/IconLink';
+import styles from 'css/containers/header';
 
 
 class ArticleActions extends React.Component {
@@ -63,23 +59,14 @@ class ArticleActions extends React.Component {
 		const { unread, marked } = this.state;
 
 		const starTitle = marked ? 'Unstar' : 'Star';
-		const starIcon  = cx({
-			fa:              true,
-			'fa-star':       marked,
-			'fa-star-empty': ! marked
-		});
-
+		const starIcon  = marked ? 'star' : 'star-empty';
+		const readIcon  = unread ? 'check-empty' : 'check';
 		const readTitle = unread ? 'Mark as read' : 'Mark as unread';
-		const readIcon  = cx({
-			fa:               true,
-			'fa-check-empty': unread,
-			'fa-check':       ! unread
-		});
 
 		return (
-			<div className={ stlHeader.actions }>
-				<a onClick={ this.toggleRead } title={ readTitle } className={ readIcon } />
-				<a onClick={ this.toggleMarked } title={ starTitle } className={ starIcon } />
+			<div className={ styles.actions }>
+				<IconLink title={ readTitle } type={ readIcon } handler={ this.toggleRead } />
+				<IconLink title={ starTitle } type={ starIcon } handler={ this.toggleMarked } />
 			</div>
 		);
 	}
