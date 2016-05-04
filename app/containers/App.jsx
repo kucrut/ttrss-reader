@@ -13,7 +13,7 @@ import Header from 'containers/Header';
 import Sidebar from 'containers/Sidebar';
 import Main from 'containers/Main';
 import Alert from 'components/Alert';
-import Spinner from 'components/Spinner';
+import MainSpinner from 'components/MainSpinner';
 import Helmet from 'react-helmet';
 import styles from 'css/common/layout';
 
@@ -76,14 +76,6 @@ class App extends React.Component {
 		this.updateCounts();
 	}
 
-	renderSpinner() {
-		const clsMainInit = cx( 'main-init' );
-
-		return (
-			<div className={ clsMainInit }><Spinner /></div>
-		);
-	}
-
 	render() {
 		const { dispatch, session, isEditingSettings, isSubscribing, unreadCount } = this.props;
 		const { isChecked, isAsking, url, sid } = session;
@@ -126,7 +118,7 @@ class App extends React.Component {
 			}
 		} else {
 			if ( ! isChecked ) {
-				content = this.renderSpinner();
+				content = ( <MainSpinner /> );
 			} else {
 				content = (
 					<div className="whole-wrap">
