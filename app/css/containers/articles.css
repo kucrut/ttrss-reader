@@ -1,0 +1,11 @@
+@import 'common/variables';
+
+.articles {
+	article {
+		border-bottom: 1px solid $border-color;
+	}
+
+	.is-read .article-title a {
+		color: #6a6a6a;
+	}
+}
