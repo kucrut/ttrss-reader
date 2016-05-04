@@ -5,7 +5,7 @@ import styles from 'css/common/layout';
 
 export default function MainSpinner() {
 	return (
-		<div className={ styles[ 'main-init' ] }>
+		<div className={ styles.mainInit }>
 			<Icon type="spinner" spin={ true } />
 		</div>
 	);

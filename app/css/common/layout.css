@@ -11,7 +11,7 @@
 	overflow: hidden;
 }
 
-.main-init {
+.mainInit {
 	text-align: center;
 	height: 100%;
 	line-height: calc( 100vh - 80px );
