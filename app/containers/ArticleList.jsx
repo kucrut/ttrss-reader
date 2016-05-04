@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { fetchFeedArticles } from 'actions/articles';
 import { setArticleListPosition } from 'actions/ui';
-import Spinner from 'components/Spinner';
 import Article from 'components/Article';
 import FeedActions from 'components/FeedActions';
 import NothingFound from 'components/NothingFound';
 import LoadMoreButton from 'components/LoadMoreButton';
+import MainSpinner from 'components/MainSpinner';
 
 import stlLayout from 'css/common/layout';
 import stlArticles from 'css/containers/articles';
@@ -83,14 +83,6 @@ class ArticleList extends React.Component {
 		);
 	}
 
-	renderSpinner() {
-		const clsMain = cx( 'main-init' );
-
-		return (
-			<div className={ clsMain }><Spinner /></div>
-		);
-	}
-
 	renderFeedActions() {
 		let actions;
 
@@ -110,7 +102,7 @@ class ArticleList extends React.Component {
 			content = this.renderList();
 		} else {
 			if ( isFetching ) {
-				content = this.renderSpinner();
+				content = ( <MainSpinner /> );
 			} else {
 				content = ( <NothingFound /> );
 			}
