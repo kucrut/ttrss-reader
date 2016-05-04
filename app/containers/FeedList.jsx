@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { fetchFeeds } from 'actions/feeds';
 import FeedItem from 'components/FeedItem';
-import Spinner from 'components/Spinner';
+import Icon from 'components/Icon';
 
 import styles from 'css/containers/feed-list';
 const cx = classNames.bind( styles );
@@ -34,7 +34,9 @@ class FeedList extends React.Component {
 
 	renderSpinner() {
 		return (
-			<li className={ styles.placeholder }><Spinner /> Loading Feeds</li>
+			<li className={ styles.placeholder }>
+				<Icon type="spinner" spin={ true } /> Loading Feeds
+			</li>
 		);
 	}
 

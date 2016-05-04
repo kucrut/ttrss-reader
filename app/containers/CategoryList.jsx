@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { categoriesShape } from 'reducers/categories';
 import { getCategories } from 'actions/categories';
 import CategoryItem from 'components/CategoryItem';
-import Spinner from 'components/Spinner';
+import Icon from 'components/Icon';
 import styles from 'css/containers/category-list';
 
 
@@ -19,7 +19,9 @@ class CategoryList extends React.Component {
 
 	renderSpinner() {
 		return (
-			<li className={ styles.placeholder }><Spinner /> Loading Categories</li>
+			<li className={ styles.placeholder }>
+				<Icon type="spinner" spin={ true } /> Loading Categories
+			</li>
 		);
 	}
 
