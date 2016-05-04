@@ -3,7 +3,7 @@
 @import 'common/base';
 @import 'common/typography';
 
-.whole-wrap {
+.wholeWrap {
 	position: relative;
 	height: 100vh;
 	max-height: 100vh;

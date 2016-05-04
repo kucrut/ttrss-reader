@@ -17,8 +17,6 @@ import MainSpinner from 'components/MainSpinner';
 import Helmet from 'react-helmet';
 import styles from 'css/common/layout';
 
-const cx = classNames.bind( styles );
-
 class App extends React.Component {
 	static propTypes = {
 		session:           PropTypes.shape( sessionShape ).isRequired,
@@ -79,7 +77,6 @@ class App extends React.Component {
 	render() {
 		const { dispatch, session, isEditingSettings, isSubscribing, unreadCount } = this.props;
 		const { isChecked, isAsking, url, sid } = session;
-		const clsWholeWrap = cx( 'whole-wrap' );
 
 		let title = 'Tiny Tiny RSS Reader';
 		let content;
@@ -87,7 +84,7 @@ class App extends React.Component {
 		if ( url && sid ) {
 			if ( isEditingSettings ) {
 				content = (
-					<div className={ clsWholeWrap }>
+					<div className={ styles.wholeWrap }>
 						<Helmet title={ `Settings « ${title}` } />
 						<SettingsForm />
 					</div>
@@ -95,7 +92,7 @@ class App extends React.Component {
 			} else {
 				if ( isSubscribing ) {
 					content = (
-						<div className={ clsWholeWrap }>
+						<div className={ styles.wholeWrap }>
 							<Helmet title={ `Add Feed « ${title}` } />
 							<SubscribeForm />
 						</div>
@@ -106,7 +103,7 @@ class App extends React.Component {
 					}
 
 					content = (
-						<div className={ clsWholeWrap }>
+						<div className={ styles.wholeWrap }>
 							<Helmet title={ title } />
 							<Header />
 							<Sidebar />
@@ -121,7 +118,7 @@ class App extends React.Component {
 				content = ( <MainSpinner /> );
 			} else {
 				content = (
-					<div className="whole-wrap">
+					<div className={ styles.wholeWrap }>
 						<Helmet title={ `Login « ${title}` } />
 						<LoginForm dispatch={ dispatch } isAsking={ isAsking } />
 						<Alert />

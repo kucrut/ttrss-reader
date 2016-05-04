@@ -4,7 +4,7 @@
 	width: 95%;
 	max-width: 360px;
 	padding: 1.25em;
-	margin: calc( $bar-height / 2 ) auto 0;
+	margin: calc( $bar-height / -2 ) auto 0;
 	border: 1px solid $border-color;
 	border-radius: 3px;
 	background: #fdfdfd;
