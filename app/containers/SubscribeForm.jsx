@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getAllCategories } from 'actions/categories';
 import { subscribeToFeed, closeSubscriptionForm } from 'actions/subscription';
+import Icon from 'components/Icon';
 
 
 class SubscribeForm extends React.Component {
@@ -138,7 +139,7 @@ class SubscribeForm extends React.Component {
 		if ( allCategories.isFetching ) {
 			element = (
 				<label className="iwrap">
-					<i className="fa-spinner animate-spin" /> Loading Categories
+					<Icon type="spinner" spin={ true } /> Loading Categories
 				</label>
 			);
 		} else {
@@ -157,22 +158,18 @@ class SubscribeForm extends React.Component {
 	renderButton() {
 		const { url }           = this.state;
 		const { isSubscribing } = this.props.subscription;
-		const classes = isSubscribing ? 'fa-spinner animate-spin' : 'fa-eye';
-
-		let attrs   = {};
-		if ( ! url || isSubscribing ) {
-			attrs = { disabled: 'disabled' };
-		}
+		const iconAttrs = isSubscribing ? { type: 'spinner', spin: true } : { type: 'eye' };
+		const btnAttrs  = ( ! url || isSubscribing ) ? { disabled: 'disabled' } : {};
 
 		return (
-			<button type="submit" { ...attrs }><i className={ classes } /> Subscribe</button>
+			<button type="submit" { ...btnAttrs }><Icon { ...iconAttrs } /> Subscribe</button>
 		);
 	}
 
 	render() {
 		return (
 			<form className="login-form" onSubmit={ this.submitForm }>
-				<h1><i className="fa-rss" /> Subscribe to Feed</h1>
+				<h1><Icon type="rss" /> Subscribe to Feed</h1>
 				{ this.renderMessage() }
 				<div className="form-row">
 					<label htmlFor="s-url">Feed URL</label>
