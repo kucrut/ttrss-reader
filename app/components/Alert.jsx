@@ -1,7 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames/bind';
 import { logsShape } from 'reducers/log';
 import { removeLog } from 'actions/log';
+import styles from 'css/components/alert';
+
+const cx = classNames.bind( styles );
 
 
 class Alert extends React.Component {
@@ -21,18 +25,21 @@ class Alert extends React.Component {
 
 	render() {
 		const { item } = this.props.logs;
-		let message   = '';
-		let className = 'alert-error';
+		let cls;
+		let msg;
 
 		if ( item.message ) {
-			message    = item.message;
-			className += ' is-visible';
+			cls = cx( ['alertError', 'isVisible'] );
+			msg = item.message;
+		} else {
+			cls = cx( 'alertError' );
+			msg = '';
 		}
 
 		return (
-			<div className={ className } onClick={ this.handleClick }>
-				<div className="inside">
-					<p>{ message }</p>
+			<div className={ cls } onClick={ this.handleClick }>
+				<div className={ styles.inside }>
+					<p>{ msg }</p>
 				</div>
 			</div>
 		);

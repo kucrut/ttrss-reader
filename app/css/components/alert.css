@@ -1,0 +1,32 @@
+.alertError {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	display: none;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+	background: rgba( 0, 0, 0, .7 );
+
+	&.isVisible {
+		display: block;
+		z-index: 9;
+	}
+
+	.inside {
+		margin-top: 1.25em;
+		display: inline-block;
+		background: #fff1f0;
+		color: #d85030;
+		padding: .5em .75em;
+		border: 1px solid rgba(216, 80, 48, .3);
+		border-radius: 3px;
+		font-size: .75em;
+	}
+
+	p {
+		margin: 0;
+	}
+}
