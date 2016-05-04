@@ -4,11 +4,11 @@ import classNames from 'classnames/bind';
 import { selectFeed } from 'actions/feeds';
 import { hideSidebar } from 'actions/ui';
 import { getCount } from 'helpers';
+import Icon from 'components/Icon';
 
-import stlFa from 'css/common/fa';
 import stlElements from 'css/common/elements';
 import stlCategoryList from 'css/containers/category-list';
-const styles = Object.assign({}, stlFa, stlCategoryList, stlElements );
+const styles = Object.assign({}, stlCategoryList, stlElements );
 const cx = classNames.bind( styles );
 
 class FeedItem extends React.Component {
@@ -48,14 +48,13 @@ class FeedItem extends React.Component {
 	render() {
 		const { feed, current } = this.props;
 		const isSelected = feed.id === current.id;
-		const clsIcon = cx( ['fa', 'fa-rss-squared'] );
 		const clsName = cx( ['name', 'text-truncate'] );
 		const clsLink = cx({ current: isSelected });
 
 		return (
 			<li>
 				<a onClick={ this.handleClick } className={ clsLink }>
-					<i className={ clsIcon } />
+					<Icon type="rss-squared" />
 					<span className={ clsName }>{ feed.title }</span>
 					{ this.renderCount() }
 				</a>
