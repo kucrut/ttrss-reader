@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { requestLogin } from 'actions/session';
+import Icon from 'components/Icon';
+import styles from 'css/containers/form';
 
 
 export default class LoginForm extends React.Component {
@@ -33,18 +35,19 @@ export default class LoginForm extends React.Component {
 	}
 
 	renderButton() {
-		let iconClass;
-		let attrs = {};
+		let btnAttrs;
+		let iconAttrs;
 
 		if ( this.props.isAsking ) {
-			attrs     = { disabled: 'disabled' };
-			iconClass = 'fa-spinner animate-spin';
+			btnAttrs  = { disabled: 'disabled' };
+			iconAttrs = { type: 'spinner', spin: true };
 		} else {
-			iconClass = 'fa-login';
+			btnAttrs  = {};
+			iconAttrs = { type: 'login' };
 		}
 
 		return (
-			<button { ...attrs }><i className={ iconClass } /> Login</button>
+			<button { ...btnAttrs }><Icon { ...iconAttrs } /> Login</button>
 		);
 	}
 
@@ -52,9 +55,10 @@ export default class LoginForm extends React.Component {
 		const { user, password, url } = this.state;
 
 		return (
-			<form className="login-form" onSubmit={ this.submitForm }>
-				<h1><i className="fa-rss" /> Tiny Tiny RSS Reader</h1>
-				<div className="form-row">
+			<form className={ styles.form } onSubmit={ this.submitForm }>
+				<h1><Icon type="rss" /> Tiny Tiny RSS Reader</h1>
+
+				<div className={ styles.formRow }>
 					<label htmlFor="login-user">Username</label>
 					<input
 						id="login-user"
@@ -66,7 +70,7 @@ export default class LoginForm extends React.Component {
 						autoFocus
 					/>
 				</div>
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="login-password">Password</label>
 					<input
 						id="login-password"
@@ -77,7 +81,7 @@ export default class LoginForm extends React.Component {
 						required
 					/>
 				</div>
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="login-url">URL</label>
 					<input
 						id="login-url"
@@ -88,7 +92,7 @@ export default class LoginForm extends React.Component {
 						required
 					/>
 				</div>
-				<div className="form-row submit-row">
+				<div className={ styles.submitRow }>
 					{ this.renderButton() }
 				</div>
 			</form>
