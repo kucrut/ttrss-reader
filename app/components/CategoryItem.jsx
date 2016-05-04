@@ -1,11 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames/bind';
 import FeedList from 'containers/FeedList';
+import Icon from 'components/Icon';
 import { getCount } from 'helpers';
 
-import stlFa from 'css/common/fa';
-import stlCategoryList from 'css/containers/category-list';
-const styles = Object.assign({}, stlFa, stlCategoryList );
+import styles from 'css/containers/category-list';
 const cx = classNames.bind( styles );
 
 class CategoryItem extends Component {
@@ -39,20 +38,23 @@ class CategoryItem extends Component {
 	render() {
 		const { isOpen } = this.state;
 		const { category } = this.props;
+		const itemClass = cx({ 'is-open': isOpen });
+		let iconType;
 
-		let itemClass = cx({ 'is-open': isOpen });
-		let iconClass = cx({
-			fa:                     true,
-			'fa-folder':            ( 0 < category.unread && ! isOpen ),
-			'fa-folder-open':       ( 0 < category.unread && isOpen ),
-			'fa-folder-empty':      ( 0 === category.unread && ! isOpen ),
-			'fa-folder-open-empty': ( 0 === category.unread && isOpen )
-		});
+		if ( 0 < category.unread && ! isOpen ) {
+			iconType = 'folder';
+		} else if ( 0 < category.unread && isOpen ) {
+			iconType = 'folder-open';
+		} else if ( 0 === category.unread && ! isOpen ) {
+			iconType = 'folder-empty';
+		} else if ( 0 === category.unread && isOpen ) {
+			iconType = 'folder-open-empty';
+		}
 
 		return (
 			<li className={ itemClass } key={ category.id }>
 				<a onClick={ this.handleClick }>
-					<i className={ iconClass } />
+					<Icon type={ iconType } />
 					<span className={ styles.name }>{ category.title }</span>
 					{ this.renderCount() }
 				</a>
