@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { selectArticle } from 'actions/articles';
+import Icon from 'components/Icon';
+import styles from 'css/components/article-pagination';
 
 
 class ArticlePagination extends React.Component {
@@ -35,7 +37,7 @@ class ArticlePagination extends React.Component {
 
 		if ( 0 < articles.currentIndex ) {
 			element = (
-				<a onClick={ this.handleClickPrev }><i className="fa-angle-double-left" /> Previous</a>
+				<a onClick={ this.handleClickPrev }><Icon type="angle-double-left" /> Previous</a>
 			);
 		}
 
@@ -49,7 +51,7 @@ class ArticlePagination extends React.Component {
 
 		if ( ( currentIndex + 1 ) < items.length ) {
 			element = (
-				<a onClick={ this.handleClickNext }>Next <i className="fa-angle-double-right" /></a>
+				<a onClick={ this.handleClickNext }>Next <Icon type="angle-double-right" /></a>
 			);
 		}
 
@@ -58,10 +60,10 @@ class ArticlePagination extends React.Component {
 
 	render() {
 		return (
-			<nav className="article-pagination">
-				<span className="previous">{ this.maybeRenderPrevious() }</span>
-				<span className="index"><a onClick={ this.handleClickIndex }>Index</a></span>
-				<span className="next">{ this.maybeRenderNext() }</span>
+			<nav className={ styles.articlePagination }>
+				<span className={ styles.previous }>{ this.maybeRenderPrevious() }</span>
+				<span className={ styles.index }><a onClick={ this.handleClickIndex }>Index</a></span>
+				<span className={ styles.next }>{ this.maybeRenderNext() }</span>
 			</nav>
 		);
 	}

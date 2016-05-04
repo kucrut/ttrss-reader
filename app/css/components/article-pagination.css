@@ -1,0 +1,32 @@
+.articlePagination {
+	clear: both;
+	margin: 0;
+	padding: 1em 1.5em;
+	list-style: none;
+	font-size: .875em;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+
+	> span {
+		display: block;
+		width: 33%;
+	}
+
+	.index {
+		text-align: center;
+	}
+	.next {
+		text-align: right;
+	}
+}
