@@ -1,0 +1,80 @@
+@import 'common/variables';
+
+.form {
+	width: 95%;
+	max-width: 360px;
+	padding: 1.25em;
+	margin: calc( $bar-height / -2 ) auto 0;
+	border: 1px solid $border-color;
+	border-radius: 3px;
+	background: #fdfdfd;
+	position: relative;
+
+	.close {
+		position: absolute;
+		right: .5em;
+		top: .25em;
+	}
+
+	h1 {
+		text-align: center;
+		margin: 0 0 .5em;
+		font-size: 1.4em;
+	}
+
+	.message {
+		font-size: .875em;
+		font-style: italic;
+		text-align: center;
+	}
+
+	.formRow,
+	.submitRow {
+		overflow: hidden;
+		padding: .4em 2px;
+	}
+
+	.submitRow {
+		text-align: right;
+	}
+
+	label {
+		float: left;
+		width: 28%;
+		padding-top: .3em;
+	}
+
+	select,
+	input[type="text"],
+	input[type="password"],
+	input[type="number"],
+	input[type="url"],
+	label.iwrap {
+		background: none;
+		border: 1px solid $border-color;
+		border-radius: 3px;
+		float: right;
+		width: 70%;
+		padding: .25em .4em;
+	}
+
+	select {
+		padding: 0;
+		margin: .25em 0;
+	}
+
+	label.iwrap {
+		border: 0;
+		padding: .3em 0;
+		cursor: pointer;
+
+		::before {
+			vertical-align: baseline;
+			margin-right: .25em;
+		}
+	}
+
+	input[type="checkbox"] {
+		display: none;
+	}
+}

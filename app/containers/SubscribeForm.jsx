@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllCategories } from 'actions/categories';
 import { subscribeToFeed, closeSubscriptionForm } from 'actions/subscription';
 import Icon from 'components/Icon';
+import styles from 'css/containers/form';
 
 
 class SubscribeForm extends React.Component {
@@ -138,7 +139,7 @@ class SubscribeForm extends React.Component {
 
 		if ( allCategories.isFetching ) {
 			element = (
-				<label className="iwrap">
+				<label className={ styles.iwrap }>
 					<Icon type="spinner" spin={ true } /> Loading Categories
 				</label>
 			);
@@ -168,22 +169,25 @@ class SubscribeForm extends React.Component {
 
 	render() {
 		return (
-			<form className="login-form" onSubmit={ this.submitForm }>
+			<form className={ styles.form } onSubmit={ this.submitForm }>
 				<h1><Icon type="rss" /> Subscribe to Feed</h1>
 				{ this.renderMessage() }
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="s-url">Feed URL</label>
 					{ this.renderUrlField() }
 				</div>
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="s-category">Category</label>
 					{ this.renderCategories() }
 				</div>
-				<div className="form-row submit-row">
+				<div className={ styles.submitRow }>
 					{ this.renderButton() }
 				</div>
 
-				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose } />
+				<a className={ styles.close } title="Close" onClick={ this.handleClickClose }>
+					<Icon type="cancel" />
+					<span>Close</span>
+				</a>
 			</form>
 		);
 	}
