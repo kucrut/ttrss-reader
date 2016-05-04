@@ -4,6 +4,9 @@ import classNames from 'classnames';
 import { selectArticle, updateArticle } from 'actions/articles';
 import { getArticleDate } from 'helpers';
 import Swipeable from 'react-swipeable';
+import Icon from 'components/Icon';
+import listStyles from 'css/containers/articles';
+import styles from 'css/components/article';
 
 
 class Article extends React.Component {
@@ -110,7 +113,10 @@ class Article extends React.Component {
 
 		if ( ! isSingle && ( feed.is_cat || 0 > feed.id ) ) {
 			element = (
-				<p className="article-meta"><i className="fa-rss-squared" /> { article.feed_title }</p>
+				<p className={ styles.articleMeta }>
+					<Icon type="rss-squared" />
+					{ article.feed_title }
+				</p>
 			);
 		}
 
@@ -119,17 +125,18 @@ class Article extends React.Component {
 
 	renderTitle() {
 		const { article, isSingle } = this.props;
+		const clsTitle = classNames( [styles.articleTitle, listStyles.articleTitle] );
 		let title;
 
 		if ( isSingle ) {
 			title = (
-				<h1 className="article-title">
+				<h1 className={ clsTitle }>
 					<a href={ article.link } target="_blank">{ article.title }</a>
 				</h1>
 			);
 		} else {
 			title = (
-				<h2 className="article-title">
+				<h2 className={ clsTitle }>
 					<a onClick={ this.handleClickTitle }>{ article.title }</a>
 				</h2>
 			);
@@ -147,7 +154,7 @@ class Article extends React.Component {
 		}
 
 		return (
-			<p className="article-meta">{ meta }</p>
+			<p className={ styles.articleMeta }>{ meta }</p>
 		);
 	}
 
@@ -157,7 +164,7 @@ class Article extends React.Component {
 		if ( this.props.isSingle ) {
 			element = (
 				<div
-					className="article-content"
+					className={ styles.articleContent }
 					dangerouslySetInnerHTML={ this.getContent() }
 					onClick={ this.handleClickContent }
 				/>
@@ -168,14 +175,12 @@ class Article extends React.Component {
 	}
 
 	renderElement() {
-		const { unread } = this.props.article;
-
-		let articleClass = classNames({
-			'is-read': ! unread
+		const clsArticle = classNames({
+			[ listStyles.isRead ]: ! this.props.article.unread
 		});
 
 		return (
-			<article className={ articleClass } style={ this.state.style }>
+			<article className={ clsArticle } style={ this.state.style }>
 				<header>
 					{ this.renderTitle() }
 					{ this.renderFeedTitle() }
