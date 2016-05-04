@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames/bind';
 import { fetchFeedArticles } from 'actions/articles';
+import Icon from 'components/Icon';
 import Spinner from 'components/Spinner';
 
 import stlFa from 'css/common/fa';
@@ -43,13 +44,12 @@ class LoadMoreButton extends React.Component {
 	}
 
 	renderIcon() {
-		const clsIcon = cx( ['fa', 'fa-cw'] );
 		let element;
 
 		if ( this.props.articles.isFetching ) {
 			element = ( <Spinner /> );
 		} else {
-			element = ( <i className={ clsIcon } /> );
+			element = ( <Icon type="cw" /> );
 		}
 
 		return element;
