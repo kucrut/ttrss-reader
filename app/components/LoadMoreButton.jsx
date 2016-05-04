@@ -3,12 +3,7 @@ import _ from 'lodash';
 import classNames from 'classnames/bind';
 import { fetchFeedArticles } from 'actions/articles';
 import Icon from 'components/Icon';
-import Spinner from 'components/Spinner';
-
-import stlFa from 'css/common/fa';
-import stlElements from 'css/common/elements';
-import stlButton from 'css/components/load-more-button';
-const cx = classNames.bind( Object.assign({}, stlFa, stlButton ) );
+import styles from 'css/components/load-more-button';
 
 
 class LoadMoreButton extends React.Component {
@@ -44,20 +39,22 @@ class LoadMoreButton extends React.Component {
 	}
 
 	renderIcon() {
-		let element;
+		let attrs;
 
 		if ( this.props.articles.isFetching ) {
-			element = ( <Spinner /> );
+			attrs = {
+				type: 'spinner',
+				spin: true
+			};
 		} else {
-			element = ( <Icon type="cw" /> );
+			attrs = { type: 'cw' };
 		}
 
-		return element;
+		return ( <Icon {...attrs} /> );
 	}
 
 	render() {
-		const icon    = this.renderIcon();
-		const clsWrap = cx( 'loadMoreWrap' );
+		const icon = this.renderIcon();
 		let attrs;
 
 		if ( this.props.articles.isFetching ) {
@@ -67,7 +64,7 @@ class LoadMoreButton extends React.Component {
 		}
 
 		return (
-			<p className={ clsWrap }>
+			<p className={ styles.loadMoreWrap }>
 				<button { ...attrs } onClick={ this.handleClick }>{ icon } Load More</button>
 			</p>
 		);
