@@ -1,0 +1,9 @@
+article {
+	position: relative;
+	padding: 1.25em;
+
+	> :last-child,
+	header > :last-child {
+		margin-bottom: 0
+	}
+}

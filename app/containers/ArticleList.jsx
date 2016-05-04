@@ -5,6 +5,7 @@ import { setArticleListPosition } from 'actions/ui';
 import Spinner from 'components/Spinner';
 import Article from 'components/Article';
 import FeedActions from 'components/FeedActions';
+import NothingFound from 'components/NothingFound';
 import LoadMoreButton from 'components/LoadMoreButton';
 
 
@@ -76,14 +77,6 @@ class ArticleList extends React.Component {
 		);
 	}
 
-	renderNoArticles() {
-		return (
-			<article className="nothing-found">
-				<p><em>No articles found.</em></p>
-			</article>
-		);
-	}
-
 	renderSpinner() {
 		return (
 			<div className="main-init"><Spinner /></div>
@@ -110,7 +103,7 @@ class ArticleList extends React.Component {
 			if ( isFetching ) {
 				content = this.renderSpinner();
 			} else {
-				content = this.renderNoArticles();
+				content = ( <NothingFound /> );
 			}
 		}
 
