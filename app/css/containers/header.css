@@ -13,7 +13,7 @@
 	background: #f0f0f0;
 
 	a,
-	.menu-toggle {
+	.menuToggle {
 		font-size: 1.5em;
 	}
 
@@ -26,12 +26,12 @@
 		}
 	}
 
-	.menu-toggle {
+	.menuToggle {
 		margin-right: .5em;
 		float: left;
 	}
 
-	.feed-title {
+	.feedTitle {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -73,7 +73,7 @@
 
 @media (min-width: 1020px) {
 	.head {
-		.menu-toggle {
+		.menuToggle {
 			display: none;
 		}
 		.actions {
@@ -84,7 +84,7 @@
 			left: 1.25em;
 		}
 
-		.feed-title i {
+		.feedTitle i {
 			display: inline-block;
 			margin-right: .5em;
 		}
