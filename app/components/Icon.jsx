@@ -6,7 +6,8 @@ import stlElements from 'css/common/elements';
 const styles = Object.assign({}, stlFa, stlElements );
 const cx = classNames.bind( styles );
 
-export default function Icon({ type, spin, text, extraClass }) {
+export default function Icon( props ) {
+	const { type, spin, tagName, text, extraClass } = props;
 	let classes = ['fa', `fa-${type}`];
 	if ( spin ) {
 		classes.push( 'animate-spin' );
@@ -18,7 +19,10 @@ export default function Icon({ type, spin, text, extraClass }) {
 
 	let element;
 	if ( text ) {
-		element = ( <span className={ cls }>{ text }</span> );
+		element = React.createElement( tagName || 'span', {
+			children:  text,
+			className: cls
+		});
 	} else {
 		element = ( <i className={ cls } /> );
 	}
@@ -29,6 +33,7 @@ export default function Icon({ type, spin, text, extraClass }) {
 Icon.propTypes = {
 	type:       PropTypes.string.isRequired,
 	spin:       PropTypes.bool,
+	tagName:    PropTypes.string,
 	text:       PropTypes.string,
 	extraClass: PropTypes.array
 };
