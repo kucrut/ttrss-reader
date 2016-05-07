@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { saveSettings, closeSettingsForm } from 'actions/settings';
+import Icon from 'components/Icon';
+import IconLink from 'components/IconLink';
+import styles from 'css/containers/form';
 
 
 class SettingsForm extends React.Component {
@@ -59,31 +62,31 @@ class SettingsForm extends React.Component {
 
 	render() {
 		const { unreadOnly, limit, interval, noPagination } = this.state;
-
-		let modeClass = '';
-		let modeAttrs = {};
+		let modeType;
+		let modeAttrs;
+		let noPaginationType;
+		let noPaginationAttrs;
 
 		if ( unreadOnly ) {
-			modeClass = 'fa-toggle-on';
+			modeType  = 'toggle-on';
 			modeAttrs = { checked: 'checked' };
 		} else {
-			modeClass = 'fa-toggle-off';
+			modeType  = 'toggle-off';
+			modeAttrs = {};
 		}
 
-		let noPaginationClass = '';
-		let noPaginationAttrs = {};
-
 		if ( noPagination ) {
-			noPaginationClass = 'fa-toggle-on';
+			noPaginationType = 'toggle-on';
 			noPaginationAttrs = { checked: 'checked' };
 		} else {
-			noPaginationClass = 'fa-toggle-off';
+			noPaginationType = 'toggle-off';
+			noPaginationAttrs = {};
 		}
 
 		return (
-			<form className="login-form" onSubmit={ this.submitForm }>
-				<h1><i className="fa-cog" /> Settings</h1>
-				<div className="form-row">
+			<form className={ styles.form } onSubmit={ this.submitForm }>
+				<h1><Icon type="cog" /> Settings</h1>
+				<div className={ styles.formRow }>
 					<label htmlFor="s-limit">Limit</label>
 					<input
 						id="s-limit"
@@ -96,7 +99,7 @@ class SettingsForm extends React.Component {
 						onChange={ this.handleChange }
 					/>
 				</div>
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="s-interval">Refresh Int.</label>
 					<input
 						id="s-interval"
@@ -107,13 +110,13 @@ class SettingsForm extends React.Component {
 						value={ interval }
 						onChange={ this.handleChange }
 					/>
-					<label htmlFor="s-interval" className="iwrap">
+					<label htmlFor="s-interval" className={ styles.iwrap }>
 						<small><em>Set to <code>0</code> to disable auto-refresh.</em></small>
 					</label>
 				</div>
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="s-mode">Mode</label>
-					<label className="iwrap">
+					<label className={ styles.iwrap }>
 						<input
 							id="s-mode"
 							type="checkbox"
@@ -122,12 +125,12 @@ class SettingsForm extends React.Component {
 							{ ...modeAttrs }
 							onChange={ this.handleChange }
 						/>
-						<span className={ modeClass }>Unread Only</span>
+						<Icon type={ modeType } text="Unread Only" />
 					</label>
 				</div>
-				<div className="form-row">
+				<div className={ styles.formRow }>
 					<label htmlFor="s-noPagination">Pagination</label>
-					<label className="iwrap">
+					<label className={ styles.iwrap }>
 						<input
 							id="s-noPagination"
 							type="checkbox"
@@ -136,14 +139,20 @@ class SettingsForm extends React.Component {
 							{ ...noPaginationAttrs }
 							onChange={ this.handleChange }
 						/>
-						<span className={ noPaginationClass }>Disabled</span>
+						<Icon type={ noPaginationType } text="Disabled" />
 					</label>
 				</div>
-				<div className="form-row submit-row">
-					<button type="submit"><i className="fa-cog-alt" /> Save</button>
+				<div className={ styles.submitRow }>
+					<button type="submit"><Icon type="cog-alt" text="Save" /></button>
 				</div>
 
-				<a className="fa-cancel close" title="Close" onClick={ this.handleClickClose } />
+				<IconLink
+					type="cancel"
+					text="Close"
+					title="Close Settings"
+					extraClass={ styles.close }
+					handler={ this.handleClickClose }
+				/>
 			</form>
 		);
 	}
