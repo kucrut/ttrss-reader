@@ -6,19 +6,29 @@ import stlElements from 'css/common/elements';
 const styles = Object.assign({}, stlFa, stlElements );
 const cx = classNames.bind( styles );
 
-export default function Icon({ type, spin }) {
-	const types = ['fa', `fa-${type}`];
+export default function Icon({ type, spin, text, extraClass }) {
+	let classes = ['fa', `fa-${type}`];
 	if ( spin ) {
-		types.push( 'animate-spin' );
+		classes.push( 'animate-spin' );
 	}
-	const cls = cx( types );
+	if ( extraClass ) {
+		classes = [].concat( classes );
+	}
+	const cls = cx( classes );
 
-	return (
-		<i className={ cls } />
-	);
+	let element;
+	if ( text ) {
+		element = ( <span className={ cls }>{ text }</span> );
+	} else {
+		element = ( <i className={ cls } /> );
+	}
+
+	return element;
 }
 
 Icon.propTypes = {
-	type: PropTypes.string.isRequired,
-	spin: PropTypes.bool
+	type:       PropTypes.string.isRequired,
+	spin:       PropTypes.bool,
+	text:       PropTypes.string,
+	extraClass: PropTypes.array
 };

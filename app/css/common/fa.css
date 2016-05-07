@@ -40,6 +40,9 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
+span.fa:before {
+	margin-right: .3125em;
+}
 
 .fa-search:before { content: '\e800'; } /* '' */
 .fa-star:before { content: '\e801'; } /* '' */
