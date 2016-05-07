@@ -85,7 +85,8 @@ class SettingsForm extends React.Component {
 
 		return (
 			<form className={ styles.form } onSubmit={ this.submitForm }>
-				<h1><Icon type="cog" /> Settings</h1>
+				<Icon tagName="h1" type="cog" text="Settings" />
+
 				<div className={ styles.formRow }>
 					<label htmlFor="s-limit">Limit</label>
 					<input
