@@ -9,15 +9,16 @@ const cx = classNames.bind( styles );
 export default function Icon( props ) {
 	const { type, spin, tagName, text, extraClass } = props;
 	let classes = ['fa', `fa-${type}`];
+	let element;
+
 	if ( spin ) {
 		classes.push( 'animate-spin' );
 	}
 	if ( extraClass ) {
-		classes = [].concat( classes );
+		classes = [].concat( classes, extraClass );
 	}
 	const cls = cx( classes );
 
-	let element;
 	if ( text ) {
 		element = React.createElement( tagName || 'span', {
 			children:  text,
