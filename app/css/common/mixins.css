@@ -18,7 +18,7 @@
  * $background-color: mix($foreground-color, white,  50%)
  */
 @define-mixin scrollbars $size, $foreground-color, $background-color {
-	// For Google Chrome
+	/* For Google Chrome */
 	&::-webkit-scrollbar {
 		width: $size;
 		height: 4rem;
@@ -45,7 +45,7 @@
 		background-color: transparent;
 	}
 
-	// For Internet Explorer
+	/* For Internet Explorer */
 	body {
 		scrollbar-face-color: $foreground-color;
 		scrollbar-track-color: $background-color;
