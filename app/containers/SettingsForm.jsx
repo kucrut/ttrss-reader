@@ -99,6 +99,9 @@ class SettingsForm extends React.Component {
 						value={ limit }
 						onChange={ this.handleChange }
 					/>
+					<label htmlFor="s-interval" className={ styles.iwrap }>
+						<small>Number of articles to fetch.</small>
+					</label>
 				</div>
 				<div className={ styles.formRow }>
 					<label htmlFor="s-interval">Refresh Int.</label>
@@ -112,7 +115,7 @@ class SettingsForm extends React.Component {
 						onChange={ this.handleChange }
 					/>
 					<label htmlFor="s-interval" className={ styles.iwrap }>
-						<small><em>Set to <code>0</code> to disable auto-refresh.</em></small>
+						<small>In minutes. <em>Set to <code>0</code> to disable auto-refresh.</em></small>
 					</label>
 				</div>
 				<div className={ styles.formRow }>
