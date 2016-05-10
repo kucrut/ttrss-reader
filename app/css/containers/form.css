@@ -1,11 +1,11 @@
-@import 'common/variables';
+@value bar-height, border-color from '../common/variables';
 
 .form {
 	width: 95%;
 	max-width: 360px;
 	padding: 1.25em;
-	margin: calc( $bar-height / -2 ) auto 0;
-	border: 1px solid $border-color;
+	margin: calc( bar-height / -2 ) auto 0;
+	border: 1px solid border-color;
 	border-radius: 3px;
 	background: #fdfdfd;
 	position: relative;
@@ -51,7 +51,7 @@
 	input[type="url"],
 	label.iwrap {
 		background: none;
-		border: 1px solid $border-color;
+		border: 1px solid border-color;
 		border-radius: 3px;
 		float: right;
 		width: 70%;

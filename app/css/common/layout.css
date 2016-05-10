@@ -1,13 +1,10 @@
-@import 'common/normalize';
-@import 'common/variables';
-@import 'common/base';
-@import 'common/typography';
+@value bar-height, light-grey, sidebar-max-width, max-content-width from './variables';
 
 .wholeWrap {
 	position: relative;
 	height: 100vh;
 	max-height: 100vh;
-	padding-top: $bar-height;
+	padding-top: bar-height;
 	overflow: hidden;
 }
 
@@ -19,7 +16,7 @@
 
 	> i {
 		font-size: 8em;
-		color: $light-grey;
+		color: light-grey;
 		vertical-align: middle;
 	}
 }
@@ -39,11 +36,11 @@
 
 @media (min-width: 1020px) {
 	.content {
-		margin-left: $sidebar-max-width;
+		margin-left: sidebar-max-width;
 		padding-left: 20px;
 
 		.inside {
-			max-width: $max-content-width;
+			max-width: max-content-width;
 		}
 	}
 }

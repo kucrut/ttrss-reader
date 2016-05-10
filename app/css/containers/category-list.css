@@ -1,4 +1,4 @@
-@import 'common/variables';
+@value orange from '../common/variables';
 
 .categoryList {
 	min-height: 100%;
@@ -44,7 +44,7 @@
 			}
 
 			i {
-				color: $orange;
+				color: orange;
 			}
 		}
 

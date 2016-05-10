@@ -1,7 +1,7 @@
-@import 'common/variables';
+@value white, border-color from '../common/variables';
 
 .sidebarActions {
-	background: $white;
+	background: white;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -30,6 +30,6 @@
 @media (min-width: 1020px) {
 	.sidebarActions {
 		background: #fafafa;
-		border-right: 1px solid $border-color;
+		border-right: 1px solid border-color;
 	}
 }

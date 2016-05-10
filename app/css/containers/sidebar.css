@@ -1,20 +1,20 @@
-@import 'common/variables';
 @import 'common/mixins';
+@value bar-height, border-color, sidebar-max-width, white, shadow-color from '../common/variables';
 
 .sidebar {
 	position: absolute;
 	z-index: 2;
-	top: $bar-height;
+	top: bar-height;
 	bottom: 0;
 	width: 100%;
-	max-width: $sidebar-max-width;
+	max-width: sidebar-max-width;
 	padding-top: 3em;
 	overflow: hidden;
 	transform: translate3d( -100%, 0, 0 );
 	transition: all .5s;
 
 	.inside {
-		background: $white;
+		background: white;
 		position: relative;
 		height: 100%;
 		overflow-y: scroll;
@@ -24,7 +24,7 @@
 
 	&.is-visible {
 		transform: translate3d( 0, 0, 0 );
-		box-shadow: 1px 2px 5px $shadow-color;
+		box-shadow: 1px 2px 5px shadow-color;
 	}
 
 	ul {
@@ -47,12 +47,12 @@
 
 @media (min-width: 1020px) {
 	.sidebar {
-		width: $sidebar-max-width;
+		width: sidebar-max-width;
 		transform: none;
 
 		.inside {
 			background: #fafafa;
-			border-right: 1px solid $border-color;
+			border-right: 1px solid border-color;
 		}
 
 		&.is-visible {
