@@ -8,6 +8,10 @@ article {
 	}
 }
 
+.isRead {
+	composes: isRead from '../containers/article-list';
+}
+
 .singleArticle {
 	header {
 		margin-bottom: 1.25em;
@@ -15,6 +19,7 @@ article {
 }
 
 .articleTitle {
+	composes: articleTitle from '../containers/article-list';
 	margin: 0;
 	font-size: 1.25em;
 }

@@ -5,7 +5,6 @@ import { selectArticle, updateArticle } from 'actions/articles';
 import { getArticleDate } from 'helpers';
 import Swipeable from 'react-swipeable';
 import Icon from 'components/Icon';
-import listStyles from 'css/containers/articles';
 import styles from 'css/components/article';
 
 
@@ -125,18 +124,17 @@ class Article extends React.Component {
 
 	renderTitle() {
 		const { article, isSingle } = this.props;
-		const clsTitle = classNames( [styles.articleTitle, listStyles.articleTitle] );
 		let title;
 
 		if ( isSingle ) {
 			title = (
-				<h1 className={ clsTitle }>
+				<h1 className={ styles.articleTitle }>
 					<a href={ article.link } target="_blank">{ article.title }</a>
 				</h1>
 			);
 		} else {
 			title = (
-				<h2 className={ clsTitle }>
+				<h2 className={ styles.articleTitle }>
 					<a onClick={ this.handleClickTitle }>{ article.title }</a>
 				</h2>
 			);
@@ -176,7 +174,7 @@ class Article extends React.Component {
 
 	renderElement() {
 		const clsArticle = classNames({
-			[ listStyles.isRead ]: ! this.props.article.unread
+			[ styles.isRead ]: ! this.props.article.unread
 		});
 
 		return (
