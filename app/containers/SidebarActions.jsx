@@ -7,7 +7,7 @@ import { openSubscriptionForm } from 'actions/subscription';
 import { requestLogout } from 'actions/session';
 import Icon from 'components/Icon';
 import IconLink from 'components/IconLink';
-import styles from 'css/components/sidebar-actions';
+import styles from 'css/containers/sidebar-actions';
 
 
 class SidebarActions extends React.Component {
