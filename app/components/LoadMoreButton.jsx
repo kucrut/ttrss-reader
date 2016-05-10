@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import _ from 'lodash';
-import classNames from 'classnames/bind';
+import { filter } from 'lodash';
 import { fetchFeedArticles } from 'actions/articles';
 import Icon from 'components/Icon';
 import styles from 'css/components/load-more-button';
@@ -28,7 +27,7 @@ class LoadMoreButton extends React.Component {
 		}
 
 		if ( unreadOnly && ! feed.is_cat ) {
-			skipNum = _.filter( articles.items, { unread: true }).length;
+			skipNum = filter( articles.items, { unread: true }).length;
 		} else {
 			skipNum = articles.items.length;
 		}
