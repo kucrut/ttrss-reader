@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames/bind';
 import { fetchFeedArticles } from 'actions/articles';
 import { setArticleListPosition } from 'actions/ui';
 import Article from 'components/Article';
@@ -8,10 +7,7 @@ import FeedActions from 'components/FeedActions';
 import NothingFound from 'components/NothingFound';
 import LoadMoreButton from 'components/LoadMoreButton';
 import MainSpinner from 'components/MainSpinner';
-
-import stlLayout from 'css/common/layout';
-import stlArticles from 'css/containers/articles';
-const cx = classNames.bind( Object.assign({}, stlLayout, stlArticles ) );
+import styles from 'css/containers/article-list';
 
 
 class ArticleList extends React.Component {
@@ -72,10 +68,9 @@ class ArticleList extends React.Component {
 
 	renderList() {
 		const { items } = this.props.articles;
-		const clsArticles = cx( 'articles' );
 
 		return (
-			<div className={ clsArticles }>
+			<div className={ styles.articles }>
 				{ items.map( article => (
 					<Article key={ article.id } article={ article } isSingle={ false } />
 				) ) }
@@ -95,7 +90,6 @@ class ArticleList extends React.Component {
 
 	render() {
 		const { isFetching, items } = this.props.articles;
-		const clsArticlesList = cx( 'inside' );
 		let content;
 
 		if ( items.length ) {
@@ -109,7 +103,7 @@ class ArticleList extends React.Component {
 		}
 
 		return (
-			<div className={ clsArticlesList }>
+			<div className={ styles.inside }>
 				{ content }
 				{ this.renderLoadMoreButton() }
 			</div>
