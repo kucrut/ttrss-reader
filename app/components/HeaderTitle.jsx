@@ -39,7 +39,7 @@ class HeaderTitle extends Component {
 		const title = this.props.feed.id ? this.renderFeedTitle() : this.renderAppTitle();
 
 		return (
-			<h2 className={ elementStyles[ 'text-truncate' ] }>{ title }</h2>
+			<h2 className={ elementStyles.textTruncate }>{ title }</h2>
 		);
 	}
 }

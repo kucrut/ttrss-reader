@@ -53,7 +53,7 @@
 }
 
 .name {
-	composes: text-truncate from '../common/elements';
+	composes: textTruncate from '../common/elements';
 	max-width: 80%;
 	display: inline-block;
 	vertical-align: middle;
