@@ -69,6 +69,8 @@ export default class FeedActions extends React.Component {
 	}
 
 	renderRefresh() {
+		const extraClass = this.props.articles.isFetching ? styles.disabled : '';
+
 		return (
 			<IconLink
 				type="arrows-cw"
@@ -76,7 +78,7 @@ export default class FeedActions extends React.Component {
 				title="Refresh"
 				handler={ this.handleClickRefresh }
 				hideText={ true }
-				disabled={ this.props.articles.isFetching }
+				extraClass={ extraClass }
 			/>
 		);
 	}
@@ -86,6 +88,7 @@ export default class FeedActions extends React.Component {
 		const { isFetching, items } = articles;
 		const iconType = dateReverse ? 'sort-alt-up' : 'sort-alt-down';
 		const title = dateReverse ? 'Show oldest articles first' : 'Sort newest articles first';
+		const extraClass = ( isFetching || ! items.length ) ? styles.disabled : '';
 
 		return (
 			<IconLink
@@ -94,7 +97,7 @@ export default class FeedActions extends React.Component {
 				title={ title }
 				handler={ this.handleClickSort }
 				hideText={ true }
-				disabled={ isFetching || ! items.length }
+				extraClass={ extraClass }
 			/>
 		);
 	}
