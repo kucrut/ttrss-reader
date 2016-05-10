@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { toggleSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
+import Icon from 'components/Icon';
 import IconLink from 'components/IconLink';
 import FeedActions from 'components/FeedActions';
 import ArticleActions from 'components/ArticleActions';
@@ -34,19 +35,20 @@ class Header extends React.Component {
 		this.props.dispatch( selectArticle( '' ) );
 	}
 
+	renderAppTitle() {
+		return (
+			<Icon
+				type="rss"
+				text="Tiny Tiny RSS Reader"
+				tagName="h2"
+				extraClass={ [styles[ 'text-truncate' ], styles.title] }
+			/>
+		);
+	}
+
 	renderFeedTitle() {
 		const { feed } = this.props;
-		let title;
-
-		if ( feed.is_cat ) {
-			title = feed.cat_title;
-		} else {
-			if ( feed.title ) {
-				title = feed.title;
-			} else {
-				title = 'Tiny Tiny RSS Reader';
-			}
-		}
+		const title = feed.is_cat ? feed.cat_title : feed.title;
 
 		return (
 			<h2 className={ styles[ 'text-truncate' ] }>
@@ -75,6 +77,8 @@ class Header extends React.Component {
 	}
 
 	render() {
+		const title = this.props.feed.id ? this.renderFeedTitle() : this.renderAppTitle();
+
 		return (
 			<div className={ styles.head }>
 				<div className={ styles.feedTitle }>
@@ -84,7 +88,7 @@ class Header extends React.Component {
 						handler={ this.handleClickMenu }
 						extraClass={ styles.menuToggle }
 					/>
-					{ this.renderFeedTitle() }
+					{ title }
 				</div>
 
 				{ this.renderActions() }
