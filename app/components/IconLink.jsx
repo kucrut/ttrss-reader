@@ -29,8 +29,8 @@ IconLink.propTypes = {
 	title:      PropTypes.string,
 	handler:    PropTypes.func,
 	hideText:   PropTypes.bool,
-	extraClass: PropTypes.oneOfType([
+	extraClass: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.arrayOf( PropTypes.string )
-	])
+	] )
 };
