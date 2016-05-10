@@ -26,7 +26,7 @@ class ArticleList extends React.Component {
 		if ( ! articles.items.length ) {
 			this.fetchArticles( feed );
 		} else {
-			if ( scrollPos.feedId === feed.id ) {
+			if ( mainContent && scrollPos.feedId === feed.id ) {
 				mainContent.scrollTop = scrollPos.top;
 			}
 		}
