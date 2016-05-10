@@ -51,7 +51,7 @@ class SidebarActions extends React.Component {
 		return (
 			<div className={ styles.sidebarActions }>
 				<a onClick={ this.handleClickRefresh } className={ styles.refresh }>
-					<Icon { ...refreshAttrs } /> Refresh
+					<Icon { ...refreshAttrs } />Refresh
 				</a>
 				<IconLink
 					type="eye"
