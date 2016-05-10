@@ -151,8 +151,9 @@ class SettingsForm extends React.Component {
 					type="cancel"
 					text="Close"
 					title="Close Settings"
-					extraClass={ styles.close }
 					handler={ this.handleClickClose }
+					extraClass={ styles.close }
+					hideText={ true }
 				/>
 			</form>
 		);
