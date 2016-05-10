@@ -4,10 +4,7 @@ import HeaderTitle from 'components/HeaderTitle';
 import MenuToggle from 'components/MenuToggle';
 import FeedActions from 'components/FeedActions';
 import ArticleActions from 'components/ArticleActions';
-
-import stlElements from 'css/common/elements';
-import stlHeader from 'css/containers/header';
-const styles = Object.assign({}, stlElements, stlHeader );
+import styles from 'css/containers/header';
 
 
 class Header extends React.Component {
