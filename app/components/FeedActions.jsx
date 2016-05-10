@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { filter, map } from 'lodash';
 import { updateSortOrder } from 'actions/settings';
 import { fetchFeedArticles, markArticlesRead } from 'actions/articles';
@@ -6,7 +7,7 @@ import IconLink from 'components/IconLink';
 import styles from 'css/containers/header';
 
 
-export default class FeedActions extends React.Component {
+class FeedActions extends React.Component {
 	static propTypes = {
 		feed:        PropTypes.object.isRequired,
 		articles:    PropTypes.object.isRequired,
@@ -112,3 +113,13 @@ export default class FeedActions extends React.Component {
 		);
 	}
 }
+
+function mapStateToProps( state ) {
+	return {
+		feed:        state.feeds.current,
+		articles:    state.articles,
+		dateReverse: state.settings.dateReverse
+	};
+}
+
+export default connect( mapStateToProps )( FeedActions );

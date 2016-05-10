@@ -25,7 +25,7 @@ class Header extends React.Component {
 		if ( currentId ) {
 			actions = ( <ArticleActions article={ items[ currentIndex ] } /> );
 		} else if ( feed.id ) {
-			actions = ( <FeedActions { ...this.props } /> );
+			actions = ( <FeedActions /> );
 		}
 
 		return actions;
