@@ -2,16 +2,13 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { toggleSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
-import classNames from 'classnames/bind';
 import IconLink from 'components/IconLink';
 import FeedActions from 'components/FeedActions';
 import ArticleActions from 'components/ArticleActions';
 
-const styles = {};
 import stlElements from 'css/common/elements';
 import stlHeader from 'css/containers/header';
-Object.assign( styles, stlElements, stlHeader );
-const cx = classNames.bind( styles );
+const styles = Object.assign({}, stlElements, stlHeader );
 
 
 class Header extends React.Component {
@@ -39,7 +36,6 @@ class Header extends React.Component {
 
 	renderFeedTitle() {
 		const { feed } = this.props;
-		const clsTextTruncate = cx( 'text-truncate' );
 		let title;
 
 		if ( feed.is_cat ) {
@@ -53,7 +49,7 @@ class Header extends React.Component {
 		}
 
 		return (
-			<h2 className={ clsTextTruncate }>
+			<h2 className={ styles[ 'text-truncate' ] }>
 				<IconLink
 					type="rss"
 					text={ title }
@@ -79,12 +75,9 @@ class Header extends React.Component {
 	}
 
 	render() {
-		const clsHead = cx( 'head' );
-		const clsFeedTitle = cx( 'feedTitle' );
-
 		return (
-			<div className={ clsHead }>
-				<div className={ clsFeedTitle }>
+			<div className={ styles.head }>
+				<div className={ styles.feedTitle }>
 					<IconLink
 						type="menu"
 						title="Show menu"
