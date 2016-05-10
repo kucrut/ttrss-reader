@@ -74,6 +74,46 @@ class App extends React.Component {
 		this.updateCounts();
 	}
 
+	renderApp( title ) {
+		return (
+			<div className={ styles.wholeWrap }>
+				<Helmet title={ title } />
+				<Header />
+				<Sidebar />
+				<Main />
+				<Alert />
+			</div>
+		);
+	}
+
+	renderLoginForm( title ) {
+		return (
+			<div className={ styles.wholeWrap }>
+				<Helmet title={ `Login « ${title}` } />
+				<LoginForm dispatch={ dispatch } isAsking={ isAsking } />
+				<Alert />
+			</div>
+		);
+	}
+
+	renderSettingsForm( title ) {
+		return (
+			<div className={ styles.wholeWrap }>
+				<Helmet title={ `Settings « ${title}` } />
+				<SettingsForm />
+			</div>
+		);
+	}
+
+	renderSubscribeForm( title ) {
+		return (
+			<div className={ styles.wholeWrap }>
+				<Helmet title={ `Add Feed « ${title}` } />
+				<SubscribeForm />
+			</div>
+		);
+	}
+
 	render() {
 		const { dispatch, session, isEditingSettings, isSubscribing, unreadCount } = this.props;
 		const { isChecked, isAsking, url, sid } = session;
@@ -82,48 +122,26 @@ class App extends React.Component {
 		let content;
 
 		if ( url && sid ) {
+			// We have a valid Session ID.
 			if ( isEditingSettings ) {
-				content = (
-					<div className={ styles.wholeWrap }>
-						<Helmet title={ `Settings « ${title}` } />
-						<SettingsForm />
-					</div>
-				);
+				content = this.renderSettingsForm( title );
 			} else {
 				if ( isSubscribing ) {
-					content = (
-						<div className={ styles.wholeWrap }>
-							<Helmet title={ `Add Feed « ${title}` } />
-							<SubscribeForm />
-						</div>
-					);
+					content = this.renderSubscribeForm( title );
 				} else {
 					if ( 0 < unreadCount ) {
 						title = `(${getCount( unreadCount )}) ${title}`;
 					}
 
-					content = (
-						<div className={ styles.wholeWrap }>
-							<Helmet title={ title } />
-							<Header />
-							<Sidebar />
-							<Main />
-							<Alert />
-						</div>
-					);
+					content = this.renderApp( title );
 				}
 			}
 		} else {
 			if ( ! isChecked ) {
+				// We're checking the last session.
 				content = ( <MainSpinner /> );
 			} else {
-				content = (
-					<div className={ styles.wholeWrap }>
-						<Helmet title={ `Login « ${title}` } />
-						<LoginForm dispatch={ dispatch } isAsking={ isAsking } />
-						<Alert />
-					</div>
-				);
+				content = this.renderLoginForm( title );
 			}
 		}
 
