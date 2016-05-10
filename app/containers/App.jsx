@@ -92,6 +92,8 @@ class App extends React.Component {
 	}
 
 	renderLoginForm( title ) {
+		const { session: { isAsking }, dispatch } = this.props;
+
 		return (
 			<div className={ styles.wholeWrap }>
 				<Helmet title={ `Login « ${title}` } />
@@ -120,8 +122,8 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { dispatch, session, isEditingSettings, isSubscribing, unreadCount } = this.props;
-		const { isChecked, isAsking, url, sid } = session;
+		const { session, isEditingSettings, isSubscribing, unreadCount } = this.props;
+		const { isChecked, url, sid } = session;
 
 		let title = 'Tiny Tiny RSS Reader';
 		let content;
