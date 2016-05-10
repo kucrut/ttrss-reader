@@ -2,7 +2,7 @@
 	padding: 0;
 	display: none;
 
-	&.is-open {
+	&.isOpen {
 		display: block;
 	}
 

@@ -1,11 +1,9 @@
 import React, { PropTypes, Component } from 'react';
-import classNames from 'classnames/bind';
 import FeedList from 'containers/FeedList';
 import Icon from 'components/Icon';
 import { getCount } from 'helpers';
-
 import styles from 'css/containers/category-list';
-const cx = classNames.bind( styles );
+
 
 class CategoryItem extends Component {
 	static propTypes = {
@@ -38,7 +36,7 @@ class CategoryItem extends Component {
 	render() {
 		const { isOpen } = this.state;
 		const { category } = this.props;
-		const itemClass = cx({ 'is-open': isOpen });
+		const clsItem = isOpen ? 'isOpen' : '';
 		let iconType;
 
 		if ( 0 < category.unread && ! isOpen ) {
@@ -52,7 +50,7 @@ class CategoryItem extends Component {
 		}
 
 		return (
-			<li className={ itemClass } key={ category.id }>
+			<li className={ clsItem } key={ category.id }>
 				<a onClick={ this.handleClick }>
 					<Icon type={ iconType } />
 					<span className={ styles.name }>{ category.title }</span>

@@ -8,6 +8,7 @@ import Icon from 'components/Icon';
 import styles from 'css/containers/feed-list';
 const cx = classNames.bind( styles );
 
+
 class FeedList extends React.Component {
 	static propTypes = {
 		category: PropTypes.object.isRequired,
@@ -59,8 +60,8 @@ class FeedList extends React.Component {
 	render() {
 		const { feeds, category, isOpen } = this.props;
 		const clsFeedList = cx({
-			feedList:  true,
-			'is-open': isOpen
+			feedList: true,
+			isOpen
 		});
 		const key = `c${category.id}`;
 		const items = feeds.groups[ key ];
