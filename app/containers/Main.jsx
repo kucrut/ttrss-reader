@@ -27,15 +27,12 @@ class Main extends Component {
 		this.handleClickPreviousNext = this.handleClickPreviousNext.bind( this );
 	}
 
-	handleClickPreviousNext( next = true ) {
-		const { articles, dispatch }  = this.props;
-		const { currentIndex, items } = articles;
-		const newIndex = next ? currentIndex + 1 : currentIndex - 1;
-		const article  = items[ newIndex ];
+	componentWillMount() {
+		this.maybeShowSidebar( this.props );
+	}
 
-		if ( article ) {
-			dispatch( selectArticle( article.id ) );
-		}
+	componentWillReceiveProps( nextProps ) {
+		this.maybeShowSidebar( nextProps );
 	}
 
 	getSingleArticle() {
@@ -55,20 +52,23 @@ class Main extends Component {
 		}
 	}
 
+	handleClickPreviousNext( next = true ) {
+		const { articles, dispatch }  = this.props;
+		const { currentIndex, items } = articles;
+		const newIndex = next ? currentIndex + 1 : currentIndex - 1;
+		const article  = items[ newIndex ];
+
+		if ( article ) {
+			dispatch( selectArticle( article.id ) );
+		}
+	}
+
 	handleClickMain() {
 		const { feeds, articles, dispatch } = this.props;
 
 		if ( feeds.current.id || articles.currentId ) {
 			dispatch( hideSidebar() );
 		}
-	}
-
-	componentWillReceiveProps( nextProps ) {
-		this.maybeShowSidebar( nextProps );
-	}
-
-	componentWillMount() {
-		this.maybeShowSidebar( this.props );
 	}
 
 	renderPagination() {
