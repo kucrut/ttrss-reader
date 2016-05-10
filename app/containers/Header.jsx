@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
-import IconLink from 'components/IconLink';
+import MenuToggle from 'components/MenuToggle';
 import FeedActions from 'components/FeedActions';
 import ArticleActions from 'components/ArticleActions';
 
@@ -21,13 +20,7 @@ class Header extends React.Component {
 
 	constructor( props ) {
 		super( props );
-
-		this.handleClickMenu = this.handleClickMenu.bind( this );
 		this.handleClickTitle = this.handleClickTitle.bind( this );
-	}
-
-	handleClickMenu() {
-		this.props.dispatch( toggleSidebar() );
 	}
 
 	handleClickTitle() {
@@ -69,12 +62,7 @@ class Header extends React.Component {
 		return (
 			<div className={ styles.head }>
 				<div className={ styles.feedTitle }>
-					<IconLink
-						type="menu"
-						title="Show menu"
-						handler={ this.handleClickMenu }
-						extraClass={ styles.menuToggle }
-					/>
+					<MenuToggle />
 					<h2 className={ styles[ 'text-truncate' ] }>{ title }</h2>
 				</div>
 
