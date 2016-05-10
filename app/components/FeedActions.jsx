@@ -62,6 +62,7 @@ export default class FeedActions extends React.Component {
 				text="Mark as read"
 				title="Mark all articles as read"
 				handler={ this.handleClickCheck }
+				hideText={ true }
 				extraClass={ clsIcon }
 			/>
 		);
@@ -70,10 +71,11 @@ export default class FeedActions extends React.Component {
 	renderRefresh() {
 		return (
 			<IconLink
-				type="ok"
+				type="arrows-cw"
 				text="Refresh"
 				title="Refresh"
 				handler={ this.handleClickRefresh }
+				hideText={ true }
 				disabled={ this.props.articles.isFetching }
 			/>
 		);
@@ -91,6 +93,7 @@ export default class FeedActions extends React.Component {
 				text="Sort Articles"
 				title={ title }
 				handler={ this.handleClickSort }
+				hideText={ true }
 				disabled={ isFetching || ! items.length }
 			/>
 		);
