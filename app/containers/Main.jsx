@@ -1,10 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import { showSidebar } from 'actions/ui';
+import { showSidebar, hideSidebar } from 'actions/ui';
 import { selectArticle } from 'actions/articles';
 import ArticleList from 'containers/ArticleList';
-import MenuToggle from 'mixins/MenuToggle';
 import MainIcon from 'components/MainIcon';
 import Article from 'components/Article';
 import ArticlePagination from 'components/ArticlePagination';
@@ -13,7 +12,7 @@ import styles from 'css/common/layout';
 const cx = classNames.bind( styles );
 
 
-class Main extends MenuToggle {
+class Main extends Component {
 	static propTypes = {
 		feeds:        PropTypes.object.isRequired,
 		articles:     PropTypes.object.isRequired,
@@ -24,8 +23,7 @@ class Main extends MenuToggle {
 	constructor( props ) {
 		super( props );
 
-		this.maybeHideSidebar = this.maybeHideSidebar.bind( this );
-		this.handleClickHide = this.handleClickHide.bind( this );
+		this.handleClickMain = this.handleClickMain.bind( this );
 		this.handleClickPreviousNext = this.handleClickPreviousNext.bind( this );
 	}
 
@@ -57,11 +55,11 @@ class Main extends MenuToggle {
 		}
 	}
 
-	maybeHideSidebar() {
-		const { feeds, articles } = this.props;
+	handleClickMain() {
+		const { feeds, articles, dispatch } = this.props;
 
 		if ( feeds.current.id || articles.currentId ) {
-			this.handleClickHide();
+			dispatch( hideSidebar() );
 		}
 	}
 
@@ -116,7 +114,7 @@ class Main extends MenuToggle {
 		}
 
 		return (
-			<main onClick={ this.maybeHideSidebar } className={ styles.content } ref="mainContent">
+			<main onClick={ this.handleClickMain } className={ styles.content } ref="mainContent">
 				{ content }
 			</main>
 		);
