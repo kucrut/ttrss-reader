@@ -12,18 +12,23 @@ const styles = Object.assign({}, stlElements, stlHeader );
 
 class Header extends React.Component {
 	static propTypes = {
-		feed:     PropTypes.object.isRequired,
-		articles: PropTypes.object.isRequired,
-		dispatch: PropTypes.func.isRequired
+		feedId: PropTypes.oneOfType( [
+			PropTypes.string,
+			PropTypes.number
+		] ).isRequired,
+		articleId: PropTypes.PropTypes.oneOfType( [
+			PropTypes.string,
+			PropTypes.number
+		] ).isRequired,
 	}
 
 	renderActions() {
-		const { feed, articles: { currentId } } = this.props;
+		const { feedId, articleId } = this.props;
 		let actions;
 
-		if ( currentId ) {
+		if ( articleId ) {
 			actions = ( <ArticleActions /> );
-		} else if ( feed.id ) {
+		} else if ( feedId ) {
 			actions = ( <FeedActions /> );
 		}
 
@@ -46,8 +51,8 @@ class Header extends React.Component {
 
 function mapStateToProps( state ) {
 	return {
-		feed:     state.feeds.current,
-		articles: state.articles
+		feedId:    state.feeds.current.id,
+		articleId: state.articles.currentId,
 	};
 }
 
