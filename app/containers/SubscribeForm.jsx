@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllCategories } from 'actions/categories';
 import { subscribeToFeed, closeSubscriptionForm } from 'actions/subscription';
 import Icon from 'components/Icon';
+import IconLink from 'components/IconLink';
 import styles from 'css/containers/form';
 
 
@@ -22,7 +23,7 @@ class SubscribeForm extends React.Component {
 			feeds:    []
 		};
 
-		this.submitForm = this.submitForm.bind( this );
+		this.handleSubmit = this.handleSubmit.bind( this );
 		this.handleChange = this.handleChange.bind( this );
 		this.handleClickClose = this.handleClickClose.bind( this );
 	}
@@ -84,7 +85,7 @@ class SubscribeForm extends React.Component {
 		this.props.dispatch( closeSubscriptionForm() );
 	}
 
-	submitForm( e ) {
+	handleSubmit( e ) {
 		const { url, category } = this.state;
 
 		e.preventDefault();
@@ -169,9 +170,11 @@ class SubscribeForm extends React.Component {
 
 	render() {
 		return (
-			<form className={ styles.form } onSubmit={ this.submitForm }>
-				<h1><Icon type="rss" /> Subscribe to Feed</h1>
+			<form className={ styles.form } onSubmit={ this.handleSubmit }>
+				<Icon type="rss" tagName="h1" text="Subscribe to Feed" />
+
 				{ this.renderMessage() }
+
 				<div className={ styles.formRow }>
 					<label htmlFor="s-url">Feed URL</label>
 					{ this.renderUrlField() }
@@ -184,10 +187,14 @@ class SubscribeForm extends React.Component {
 					{ this.renderButton() }
 				</div>
 
-				<a className={ styles.close } title="Close" onClick={ this.handleClickClose }>
-					<Icon type="cancel" />
-					<span>Close</span>
-				</a>
+				<IconLink
+					type="cancel"
+					text="Close"
+					title="Close"
+					handler={ this.handleClickClose }
+					hideText={ true }
+					extraClass={ styles.close }
+				/>
 			</form>
 		);
 	}
