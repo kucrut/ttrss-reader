@@ -25,6 +25,7 @@ class MenuToggle extends Component {
 				type="menu"
 				text="Menu"
 				title="Show menu"
+				hideText={ true }
 				handler={ this.handleClick }
 				extraClass={ styles.menuToggle }
 			/>
