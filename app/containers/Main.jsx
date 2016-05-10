@@ -9,8 +9,8 @@ import MainIcon from 'components/MainIcon';
 import Article from 'components/Article';
 import ArticlePagination from 'components/ArticlePagination';
 
-import stlLayout from 'css/common/layout';
-const cx = classNames.bind( Object.assign({}, stlLayout ) );
+import styles from 'css/common/layout';
+const cx = classNames.bind( styles );
 
 
 class Main extends MenuToggle {
@@ -105,7 +105,6 @@ class Main extends MenuToggle {
 
 	render() {
 		const { feeds, articles } = this.props;
-		const clsContent = cx( 'content' );
 		let content;
 
 		if ( articles.currentId ) {
@@ -117,7 +116,7 @@ class Main extends MenuToggle {
 		}
 
 		return (
-			<main onClick={ this.maybeHideSidebar } className={ clsContent } ref="mainContent">
+			<main onClick={ this.maybeHideSidebar } className={ styles.content } ref="mainContent">
 				{ content }
 			</main>
 		);
