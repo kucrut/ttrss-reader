@@ -40,8 +40,7 @@ class Header extends React.Component {
 			<Icon
 				type="rss"
 				text="Tiny Tiny RSS Reader"
-				tagName="h2"
-				extraClass={ [styles[ 'text-truncate' ], styles.title] }
+				extraClass={ styles.title }
 			/>
 		);
 	}
@@ -51,14 +50,12 @@ class Header extends React.Component {
 		const title = feed.is_cat ? feed.cat_title : feed.title;
 
 		return (
-			<h2 className={ styles[ 'text-truncate' ] }>
-				<IconLink
-					type="rss"
-					text={ title }
-					handler={ this.handleClickTitle }
-					extraClass={ styles.title }
-				/>
-			</h2>
+			<IconLink
+				type="rss"
+				text={ title }
+				handler={ this.handleClickTitle }
+				extraClass={ styles.title }
+			/>
 		);
 	}
 
@@ -88,7 +85,7 @@ class Header extends React.Component {
 						handler={ this.handleClickMenu }
 						extraClass={ styles.menuToggle }
 					/>
-					{ title }
+					<h2 className={ styles[ 'text-truncate' ] }>{ title }</h2>
 				</div>
 
 				{ this.renderActions() }
