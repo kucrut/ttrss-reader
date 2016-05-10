@@ -18,12 +18,11 @@ class Header extends React.Component {
 	}
 
 	renderActions() {
-		const { feed, articles } = this.props;
-		const { currentId, currentIndex, items } = articles;
+		const { feed, articles: { currentId } } = this.props;
 		let actions;
 
 		if ( currentId ) {
-			actions = ( <ArticleActions article={ items[ currentIndex ] } /> );
+			actions = ( <ArticleActions /> );
 		} else if ( feed.id ) {
 			actions = ( <FeedActions /> );
 		}

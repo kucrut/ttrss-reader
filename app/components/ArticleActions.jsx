@@ -7,7 +7,7 @@ import styles from 'css/containers/header';
 
 class ArticleActions extends React.Component {
 	static propTypes = {
-		article:  PropTypes.object.isRequired,
+		articles: PropTypes.object.isRequired,
 		dispatch: PropTypes.func.isRequired
 	}
 
@@ -31,11 +31,17 @@ class ArticleActions extends React.Component {
 		this.updateState( nextProps );
 	}
 
+	getArticle( props ) {
+		const { currentIndex, items } = props.articles;
+
+		return items[ currentIndex ];
+	}
+
 	handleClickAction( action ) {
-		const { article, dispatch } = this.props;
+		const { articles: { currentId }, dispatch } = this.props;
 
 		this.setState({ [ action ]: ! this.state[ action ] });
-		dispatch( updateArticle( article.id, action, 2 ) );
+		dispatch( updateArticle( currentId, action, 2 ) );
 	}
 
 	toggleRead() {
@@ -47,7 +53,7 @@ class ArticleActions extends React.Component {
 	}
 
 	updateState( props ) {
-		const { unread, marked } = props.article;
+		const { unread, marked } = this.getArticle( props );
 
 		this.setState({
 			unread,
@@ -72,4 +78,10 @@ class ArticleActions extends React.Component {
 	}
 }
 
-export default connect()( ArticleActions );
+function mapStateToProps( state ) {
+	return {
+		articles: state.articles
+	};
+}
+
+export default connect( mapStateToProps )( ArticleActions );
