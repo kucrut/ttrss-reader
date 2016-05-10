@@ -12,10 +12,9 @@ const styles = Object.assign({}, stlElements, stlHeader );
 
 class Header extends React.Component {
 	static propTypes = {
-		feed:        PropTypes.object.isRequired,
-		articles:    PropTypes.object.isRequired,
-		dateReverse: PropTypes.number.isRequired,
-		dispatch:    PropTypes.func.isRequired
+		feed:     PropTypes.object.isRequired,
+		articles: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired
 	}
 
 	renderActions() {
@@ -48,9 +47,8 @@ class Header extends React.Component {
 
 function mapStateToProps( state ) {
 	return {
-		feed:        state.feeds.current,
-		articles:    state.articles,
-		dateReverse: state.settings.dateReverse
+		feed:     state.feeds.current,
+		articles: state.articles
 	};
 }
 
