@@ -15,12 +15,6 @@
 		padding: .4em 1.25em;
 	}
 
-	.name {
-		max-width: 80%;
-		display: inline-block;
-		vertical-align: middle;
-	}
-
 	a {
 		position: relative;
 
@@ -56,4 +50,11 @@
 			right: 1.5625em;
 		}
 	}
+}
+
+.name {
+	composes: text-truncate from '../common/elements';
+	max-width: 80%;
+	display: inline-block;
+	vertical-align: middle;
 }
