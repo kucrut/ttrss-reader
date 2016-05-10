@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { saveSettings, closeSettingsForm } from 'actions/settings';
 import Icon from 'components/Icon';
 import IconLink from 'components/IconLink';
-import styles from 'css/containers/form';
+import styles from 'css/components/form';
 
 
 class SettingsForm extends React.Component {

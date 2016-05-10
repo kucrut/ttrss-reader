@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { requestLogin } from 'actions/session';
 import Icon from 'components/Icon';
-import styles from 'css/containers/form';
+import styles from 'css/components/form';
 
 
 export default class LoginForm extends React.Component {

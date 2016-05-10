@@ -4,7 +4,7 @@ import { getAllCategories } from 'actions/categories';
 import { subscribeToFeed, closeSubscriptionForm } from 'actions/subscription';
 import Icon from 'components/Icon';
 import IconLink from 'components/IconLink';
-import styles from 'css/containers/form';
+import styles from 'css/components/form';
 
 
 class SubscribeForm extends React.Component {
