@@ -11,6 +11,10 @@ var server = new WebpackDevServer( compiler, {
 	},
 	contentBase: 'public',
 	publicPath: config.output.publicPath,
+	watchOptions: {
+		aggregateTimeout: 300,
+		poll: 2000
+	}
 });
 
 server.listen( PORT );
