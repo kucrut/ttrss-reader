@@ -29,6 +29,10 @@
 	.menuToggle {
 		margin-right: .5em;
 		float: left;
+
+		&::before {
+			margin-right: 0;
+		}
 	}
 
 	.feedTitle {
