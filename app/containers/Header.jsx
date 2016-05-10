@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { selectArticle } from 'actions/articles';
+import HeaderTitle from 'components/HeaderTitle';
 import MenuToggle from 'components/MenuToggle';
 import FeedActions from 'components/FeedActions';
 import ArticleActions from 'components/ArticleActions';
@@ -18,30 +18,6 @@ class Header extends React.Component {
 		dispatch:    PropTypes.func.isRequired
 	}
 
-	constructor( props ) {
-		super( props );
-		this.handleClickTitle = this.handleClickTitle.bind( this );
-	}
-
-	handleClickTitle() {
-		this.props.dispatch( selectArticle( '' ) );
-	}
-
-	renderAppTitle() {
-		return (
-			<span className={ styles.title }>Tiny Tiny RSS Reader</span>
-		);
-	}
-
-	renderFeedTitle() {
-		const { feed } = this.props;
-		const title = feed.is_cat ? feed.cat_title : feed.title;
-
-		return (
-			<a onClick={ this.handleClickTitle } className={ styles.title }>{ title }</a>
-		);
-	}
-
 	renderActions() {
 		const { feed, articles } = this.props;
 		const { currentId, currentIndex, items } = articles;
@@ -57,13 +33,11 @@ class Header extends React.Component {
 	}
 
 	render() {
-		const title = this.props.feed.id ? this.renderFeedTitle() : this.renderAppTitle();
-
 		return (
 			<div className={ styles.head }>
 				<div className={ styles.feedTitle }>
 					<MenuToggle />
-					<h2 className={ styles[ 'text-truncate' ] }>{ title }</h2>
+					<HeaderTitle />
 				</div>
 
 				{ this.renderActions() }
