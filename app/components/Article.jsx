@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 import { selectArticle, updateArticle } from 'actions/articles';
 import { getArticleDate } from 'helpers';
 import Swipeable from 'react-swipeable';
@@ -173,9 +172,7 @@ class Article extends React.Component {
 	}
 
 	renderElement() {
-		const clsArticle = classNames({
-			[ styles.isRead ]: ! this.props.article.unread
-		});
+		const clsArticle = this.props.article.unread ? '' : styles.isRead;
 
 		return (
 			<article className={ clsArticle } style={ this.state.style }>
