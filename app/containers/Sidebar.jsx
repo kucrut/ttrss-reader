@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import CategoryList from 'containers/CategoryList';
-import SidebarActions from 'containers/SidebarActions';
+import SidebarActions from 'components/SidebarActions';
 
 import styles from 'css/containers/sidebar';
 const cx = classNames.bind( styles );
