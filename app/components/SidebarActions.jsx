@@ -5,12 +5,10 @@ import { getCategories } from 'actions/categories';
 import { openSettingsForm } from 'actions/settings';
 import { openSubscriptionForm } from 'actions/subscription';
 import { requestLogout } from 'actions/session';
+import Icon from 'components/Icon';
+import IconLink from 'components/IconLink';
+import styles from 'css/components/sidebar-actions';
 
-import stlFa from 'css/common/fa';
-import stlElements from 'css/common/elements';
-import stlActions from 'css/components/sidebar-actions';
-const styles = Object.assign({}, stlFa, stlElements, stlActions );
-const cx = classNames.bind( styles );
 
 class SidebarActions extends React.Component {
 	static propTypes = {
@@ -45,35 +43,36 @@ class SidebarActions extends React.Component {
 
 	render() {
 		const { isRefreshing } = this.props;
-		const clsSubscribe     = cx( ['fa', 'fa-eye'] );
-		const clsSettings      = cx( ['fa', 'fa-cog'] );
-		const clsLogout        = cx( ['fa', 'fa-logout'] );
-		const clsRefresh       = cx({
-			fa:             true,
-			'fa-spinner':   isRefreshing,
-			'animate-spin': isRefreshing,
-			'fa-arrows-cw': ! isRefreshing
-		});
+		const refreshAttrs = {
+			type: isRefreshing ? 'spinner' : 'arrows-cw',
+			spin: isRefreshing
+		};
 
 		return (
 			<div className={ styles.sidebarActions }>
 				<a onClick={ this.handleClickRefresh } className={ styles.refresh }>
-					<i className={ clsRefresh } />Refresh
+					<Icon { ...refreshAttrs } /> Refresh
 				</a>
-				<a
-					onClick={ this.handleClickSubscribe }
-					className={ clsSubscribe }
-					title="Subscribe to feed"
+				<IconLink
+					type="eye"
+					handler={ this.handleClickSubscribe }
+					text="Subscribe"
+					title="Subscribe to Feed"
+					hideText={ true }
 				/>
-				<a
-					onClick={ this.handleClickSettings }
-					className={ clsSettings }
-					title="Settings"
+				<IconLink
+					type="cog"
+					handler={ this.handleClickSettings }
+					text="Settings"
+					title="Edit Settings"
+					hideText={ true }
 				/>
-				<a
-					onClick={ this.handleClickLogout }
-					className={ clsLogout }
+				<IconLink
+					type="logout"
+					handler={ this.handleClickLogout }
+					text="Logout"
 					title="Logout"
+					hideText={ true }
 				/>
 			</div>
 		);
