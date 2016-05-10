@@ -5,7 +5,6 @@ import { getCategories } from 'actions/categories';
 import { checkLastSession } from 'actions/session';
 import { fetchUnreadCount } from 'actions/articles';
 import { getCount } from 'helpers';
-import classNames from 'classnames/bind';
 import SettingsForm from 'containers/SettingsForm';
 import SubscribeForm from 'containers/SubscribeForm';
 import LoginForm from 'containers/LoginForm';
