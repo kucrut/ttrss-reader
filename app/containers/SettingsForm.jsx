@@ -22,12 +22,12 @@ class SettingsForm extends React.Component {
 			noPagination: props.settings.noPagination
 		};
 
-		this.submitForm = this.submitForm.bind( this );
+		this.handleSubmit = this.handleSubmit.bind( this );
 		this.handleChange = this.handleChange.bind( this );
 		this.handleClickClose = this.handleClickClose.bind( this );
 	}
 
-	submitForm( e ) {
+	handleSubmit( e ) {
 		e.preventDefault();
 		this.props.dispatch( saveSettings( Object.assign({}, this.state ) ) );
 	}
@@ -84,7 +84,7 @@ class SettingsForm extends React.Component {
 		}
 
 		return (
-			<form className={ styles.form } onSubmit={ this.submitForm }>
+			<form className={ styles.form } onSubmit={ this.handleSubmit }>
 				<Icon tagName="h1" type="cog" text="Settings" />
 
 				<div className={ styles.formRow }>
