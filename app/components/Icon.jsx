@@ -36,5 +36,8 @@ Icon.propTypes = {
 	spin:       PropTypes.bool,
 	tagName:    PropTypes.string,
 	text:       PropTypes.string,
-	extraClass: PropTypes.array
+	extraClass: PropTypes.oneOfType( [
+		PropTypes.string,
+		PropTypes.arrayOf( PropTypes.string )
+	] )
 };
