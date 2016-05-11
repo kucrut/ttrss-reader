@@ -1,22 +1,22 @@
-@value bar-height, light-grey, sidebar-max-width, max-content-width from './variables';
+@value barHeight, lightGrey, sidebarMaxWidth, maxContentWidth from './variables';
 
 .wholeWrap {
 	position: relative;
 	height: 100vh;
 	max-height: 100vh;
-	padding-top: bar-height;
+	padding-top: barHeight;
 	overflow: hidden;
 }
 
 .mainInit {
 	text-align: center;
 	height: 100%;
-	line-height: calc( 100vh - 80px );
+	line-height: calc(100vh - 80px);
 	overflow: hidden;
 
 	> i {
 		font-size: 8em;
-		color: light-grey;
+		color: lightGrey;
 		vertical-align: middle;
 	}
 }
@@ -36,11 +36,11 @@
 
 @media (min-width: 1020px) {
 	.content {
-		margin-left: sidebar-max-width;
+		margin-left: sidebarMaxWidth;
 		padding-left: 20px;
 
 		.inside {
-			max-width: max-content-width;
+			max-width: maxContentWidth;
 		}
 	}
 }

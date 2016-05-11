@@ -9,12 +9,12 @@
 	align-items: center;
 	justify-content: space-between;
 
-	&:before,
-	&:after {
+	&::before,
+	&::after {
 		content: "";
 		display: table;
 	}
-	&:after {
+	&::after {
 		clear: both;
 	}
 

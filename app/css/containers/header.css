@@ -1,4 +1,4 @@
-@value bar-height, border-color, sidebar-max-width, max-content-width from '../common/variables';
+@value barHeight, borderColor, sidebarMaxWidth, maxContentWidth from '../common/variables';
 
 .head {
 	position: absolute;
@@ -6,9 +6,9 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: bar-height;
-	line-height: bar-height;
-	border-bottom: 1px solid border-color;
+	height: barHeight;
+	line-height: barHeight;
+	border-bottom: 1px solid borderColor;
 	overflow: hidden;
 	background: #f0f0f0;
 
@@ -39,7 +39,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: calc( sidebar-max-width - 6px );
+		width: calc(sidebarMaxWidth - 6px);
 		max-width: 70vw;
 		padding-left: 1.25em;
 
@@ -68,7 +68,7 @@
 				cursor: default;
 			}
 
-			&:before {
+			&::before {
 				width: .8335em;
 			}
 		}
@@ -82,8 +82,8 @@
 		}
 		.actions {
 			float: none;
-			margin-left: sidebar-max-width;
-			max-width: max-content-width;
+			margin-left: sidebarMaxWidth;
+			max-width: maxContentWidth;
 			padding: 0;
 			left: 1.25em;
 		}

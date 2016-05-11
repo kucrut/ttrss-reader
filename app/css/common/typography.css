@@ -1,11 +1,12 @@
-@value font-stack from './variables';
+@value fontStack from './variables';
 
 body {
 	color: #222;
-	font-family: font-stack;
+	font-family: fontStack;
 }
 
-h1, h2 {
+h1,
+h2 {
 	font-weight: normal;
 }
 
@@ -35,7 +36,7 @@ pre {
 :not(pre) > kbd,
 :not(pre) > samp {
 	font-family: Consolas, monospace, serif;
-	color: #D05;
+	color: #d05;
 	white-space: nowrap;
 	padding: 0 4px;
 	border: 1px solid #ddd;

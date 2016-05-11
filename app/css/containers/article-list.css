@@ -1,8 +1,8 @@
-@value border-color from '../common/variables';
+@value borderColor from '../common/variables';
 
 .articles {
 	article {
-		border-bottom: 1px solid border-color;
+		border-bottom: 1px solid borderColor;
 	}
 
 	.isRead .articleTitle a {

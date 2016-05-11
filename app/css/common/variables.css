@@ -1,16 +1,18 @@
+/* stylelint-disable at-rule-empty-line-before */
+
 /* Fonts */
-@value font-stack: Helvetica Neue, sans-serif;
+@value fontStack: Helvetica Neue, sans-serif;
 
 /* Colors */
 @value white: #fff;
 @value orange: #e28327;
 @value green: #659f13;
-@value light-grey: #f0f0f0;
+@value lightGrey: #f0f0f0;
 
-@value border-color: #ddd;
-@value shadow-color: #8f8f8f;
+@value borderColor: #ddd;
+@value shadowColor: #8f8f8f;
 
 /* Layout */
-@value bar-height: 3.125em;
-@value sidebar-max-width: 360px;
-@value max-content-width: 640px;
+@value barHeight: 3.125em;
+@value sidebarMaxWidth: 360px;
+@value maxContentWidth: 640px;

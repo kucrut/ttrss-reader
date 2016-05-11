@@ -1,10 +1,4 @@
 /*
-@define-mixin border-bottom $border-color {
-	border-bottom: 1px solid $border-color;
-}
-*/
-
-/*
  * Mixin to customize scrollbars
  *
  * Beware, this does not work in all browsers
