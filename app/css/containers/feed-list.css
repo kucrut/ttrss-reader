@@ -1,0 +1,13 @@
+.feedList {
+	padding: 0;
+	display: none;
+
+	&.isOpen {
+		display: block;
+	}
+
+	a,
+	.placeholder {
+		padding-left: 2.85em;
+	}
+}

@@ -1,0 +1,82 @@
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(359deg);
+	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+table {
+	width: 100%;
+	margin: 1em auto;
+}
+
+figure {
+	margin: 1em auto;
+	max-width: 100% !important;
+}
+
+button,
+input[type="submit"],
+.button {
+	cursor: default;
+	border: none;
+	overflow: visible;
+	font: inherit;
+	color: #444;
+	text-transform: none;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0 .75em;
+	background: #f5f5f5;
+	vertical-align: middle;
+	line-height: 28px;
+	min-height: 30px;
+	font-size: 1rem;
+	text-decoration: none;
+	text-align: center;
+	border: 1px solid rgba(0, 0, 0, .06);
+	border-radius: 4px;
+	text-shadow: 0 1px 0 #fff;
+
+	&:not(:disabled) {
+		cursor: pointer;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: #fafafa;
+		outline: none;
+		border-color: rgba(0, 0, 0, .16);
+	}
+
+	&:active {
+		background-color: #eee;
+	}
+}
+
+.animate-spin {
+	animation: spin 2s infinite linear;
+	display: inline-block;
+}
+
+.textTruncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.screenReaderText {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}

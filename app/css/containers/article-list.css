@@ -1,0 +1,15 @@
+@value borderColor from '../common/variables';
+
+.articles {
+	article {
+		border-bottom: 1px solid borderColor;
+	}
+
+	.isRead .articleTitle a {
+		color: #6a6a6a;
+	}
+}
+
+.inside {
+	composes: inside from '../common/layout';
+}

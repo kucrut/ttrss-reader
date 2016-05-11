@@ -1,0 +1,38 @@
+article {
+	position: relative;
+	padding: 1.25em;
+
+	> :last-child,
+	header > :last-child {
+		margin-bottom: 0;
+	}
+}
+
+.isRead {
+	composes: isRead from '../containers/article-list';
+}
+
+.singleArticle {
+	header {
+		margin-bottom: 1.25em;
+	}
+}
+
+.articleTitle {
+	composes: articleTitle from '../containers/article-list';
+	margin: 0;
+	font-size: 1.25em;
+}
+
+.articleMeta {
+	color: #888;
+	font-size: .75em;
+}
+
+.articleContent {
+	line-height: 1.5;
+
+	a {
+		text-decoration: underline;
+	}
+}

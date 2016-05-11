@@ -1,0 +1,12 @@
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"node": true
+	},
+	"rules": {
+		"comma-dangle": 0,
+		"indent": [ "error", "tab", { "SwitchCase": 1 }],
+		"semi": [ "error", "always" ],
+		"space-in-parens": [ "error", "always", { "exceptions": ["{}", "[]"] }]
+	}
+}
