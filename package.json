@@ -34,6 +34,7 @@
     "es6-promise": "^3.1.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "he": "^1.1.0",
     "inline-environment-variables-webpack-plugin": "0.0.2",
     "lodash": "^4",
     "postcss-fontpath": "^0.3.0",

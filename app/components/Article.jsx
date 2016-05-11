@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import he from 'he';
 import { selectArticle, updateArticle } from 'actions/articles';
 import { getArticleDate } from 'helpers';
 import Swipeable from 'react-swipeable';
@@ -123,18 +124,19 @@ class Article extends React.Component {
 
 	renderTitle() {
 		const { article, isSingle } = this.props;
+		const theTitle = he.decode( article.title );
 		let title;
 
 		if ( isSingle ) {
 			title = (
 				<h1 className={ styles.articleTitle }>
-					<a href={ article.link } target="_blank">{ article.title }</a>
+					<a href={ article.link } target="_blank">{ theTitle }</a>
 				</h1>
 			);
 		} else {
 			title = (
 				<h2 className={ styles.articleTitle }>
-					<a onClick={ this.handleClickTitle }>{ article.title }</a>
+					<a onClick={ this.handleClickTitle }>{ theTitle }</a>
 				</h2>
 			);
 		}
