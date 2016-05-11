@@ -1,4 +1,7 @@
 /* stylelint-disable */
+
+@value orange from './variables';
+
 @font-face {
   font-family: 'fa';
   font-path: '../font/fa';
@@ -49,6 +52,11 @@ span.fa::before {
 }
 .fa.hiddenText::before {
 	margin-right: 0;
+}
+
+a:active > i::before,
+a.fa:active::before {
+	color: orange;
 }
 
 .fa-search:before { content: '\e800'; } /* '' */
