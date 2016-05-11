@@ -23,9 +23,10 @@ class FeedItem extends React.Component {
 		const { feed, current, dispatch } = this.props;
 
 		if ( feed.id !== current.id ) {
-			dispatch( hideSidebar() );
 			dispatch( selectFeed( feed.id ) );
 		}
+
+		dispatch( hideSidebar() );
 	}
 
 	renderCount() {
