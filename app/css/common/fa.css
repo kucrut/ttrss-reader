@@ -42,10 +42,13 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-a.fa:before,
-h1.fa:before,
-span.fa:before {
+a.fa::before,
+h1.fa::before,
+span.fa::before {
 	margin-right: .3125em;
+}
+.fa.hiddenText::before {
+	margin-right: 0;
 }
 
 .fa-search:before { content: '\e800'; } /* '' */

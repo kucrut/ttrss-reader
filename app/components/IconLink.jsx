@@ -9,14 +9,17 @@ const cx = classNames.bind( styles );
 
 export default function IconLink( props ) {
 	const { text, title, type, handler, hideText, extraClass } = props;
-	const cls = cx( ['fa', `fa-${type}`].concat( extraClass ) );
+	let classes = ['fa', `fa-${type}`].concat( extraClass );
 	let textEl;
 
 	if ( true === hideText ) {
+		classes = classes.concat( styles.hiddenText );
 		textEl = ( <span className={ styles.screenReaderText }>{ text }</span> );
 	} else {
 		textEl = text;
 	}
+
+	const cls = cx( classes );
 
 	return (
 		<a onClick={ handler } title={ title } className={ cls }>{ textEl }</a>
