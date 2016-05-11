@@ -44,7 +44,7 @@ class FeedItem extends React.Component {
 	render() {
 		const { feed, current } = this.props;
 		const isSelected = feed.id === current.id;
-		const clsLink = isSelected ? 'current' : '';
+		const clsLink = isSelected ? styles.current : '';
 
 		return (
 			<li>
