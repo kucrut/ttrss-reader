@@ -120,14 +120,18 @@ export function fetchArticles( ids ) {
  *
  * @param {array}  ids   Article IDs.
  * @param {string} field Field to update.
- * @param {value}  value New value.
+ * @param {number} mode  Update mode.
  */
-function updateLocalItems( ids, field, value ) {
+function updateLocalItems( ids, field, mode ) {
 	return ( dispatch, getState ) => {
+		const intIds = 'string' === typeof ids ? ids.split( ',' ) : ids;
+		const articleIds = [].concat( intIds ).map( id => parseInt( id, 10 ) );
 		const items = [];
 
 		each( getState().articles.items, ( item ) => {
-			if ( -1 < ids.indexOf( item.id ) ) {
+			if ( -1 < articleIds.indexOf( item.id ) ) {
+				const value = 2 === mode ? ! item[ field ] : Boolean( mode );
+
 				items.push( Object.assign( item, {
 					[ field ]: value
 				}) );
@@ -160,6 +164,7 @@ export function updateArticle( ids, field, mode ) {
 	return ( dispatch, getState ) => {
 		const { url, sid } = getState().session;
 
+		dispatch( updateLocalItems( ids, field, mode ) );
 		dispatch({ type: UPDATE_ARTICLES_REQUEST });
 
 		axios.post( url, {
@@ -180,7 +185,6 @@ export function updateArticle( ids, field, mode ) {
  */
 export function markArticlesRead( ids ) {
 	return ( dispatch ) => {
-		dispatch( updateLocalItems( ids, 'unread', false ) );
 		dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) );
 	};
 }
