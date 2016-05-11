@@ -28,11 +28,11 @@ class Main extends Component {
 	}
 
 	componentWillMount() {
-		this.toggleSidebar( this.props );
+		this.maybeShowSidebar( this.props );
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		this.toggleSidebar( nextProps );
+		this.maybeShowSidebar( nextProps );
 	}
 
 	getSingleArticle() {
@@ -44,12 +44,10 @@ class Main extends Component {
 		});
 	}
 
-	toggleSidebar( props ) {
+	maybeShowSidebar( props ) {
 		const { feeds, articles, dispatch } = props;
 
-		if ( articles.currentId || feeds.current.id ) {
-			dispatch( hideSidebar() );
-		} else {
+		if ( ! articles.currentId && ! feeds.current.id ) {
 			dispatch( showSidebar() );
 		}
 	}
