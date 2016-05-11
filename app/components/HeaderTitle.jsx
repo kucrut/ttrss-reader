@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { selectArticle } from 'actions/articles';
+import Icon from 'components/Icon';
 import elementStyles from 'css/common/elements';
 import headerStyles from 'css/containers/header';
 
@@ -22,7 +23,7 @@ class HeaderTitle extends Component {
 
 	renderAppTitle() {
 		return (
-			<span className={ headerStyles.title }>Tiny Tiny RSS Reader</span>
+			<span className={ headerStyles.title }><Icon type="rss" />Tiny Tiny RSS Reader</span>
 		);
 	}
 
@@ -31,7 +32,9 @@ class HeaderTitle extends Component {
 		const title = feed.is_cat ? feed.cat_title : feed.title;
 
 		return (
-			<a onClick={ this.handleClick } className={ headerStyles.title }>{ title }</a>
+			<a onClick={ this.handleClick } className={ headerStyles.title }>
+				<Icon type="rss" />{ title }
+			</a>
 		);
 	}
 
