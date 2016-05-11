@@ -1,0 +1,9 @@
+{
+	"extends": "stylelint-config-standard",
+	"rules": {
+		"indentation": ["tab", {
+			"except": ["value"]
+		}],
+		"number-leading-zero": "never"
+	}
+}

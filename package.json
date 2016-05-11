@@ -7,7 +7,9 @@
   "main": "js/bundle.js",
   "license": "GPL-2.0",
   "scripts": {
-    "lint": "eslint webpack app",
+    "lint:js": "eslint webpack app",
+    "lint:css": "stylelint app/css/**/*.css --config app/css/.stylelintrc.json",
+    "lint": "npm run lint:js && npm run lint:css",
     "clean": "rimraf public/assets",
     "start": "node webpack/dev-server.js",
     "build": "npm run clean && NODE_ENV=production webpack --colors --config ./webpack/prod-config.js"
@@ -62,6 +64,8 @@
     "eslint-plugin-import": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
+    "stylelint": "^6.3.3",
+    "stylelint-config-standard": "^7.0.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
