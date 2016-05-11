@@ -8,8 +8,6 @@ var InlineEnviromentVariablesPlugin = require( 'inline-environment-variables-web
 
 
 module.exports = {
-	// A SourceMap is emitted.
-	devtool: 'source-map',
 	context: appPath,
 	// Multiple entry with hot loader
 	// https://github.com/glenjamin/webpack-hot-middleware/blob/master/example/webpack.config.multientry.js
