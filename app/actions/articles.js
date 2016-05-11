@@ -113,6 +113,35 @@ export function fetchArticles( ids ) {
 }
 
 /**
+ * Update articles in store
+ *
+ * Before POSTing the update, let's update the article's state
+ * so the UI doesn't have to wait for the API call.
+ *
+ * @param {array}  ids   Article IDs.
+ * @param {string} field Field to update.
+ * @param {value}  value New value.
+ */
+function updateLocalItems( ids, field, value ) {
+	return ( dispatch, getState ) => {
+		const items = [];
+
+		each( getState().articles.items, ( item ) => {
+			if ( -1 < ids.indexOf( item.id ) ) {
+				items.push( Object.assign( item, {
+					[ field ]: value
+				}) );
+			}
+		});
+
+		dispatch({
+			type: UPDATE_LOCAL_ARTICLES,
+			items
+		});
+	};
+}
+
+/**
  * @param  {number}  ids    Article ID, separate multiple IDs with commas.
  * @param  {number}  field  Field to update {
  *     0: starred
@@ -150,24 +179,8 @@ export function updateArticle( ids, field, mode ) {
  * @return void
  */
 export function markArticlesRead( ids ) {
-	return ( dispatch, getState ) => {
-		const items = [];
-
-		each( getState().articles.items, ( item ) => {
-			if ( -1 < ids.indexOf( item.id ) ) {
-				items.push( Object.assign( item, {
-					unread: false
-				}) );
-			}
-		});
-
-		// Update articles in store first, so the UI
-		// doesn't have to wait for `updateArticle()`.
-		dispatch({
-			type: UPDATE_LOCAL_ARTICLES,
-			items
-		});
-
+	return ( dispatch ) => {
+		dispatch( updateLocalItems( ids, 'unread', false ) );
 		dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) );
 	};
 }
