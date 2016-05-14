@@ -98,7 +98,7 @@ class SubscribeForm extends React.Component {
 
 		if ( message ) {
 			element = (
-				<p className="message">{ message }</p>
+				<p className={ styles.message }>{ message }</p>
 			);
 		}
 
