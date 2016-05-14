@@ -36,9 +36,12 @@ class Article extends React.Component {
 	componentDidMount() {
 		const { article, isSingle } = this.props;
 
-		if ( isSingle && article.unread ) {
+		if ( isSingle ) {
 			this.scrollToTop();
-			this.handleClickAction( 'unread', 0 );
+
+			if ( article.unread ) {
+				this.handleClickAction( 'unread', 0 );
+			}
 		}
 	}
 
@@ -93,6 +96,7 @@ class Article extends React.Component {
 	}
 
 	scrollToTop() {
+		console.log( this.props.mainContent.scrollTop );
 		this.props.mainContent.scrollTop = 0;
 	}
 
