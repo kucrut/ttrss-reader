@@ -62,26 +62,8 @@ class SettingsForm extends React.Component {
 
 	render() {
 		const { unreadOnly, limit, interval, noPagination } = this.state;
-		let modeType;
-		let modeAttrs;
-		let noPaginationType;
-		let noPaginationAttrs;
-
-		if ( unreadOnly ) {
-			modeType  = 'toggle-on';
-			modeAttrs = { checked: 'checked' };
-		} else {
-			modeType  = 'toggle-off';
-			modeAttrs = {};
-		}
-
-		if ( noPagination ) {
-			noPaginationType = 'toggle-on';
-			noPaginationAttrs = { checked: 'checked' };
-		} else {
-			noPaginationType = 'toggle-off';
-			noPaginationAttrs = {};
-		}
+		const modeType = unreadOnly ? 'toggle-on' : 'toggle-off';
+		const noPaginationType = noPagination ? 'toggle-on' : 'toggle-off';
 
 		return (
 			<form className={ styles.form } onSubmit={ this.handleSubmit }>
@@ -126,7 +108,7 @@ class SettingsForm extends React.Component {
 							type="checkbox"
 							name="unreadOnly"
 							value="1"
-							{ ...modeAttrs }
+							checked={ unreadOnly }
 							onChange={ this.handleChange }
 						/>
 						<Icon type={ modeType } text="Unread Only" />
@@ -140,7 +122,7 @@ class SettingsForm extends React.Component {
 							type="checkbox"
 							name="noPagination"
 							value="1"
-							{ ...noPaginationAttrs }
+							checked={ noPagination }
 							onChange={ this.handleChange }
 						/>
 						<Icon type={ noPaginationType } text="Disabled" />
