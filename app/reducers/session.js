@@ -1,5 +1,5 @@
 import { PropTypes } from 'react';
-import { get } from 'lodash';
+import { get, trimEnd } from 'lodash';
 import {
 	CHECK_SESSION_SUCCESS,
 	CHECK_SESSION_FAILURE,
@@ -19,6 +19,7 @@ const initialState = {
 function saveSession( url, sid ) {
 	localStorage.setItem( 'ttrssUrl', url );
 	localStorage.setItem( 'ttrssSid', sid );
+	localStorage.setItem( 'ttrssBaseUrl', trimEnd( url, '/api/' ) );
 }
 
 export const sessionShape = {
