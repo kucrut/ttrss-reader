@@ -4,6 +4,9 @@
 		"indentation": ["tab", {
 			"except": ["value"]
 		}],
-		"number-leading-zero": "never"
-	}
+		"number-leading-zero": "never",
+    "property-no-unknown": [ true, {
+      "ignoreProperties": ["composes"]
+    }]
+  }
 }
