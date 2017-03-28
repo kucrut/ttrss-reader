@@ -19,7 +19,10 @@ const initialState = {
 function saveSession( url, sid ) {
 	localStorage.setItem( 'ttrssUrl', url );
 	localStorage.setItem( 'ttrssSid', sid );
-	localStorage.setItem( 'ttrssBaseUrl', trimEnd( url, '/api/' ) );
+
+	if ( url ) {
+		localStorage.setItem( 'ttrssBaseUrl', trimEnd( url, '/api/' ) );
+	}
 }
 
 export const sessionShape = {
