@@ -1,35 +1,25 @@
-var path = require( 'path' );
-var webpack = require( 'webpack' );
-var appPath = path.join( __dirname, '..', 'app' );
-var assetsPath = path.join( __dirname, '..', 'public', 'assets' );
-//var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
-var sharedConfig = require( './shared.js' );
-var PORT = process.env.PORT || 8080;
+/* eslint-disable max-len */
 
-module.exports = {
-	// eval - Each module is executed with eval and //@ sourceURL.
-	devtool: 'eval',
-	name: 'browser',
-	context: appPath,
-	// Multiple entry with hot loader
-	// https://github.com/glenjamin/webpack-hot-middleware/blob/master/example/webpack.config.multientry.js
+const path = require( 'path' );
+const webpack = require( 'webpack' );
+const merge = require( 'webpack-merge' );
+const sharedConfig = require( './shared.js' );
+
+const appPath = path.join( __dirname, '..', 'app' );
+// const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+const PORT = process.env.PORT || 8080;
+
+module.exports = merge( sharedConfig, {
+	devtool: 'eval-source-map',
 	entry: {
 		app: [
-			'webpack-dev-server/client?http://localhost:' + PORT,
+			`webpack-dev-server/client?http://localhost:${PORT}`,
 			'webpack/hot/dev-server',
 			'./index'
 		]
 	},
-	output: {
-		// The output directory as absolute path
-		path: assetsPath,
-		// The filename of the entry chunk as relative path inside the output.path directory
-		filename: '[name].js',
-		// The output path from the view of the Javascript
-		publicPath: '/assets/'
-	},
 	module: {
-		rules: sharedConfig.rules.concat([{
+		rules: [{
 			/*
 			* TC39 categorises proposals for babel in 4 stages
 			* Read more http://babeljs.io/docs/usage/experimental/
@@ -39,10 +29,8 @@ module.exports = {
 			// Reason why we put this here instead of babelrc
 			// https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
 			options: {
-				presets: [ 'react-hmre', 'es2015', 'react', 'stage-0' ],
-				plugins: [
-					'transform-react-remove-prop-types'
-				]
+				presets: ['react-hmre', 'es2015', 'react', 'stage-0'],
+				plugins: ['transform-react-remove-prop-types']
 			},
 			include: appPath,
 			exclude: path.join( __dirname, '/node_modules/' )
@@ -60,17 +48,11 @@ module.exports = {
 				},
 				'postcss-loader'
 			]
-		}])
-	},
-	resolve: {
-		extensions: [ '.js', '.jsx', '.css' ],
-		modules: [ 'app', 'node_modules' ]
+		}]
 	},
 	plugins: [
-		new webpack.LoaderOptionsPlugin({
-			debug: true
-		}),
+		new webpack.LoaderOptionsPlugin({ debug: true }),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin()
 	]
-};
+});
