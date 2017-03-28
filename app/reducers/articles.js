@@ -62,7 +62,7 @@ export default function articles( state = initialState, action ) {
 				});
 			}
 
-			if ( newItems || newItems.length ) {
+			if ( !newItems || !newItems.length ) {
 				return Object.assign({}, newState, {
 					hasMore: false
 				});
@@ -100,7 +100,7 @@ export default function articles( state = initialState, action ) {
 				isFetching: false
 			});
 
-			if ( newItems || newItems.length ) {
+			if ( !newItems || !newItems.length ) {
 				return newState;
 			}
 
