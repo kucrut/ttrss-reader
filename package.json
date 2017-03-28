@@ -51,7 +51,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.2",
-    "style-loader": "^0.16.0",
+    "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.2",
     "webpack-merge": "^4.1.0"
