@@ -4,8 +4,6 @@ var appPath = path.join( __dirname, '..', 'app' );
 var assetsPath = path.join( __dirname, '..', 'public', 'assets' );
 var sharedConfig = require( './shared.js' );
 var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-var InlineEnviromentVariablesPlugin = require( 'inline-environment-variables-webpack-plugin' );
-
 
 module.exports = {
 	context: appPath,
@@ -23,43 +21,43 @@ module.exports = {
 		publicPath: './assets/'
 	},
 	module: {
-		loaders: sharedConfig.loaders.concat([{
+		rules: sharedConfig.rules.concat([{
 			/*
 			* TC39 categorises proposals for babel in 4 stages
 			* Read more http://babeljs.io/docs/usage/experimental/
 			*/
 			test: /\.js$|\.jsx$/,
-			loader: 'babel',
-			// Reason why we put this here instead of babelrc
-			// https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
-			query: {
-				presets: [ 'es2015', 'react', 'stage-0' ],
-				plugins: [
-					'transform-react-remove-prop-types',
-					'transform-react-constant-elements',
-					'transform-react-inline-elements'
-				]
+			use: {
+				loader: 'babel-loader',
+				// Reason why we put this here instead of babelrc
+				// https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
+				options: {
+					presets: [ 'es2015', 'react', 'stage-0' ],
+					plugins: [
+						'transform-react-remove-prop-types',
+						'transform-react-constant-elements',
+						'transform-react-inline-elements'
+					]
+				}
 			},
 			include: appPath,
 			exclude: path.join( __dirname, '/node_modules/' )
 		}, {
 			test: /\.css$/,
-			loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader?module!postcss-loader' )
+			use: ExtractTextPlugin.extract({ use: 'css-loader?module!postcss-loader' })
 		}])
 	},
 	resolve: {
-		extensions: [ '', '.js', '.jsx', '.css' ],
-		modulesDirectories: [ 'app', 'node_modules' ]
+		extensions: [ '.js', '.jsx', '.css' ],
+		modules: [ 'app', 'node_modules' ]
 	},
 	plugins: [
 		new ExtractTextPlugin( 'style.css' ),
-		new webpack.NoErrorsPlugin(),
-		new InlineEnviromentVariablesPlugin({ NODE_ENV: 'production' }),
+		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
 			compressor: {
 				warnings: false
 			}
 		})
-	],
-	postcss: sharedConfig.postcss
+	]
 };

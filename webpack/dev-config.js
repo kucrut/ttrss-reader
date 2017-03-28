@@ -6,11 +6,9 @@ var assetsPath = path.join( __dirname, '..', 'public', 'assets' );
 var sharedConfig = require( './shared.js' );
 var PORT = process.env.PORT || 8080;
 
-
 module.exports = {
 	// eval - Each module is executed with eval and //@ sourceURL.
 	devtool: 'eval',
-	debug: true,
 	name: 'browser',
 	context: appPath,
 	// Multiple entry with hot loader
@@ -31,16 +29,16 @@ module.exports = {
 		publicPath: '/assets/'
 	},
 	module: {
-		loaders: sharedConfig.loaders.concat([{
+		rules: sharedConfig.rules.concat([{
 			/*
 			* TC39 categorises proposals for babel in 4 stages
 			* Read more http://babeljs.io/docs/usage/experimental/
 			*/
 			test: /\.js$|\.jsx$/,
-			loader: 'babel',
+			loader: 'babel-loader',
 			// Reason why we put this here instead of babelrc
 			// https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
-			query: {
+			options: {
 				presets: [ 'react-hmre', 'es2015', 'react', 'stage-0' ],
 				plugins: [
 					'transform-react-remove-prop-types'
@@ -50,16 +48,29 @@ module.exports = {
 			exclude: path.join( __dirname, '/node_modules/' )
 		}, {
 			test: /\.css$/,
-			loader: 'style!css?module&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+			use: [
+				'style-loader',
+				{
+					loader: 'css-loader',
+					options: {
+						modules: true,
+						importLoaders: 1,
+						localIdentName: '[name]__[local]___[hash:base64:5]'
+					}
+				},
+				'postcss-loader'
+			]
 		}])
 	},
 	resolve: {
-		extensions: [ '', '.js', '.jsx', '.css' ],
-		modulesDirectories: [ 'app', 'node_modules' ]
+		extensions: [ '.js', '.jsx', '.css' ],
+		modules: [ 'app', 'node_modules' ]
 	},
 	plugins: [
+		new webpack.LoaderOptionsPlugin({
+			debug: true
+		}),
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
-	],
-	postcss: sharedConfig.postcss
+		new webpack.NoEmitOnErrorsPlugin()
+	]
 };
