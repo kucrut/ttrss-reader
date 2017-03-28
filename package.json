@@ -15,7 +15,7 @@
     "build": "npm run clean && npm run lint && webpack -p --colors --config ./webpack/prod-config.js"
   },
   "dependencies": {
-    "axios": "^0.11.0",
+    "axios": "^0.15.3",
     "babel-core": "^6.24.0",
     "babel-loader": "7.0.0-beta.1",
     "babel-plugin-react-transform": "^2.0.2",
@@ -29,7 +29,6 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.27.3",
     "date-fns": "^1.0.0-rc21",
-    "es6-promise": "^3.1.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "he": "^1.1.0",
