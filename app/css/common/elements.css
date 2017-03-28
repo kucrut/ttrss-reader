@@ -27,7 +27,6 @@ button,
 input[type="submit"],
 .button {
 	cursor: default;
-	border: none;
 	overflow: visible;
 	font: inherit;
 	color: #444;

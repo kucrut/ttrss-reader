@@ -76,6 +76,7 @@
 		.menuToggle {
 			display: none;
 		}
+
 		.actions {
 			float: none;
 			margin-left: sidebarMaxWidth;

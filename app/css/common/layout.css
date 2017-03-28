@@ -1,4 +1,5 @@
 @import './mixins';
+
 @value barHeight, lightGrey, sidebarMaxWidth, maxContentWidth from './variables';
 
 .wholeWrap {
