@@ -20,7 +20,7 @@ export function checkLastSession() {
 	const url = toString( localStorage.getItem( 'ttrssUrl' ) );
 	const sid = toString( localStorage.getItem( 'ttrssSid' ) );
 
-	if ( ! url || ! sid ) {
+	if ( !url || !sid ) {
 		return { type: CHECK_SESSION_SUCCESS };
 	}
 

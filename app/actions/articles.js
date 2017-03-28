@@ -30,7 +30,7 @@ export const updateFields = [
 ];
 
 export function clearArticles( feedId ) {
-	return ( dispatch ) => dispatch({
+	return dispatch => dispatch({
 		type: CLEARED_ARTICLES,
 		feedId
 	});
@@ -102,7 +102,7 @@ export function fetchArticles( ids ) {
 			op:         'getArticle',
 			article_id: ids,
 			sid
-		}).then( response => {
+		}).then( ( response ) => {
 			dispatch( getCategories() );
 			dispatch({
 				type: UPDATE_ARTICLES_SUCCESS,
@@ -130,7 +130,7 @@ function updateLocalItems( ids, field, mode ) {
 
 		each( getState().articles.items, ( item ) => {
 			if ( -1 < articleIds.indexOf( item.id ) ) {
-				const value = 2 === mode ? ! item[ field ] : Boolean( mode );
+				const value = 2 === mode ? !item[ field ] : Boolean( mode );
 
 				items.push( Object.assign( item, {
 					[ field ]: value
@@ -184,16 +184,12 @@ export function updateArticle( ids, field, mode ) {
  * @return void
  */
 export function markArticlesRead( ids ) {
-	return ( dispatch ) => {
-		dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) );
-	};
+	return dispatch => dispatch( updateArticle( ids.join( ',' ), 'unread', 0 ) );
 }
 
 export function selectArticle( currentId ) {
-	return ( dispatch ) => {
-		dispatch({
-			type: SELECTED_ARTICLE,
-			currentId
-		});
-	};
+	return dispatch => dispatch({
+		type: SELECTED_ARTICLE,
+		currentId
+	});
 }

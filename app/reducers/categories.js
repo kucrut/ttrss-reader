@@ -68,7 +68,7 @@ export function allCategories( state = initialState, action ) {
 
 		case GET_ALL_CATEGORIES_SUCCESS:
 			feedCategories = action.req.data.content.map( normalizeCategory );
-			feedCategories = filter( feedCategories, ( item ) => -1 < item.id );
+			feedCategories = filter( feedCategories, item => -1 < item.id );
 			feedCategories = sortBy( feedCategories, 'title' );
 
 			return Object.assign({}, state, {
