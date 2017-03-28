@@ -22,6 +22,7 @@
 			"VariableDeclarator": true,
 			"AssignmentExpression": true
 		}}],
+		"no-tabs": 0,
 		"space-in-parens": ["error", "always", { "exceptions": ["{}"] } ],
 		"yoda": ["error", "always"],
 		"react/forbid-prop-types": 1,
