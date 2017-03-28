@@ -1,10 +1,6 @@
-import { polyfill } from 'es6-promise';
 import axios from 'axios';
 import { find } from 'lodash';
 import { clearArticles } from 'actions/articles';
-
-
-polyfill();
 
 export const GET_FEEDS = 'GET_FEEDS';
 export const GET_FEEDS_REQUEST = 'GET_FEEDS_REQUEST';

@@ -1,9 +1,5 @@
-import { polyfill } from 'es6-promise';
 import axios from 'axios';
 import { toString, trimEnd } from 'lodash';
-
-
-polyfill();
 
 export const CHECK_SESSION = 'CHECK_SESSION';
 export const CHECK_SESSION_REQUEST = 'CHECK_SESSION_REQUEST';
