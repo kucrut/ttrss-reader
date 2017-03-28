@@ -1,9 +1,5 @@
 import axios from 'axios';
-import { polyfill } from 'es6-promise';
 import { getCategories } from 'actions/categories';
-
-
-polyfill();
 
 export const SUBSCRIBE = 'SUBSCRIBE';
 export const SUBSCRIBE_REQUEST = 'SUBSCRIBE_REQUEST';

@@ -1,8 +1,4 @@
-import { polyfill } from 'es6-promise';
 import axios from 'axios';
-
-
-polyfill();
 
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_CATEGORIES_REQUEST = 'GET_CATEGORIES_REQUEST';

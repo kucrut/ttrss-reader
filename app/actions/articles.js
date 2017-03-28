@@ -1,10 +1,6 @@
 import axios from 'axios';
-import { polyfill } from 'es6-promise';
 import { each } from 'lodash';
 import { getCategories } from 'actions/categories';
-
-
-polyfill();
 
 export const GET_UNREAD = 'GET_UNREAD';
 export const GET_UNREAD_REQUEST = 'GET_UNREAD_REQUEST';
