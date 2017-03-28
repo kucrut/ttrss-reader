@@ -96,7 +96,6 @@ class Article extends React.Component {
 	}
 
 	scrollToTop() {
-		console.log( this.props.mainContent.scrollTop );
 		this.props.mainContent.scrollTop = 0;
 	}
 
