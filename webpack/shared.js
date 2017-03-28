@@ -1,48 +1,42 @@
-var path = require( 'path' );
-var webpack = require( 'webpack' );
+const path = require( 'path' );
 
+const appPath = path.join( __dirname, '..', 'app' );
+const assetsPath = path.join( __dirname, '..', 'public', 'assets' );
 
 module.exports = {
-	loaders: [{
-		test: /\.html$/, loader: 'html-loader'
-	}, {
-		test: /\.json$/, loader: 'json-loader'
-	}, {
-		test: /\.(png|jpg|jpeg|gif|woff|woff2)/,
-		loader: 'url',
-		query: {
-			name: '[hash].[ext]',
-			limit: 10000,
-		}
-	}, {
-		test: /\.(otf|ttf|eot|svg)/,
-		loader: 'file-loader',
-		query: {
-			name: '[hash].[ext]',
-			limit: 10000,
-		}
-	}],
-	postcss: function() {
-		return [
-			require( 'postcss-import' )({
-				path: path.join( __dirname, '..', 'app', 'css' ),
-				// addDependencyTo is used for hot-reloading in webpack
-				addDependencyTo: webpack
-			}),
-			require( 'postcss-fontpath' )(),
-			require( 'postcss-mixins' )(),
-			require( 'postcss-simple-vars' )(),
-			// Unwrap nested rules like how Sass does it
-			require( 'postcss-nested' )(),
-			// parse CSS and add vendor prefixes to CSS rules
-			require( 'autoprefixer' )({
-				browsers: [ 'last 2 versions', 'IE > 8' ]
-			}),
-			// A PostCSS plugin to console.log() the messages registered by other
-			// PostCSS plugins
-			require( 'postcss-reporter' )({
-				clearMessages: true
-			})
-		];
+	devtool: 'cheap-module-source-map',
+	context: appPath,
+	output: {
+		// The output directory as absolute path
+		path: assetsPath,
+		// The filename of the entry chunk as relative path inside the output.path directory
+		filename: '[name].js',
+		// The output path from the view of the Javascript
+		publicPath: '/assets/'
+	},
+	module: {
+		rules: [{
+			test: /\.html$/, loader: 'html-loader'
+		}, {
+			test: /\.json$/, loader: 'json-loader'
+		}, {
+			test: /\.(png|jpg|jpeg|gif|woff|woff2)/,
+			loader: 'url-loader',
+			options: {
+				name: '[hash].[ext]',
+				limit: 10000,
+			}
+		}, {
+			test: /\.(otf|ttf|eot|svg)/,
+			loader: 'file-loader',
+			options: {
+				name: '[hash].[ext]',
+				limit: 10000,
+			}
+		}]
+	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.css'],
+		modules: ['app', 'node_modules']
 	}
 };

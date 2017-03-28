@@ -40,7 +40,7 @@ export default function session( state = initialState, action ) {
 	switch ( action.type ) {
 		case CHECK_SESSION_SUCCESS:
 			// No URL/session ID found in local storage.
-			if ( ! action.req ) {
+			if ( !action.req ) {
 				return Object.assign({}, state, {
 					isChecked: true
 				});

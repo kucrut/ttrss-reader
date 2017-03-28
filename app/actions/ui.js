@@ -24,7 +24,7 @@ export function toggleSidebar() {
 	return ( dispatch, getState ) => {
 		dispatch({
 			type:             SIDEBAR_VISIBILITY,
-			isSidebarVisible: ! getState().ui.isSidebarVisible
+			isSidebarVisible: !getState().ui.isSidebarVisible
 		});
 	};
 }

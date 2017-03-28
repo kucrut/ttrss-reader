@@ -1,4 +1,5 @@
 @import 'common/mixins';
+
 @value barHeight, borderColor, sidebarMaxWidth, white, shadowColor from '../common/variables';
 
 .sidebar {

@@ -22,7 +22,7 @@ function normalizeFeed( feed ) {
 }
 
 function groupify( items ) {
-	return groupBy( items, ( item ) => `c${item.cat_id}` );
+	return groupBy( items, item => `c${item.cat_id}` );
 }
 
 export default function feeds( state = initialState, action ) {
@@ -62,7 +62,7 @@ export default function feeds( state = initialState, action ) {
 				current = find( allItems, { id: state.current.id });
 
 				// Current feed has been removed, simply update its `unread` count.
-				if ( ! current ) {
+				if ( !current ) {
 					current = Object.assign({}, state.current, {
 						unread: 0
 					});

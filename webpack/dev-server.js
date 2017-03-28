@@ -1,10 +1,13 @@
-var config = require( './dev-config.js' );
-var webpack = require( 'webpack' );
-var compiler = webpack( config );
-var WebpackDevServer = require( 'webpack-dev-server' );
-var PORT = process.env.PORT || 8080;
+/* eslint-disable import/no-extraneous-dependencies */
 
-var server = new WebpackDevServer( compiler, {
+const config = require( './dev-config.js' );
+const webpack = require( 'webpack' );
+const WebpackDevServer = require( 'webpack-dev-server' );
+
+const compiler = webpack( config );
+const PORT = process.env.PORT || 8080;
+
+const server = new WebpackDevServer( compiler, {
 	hot: true,
 	stats: {
 		colors: true

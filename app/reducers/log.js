@@ -14,11 +14,11 @@ function getErrorMessage( action ) {
 		message = action.error.message;
 	}
 
-	if ( ! message ) {
+	if ( !message ) {
 		message = get( action, 'req.data.content.error' );
 	}
 
-	if ( ! message ) {
+	if ( !message ) {
 		message = get( action, 'error.statusText' );
 	}
 
