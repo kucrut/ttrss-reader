@@ -9,3 +9,9 @@ This is a light and responsive client for [TTRSS](https://tt-rss.org/) built wit
 
 ## Contributing
 Pull requests are very welcome! I built this app to satisfy my needs and will update it as I see fit. If you'd like a feature to be added, I'm more than happy to merge it. Right now, the highest priority is to have the CSS restructured and streamlined.
+
+## Screenshots
+
+[![](doc/thumb_screenshot-mobile-feedlist.jpg)](doc/screenshot-mobile-feedlist.jpg)
+[![](doc/thumb_screenshot-mobile-image.jpg)](doc/screenshot-mobile-image.jpg)
+[![](doc/thumb_screenshot-desktop-small.jpg)](doc/screenshot-desktop-small.jpg)
